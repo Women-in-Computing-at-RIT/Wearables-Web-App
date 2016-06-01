@@ -1,0 +1,19 @@
+{
+  "name": "StressMonitor",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "classnames": "^2.2.5",
+    "jquery": "^2.2.4",
+    "meteor-node-stubs": "~0.2.0",
+    "react": "^15.1.0",
+    "react-addons-pure-render-mixin": "^15.1.0",
+    "react-bootstrap": "^0.29.4",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.1",
+    "react-router-bootstrap": "^0.23.0"
+  }
+}
