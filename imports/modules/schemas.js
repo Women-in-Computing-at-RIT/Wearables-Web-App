@@ -1,6 +1,8 @@
 import {Random} from 'meteor/random';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
+import {Gender, Ethnicity} from './enums';
+
 /**
  * A centralized store for all Collection-related schemas created from the simple-schema package. The
  * Schemas are stored with the collection as the key to a schema value. e.g. a collection-schema pair for a
@@ -20,20 +22,36 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
  * </code></pre>
  * @type {{}}
  */
-export const Schemas = {};
+const Schemas = {};
 
 Schemas.User = new SimpleSchema({
+  emails: {
+    type: Array
+  },
+  'emails.$': {
+    type: Object
+  },
+  'emails.$.address': {
+    type: String,
+    max: 254,
+    regEx: SimpleSchema.RegEx.Email
+  },
+  'emails.$.verified': {
+    type: Boolean
+  },
   gender: {
     type: String,
     label: "Gender",
     max: 20,
-    optional: false
+    optional: false,
+    custom: () => Gender.fromString(this.value) === null ? "Invalid gender value!" : true
   },
   ethnicity: {
     type: String,
     label: "Ethnicity",
     max: 40,
-    optional: false
+    optional: false,
+    custom: () => Ethnicity.fromString(this.value) === null ? "Invalid ethnicity value!" : true
   },
   dateOfBirth: {
     type: Date,
@@ -205,3 +223,5 @@ Schemas.HealthData = new SimpleSchema({
     defaultValue: []
   }
 });
+
+export default Schemas;
