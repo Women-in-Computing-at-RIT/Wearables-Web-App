@@ -1,4 +1,7 @@
+import {Random} from 'meteor/random';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+
+import {Gender, Ethnicity} from './enums';
 
 /**
  * A centralized store for all Collection-related schemas created from the simple-schema package. The
@@ -19,111 +22,157 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
  * </code></pre>
  * @type {{}}
  */
-export const Schemas = {};
+const Schemas = {};
 
 Schemas.User = new SimpleSchema({
-  name: {
-    type: String,
-    label: "Name"
+  emails: {
+    type: Array
   },
-  email: {
-    type: String,
-    label: "Email"
+  'emails.$': {
+    type: Object
   },
-  password: {
+  'emails.$.address': {
     type: String,
-    label: "Password",
-    min: 6
+    max: 254,
+    regEx: SimpleSchema.RegEx.Email
+  },
+  'emails.$.verified': {
+    type: Boolean
   },
   gender: {
     type: String,
-    label: "Gender"
+    label: "Gender",
+    max: 20,
+    optional: false,
+    custom: () => Gender.fromString(this.value) === null ? "Invalid gender value!" : true
   },
   ethnicity: {
     type: String,
-    label: "Ethnicity"
+    label: "Ethnicity",
+    max: 40,
+    optional: false,
+    custom: () => Ethnicity.fromString(this.value) === null ? "Invalid ethnicity value!" : true
   },
   dateOfBirth: {
     type: Date,
-    label: "Date of Birth"
+    label: "Date of Birth",
+    min: moment('1900-1-1').toDate(),
+    max: () => moment().toDate(),
+    optional: false
   },
   phoneNumber: {
     type: Number,
     label: "Phone Number",
-    min: 10,
-    max: 10
+    min: 13,
+    max: 15,
+    optional: false,
+    regEx: /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g
   },
   deviceId: {
     type: Object,
-    label: "Device Id"
+    label: "Device Id",
+    optional: true,
+    defaultValue: null
   },
   familyIds: {
     type: [Object],
-    label: "Family Ids"
+    label: "Family Ids",
+    optional: true,
+    defaultValue: []
   },
   apiAuthKey: {
     type: String,
-    label: "API Auth Key"
+    label: "API Auth Key",
+    optional: true,
+    defaultValue: null
   },
   apiAuthType: {
     type: Object,
-    label: "API Auth Type"
+    label: "API Auth Type",
+    optional: true,
+    defaultValue: null
   }
 });
 
 Schemas.Family = new SimpleSchema({
   familyName: {
-    type: "String",
-    label: "Family Name"
-  },
-  familyId: {
-    type: Object,
-    label: "Family Id"
+    type: String,
+    label: "Family Name",
+    min: 6,
+    max: 40,
+    optional: false
   },
   userIds: {
     type: [Object],
-    label: "User Ids"
+    label: "User Ids",
+    optional: true,
+    defaultValue: []
   }
 });
 
 Schemas.Relationship = new SimpleSchema({
   relationshipType: {
-    type: String,
-    label: "Relationship Type"
+    type: Object,
+    label: "Relationship Type",
+    optional: false
   },
   userId: {
     type: Object,
-    label: "User Id"
+    label: "User Id",
+    optional: false
   }
 });
 
 Schemas.Task = new SimpleSchema({
   taskLabel: {
     type: String,
-    label: "Task"
+    label: "Task",
+    min: 6,
+    max: 40,
+    optional: false
   },
   startTime: {
     type: Date,
-    label: "Start Time"
+    label: "Start Time",
+    min: () => moment().toDate(),
+    max: () => moment().add(1, 'year').toDate(),
+    optional: false,
+    autoValue: () => this.field('min').value
   },
   endTime: {
     type: Date,
-    label: "End Time"
+    label: "End Time",
+    min: () => moment().toDate(),
+    exclusiveMin: true,
+    custom: () => {
+      let start = moment(this.field('startTime').value);
+      let end = moment(this.value);
+
+      if(start.isSameOrAfter(end))
+        return "Invalid times. Start time must be before end time!";
+
+      return true;
+    }
   },
   duration: {
-    type: Date,
-    label: "Duration"
+    type: Number,
+    decimal: false,
+    label: "Duration",
+    optional: true,
+    autoValue: () => {
+      let start = moment(this.field('startTime').value);
+      let end = moment(this.field('endTime').value);
+
+      return end.diff(start, 'seconds');
+    }
   }
 });
 
 Schemas.Device = new SimpleSchema({
-  deviceId: {
-    type: Object,
-    label: "Device Id"
-  },
   logId: {
     type: String,
-    label: "Log Id"
+    label: "Log Id",
+    autoValue: () => Random.id()
   },
   status: {
     type: Object,
@@ -138,26 +187,41 @@ Schemas.Device = new SimpleSchema({
 Schemas.HealthData = new SimpleSchema({
   userId: {
     type: Object,
-    label: "User Id"
+    label: "User Id",
+    optional: false
   },
   timestamp: {
     type: Date,
-    label: "Timestamp"
+    label: "Timestamp",
+    optional: false
   },
   BPM: {
     type: Number,
-    label: "BPM"
+    label: "BPM",
+    decimal: false,
+    optional: true,
+    defaultValue: 0
   },
   IBI: {
     type: Number,
-    label: "IBI"
+    decimal: false,
+    label: "IBI",
+    optional: true,
+    defaultValue: 0
   },
   conductance: {
     type: Number,
-    label: "Skin Conductance"
+    decimal: true,
+    label: "Skin Conductance",
+    optional: true,
+    defaultValue: 0.0
   },
   statisticalData: {
-    type: Number,
-    label: "Statistics"
+    type: [Number],
+    label: "Statistics",
+    optional: true,
+    defaultValue: []
   }
 });
+
+export default Schemas;
