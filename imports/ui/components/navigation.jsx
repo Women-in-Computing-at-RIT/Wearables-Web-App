@@ -5,12 +5,20 @@ import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 
 const handleLogout = () => Meteor.logout(() => browserHistory.push('/signin'));
 
+/**
+ * Gets the name of the logged in user. If no user is logged in (hope that never happens) or the User has no profile,
+ * then "No User" is returned, if the user has no name in their profile, "Unknown Unknown" is returned.
+ *
+ * @returns {string} User Name as <firstname> <lastname> or "No User" or "Unknown Unknown"
+ * @todo Do not rely on the user profile
+ */
 const getUserName = () => {
   const user = Meteor.user();
   const name = user && user.profile ? user.profile.name : {first: 'Unknown', last: 'Unknown'};
   return user ? `${name.first} ${name.last}` : 'No User';
 };
 
+// Navigation specification for anonymous users
 export const PublicNavigation = () =>
   <Nav pullRight>
     <LinkContainer to="signin">
@@ -21,6 +29,7 @@ export const PublicNavigation = () =>
     </LinkContainer>
   </Nav>;
 
+// Navigation specification for authenticated users
 export const AuthNavigation = () =>
   <Nav pullRight>
     <LinkContainer to="/home">

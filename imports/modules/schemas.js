@@ -1,6 +1,25 @@
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-var Schemas = {};
+/**
+ * A centralized store for all Collection-related schemas created from the simple-schema package. The
+ * Schemas are stored with the collection as the key to a schema value. e.g. a collection-schema pair for a
+ * Books collection.
+ * <pre><code>
+ * {
+ *    ...,
+ *    "Books": {
+ *        "title": {
+ *            "type": String,
+ *            ...
+ *        },
+ *        ...
+ *    ],
+ *    ...
+ * }
+ * </code></pre>
+ * @type {{}}
+ */
+export const Schemas = {};
 
 Schemas.User = new SimpleSchema({
   name: {
