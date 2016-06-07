@@ -9,8 +9,8 @@ import {Index} from '../../ui/pages/index';
 import {Info} from '../../ui/pages/information';
 
 /**
- * An onEnter action that specifies that if a user is not logged in or logging in then they must log in and are
- * redirected to a login page. The page they were going to visit is stored in history.
+ * An onEnter action that requires the user accessing that route to be authenticated. If the user is not authenticated
+ * they are redirected to a login page.
  *
  * @param {Object} next An object defining the next state, provided by Meteor.
  * @param {Function} repl A function specifying a redirection/change, provided by Meteor.
@@ -23,10 +23,16 @@ const requireAuth = (next, repl) => {
     });
 };
 
-const signInRedirect = (next, repl) => {
+/**
+ * An onEnter action that specifies that a user should be redirected if they are authenticated.
+ *
+ * @param {String} to The path to redirect to if user is authenticated
+ * @return {Function} The redirecting function that handles redirection to the given path.
+ */
+const redirectAuth = (to) => (next, repl) => {
   if (Meteor.userId() !== null)
     repl({
-      pathname: '/home',
+      pathname: to,
       state: {nextPathname: next.location.pathname}
     });
 };
@@ -34,7 +40,7 @@ const signInRedirect = (next, repl) => {
 Meteor.startup(() => {
   render(
     <Router history={ browserHistory }>
-      <Route path="/" component={ App } onEnter={ signInRedirect }>
+      <Route path="/" component={ App } onEnter={ redirectAuth('/home') }>
         <IndexRoute name="index" component={Index}/>
         <Route name="info" path="/info" component={Info}/>
       </Route>
