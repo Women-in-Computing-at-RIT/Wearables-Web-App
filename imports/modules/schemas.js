@@ -40,7 +40,7 @@ Schemas.UserProfile = new SimpleSchema({
   dateOfBirth: {
     type: Date,
     label: "Date of Birth",
-    min: moment('1900-1-1').toDate(),
+    min: moment('01-01-1990', 'MM-DD-YYYY').toDate(),
     max: () => moment().toDate(),
     optional: false
   },

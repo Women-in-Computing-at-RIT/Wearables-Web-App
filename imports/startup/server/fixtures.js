@@ -52,7 +52,7 @@ if(Meteor.isServer) {
         $set: customProps
       });
 
-      Roles.addUsersToRoles(userId, roles);
+      Roles.addUsersToRoles(userId, roles, Roles.GLOBAL_GROUP);
     }
   });
 }
