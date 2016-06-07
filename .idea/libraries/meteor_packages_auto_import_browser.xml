@@ -325,6 +325,7 @@
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/velocity_html-reporter/0.9.1/web.browser/lib/velocity.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/velocity_meteor-internals/1.1.0_7/web.browser/packages/velocity_meteor-internals.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/velocity_shim/0.1.0/web.browser/packages/velocity_shim.js" />
+        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/practicalmeteor_faker/3.0.1_1/web.browser/packages/practicalmeteor_faker.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_collection2-core/1.1.1/web.browser/lib/collection2.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-deny/1.0.1/web.browser/lib/deny.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-index/1.0.1/web.browser/lib/indexing.js" />
@@ -739,6 +740,7 @@
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/velocity_html-reporter/0.9.1/web.browser/lib/velocity.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/velocity_meteor-internals/1.1.0_7/web.browser/packages/velocity_meteor-internals.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/velocity_shim/0.1.0/web.browser/packages/velocity_shim.js" />
+      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/practicalmeteor_faker/3.0.1_1/web.browser/packages/practicalmeteor_faker.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_collection2-core/1.1.1/web.browser/lib/collection2.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-deny/1.0.1/web.browser/lib/deny.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-index/1.0.1/web.browser/lib/indexing.js" />
