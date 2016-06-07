@@ -169,26 +169,39 @@ Schemas.Device = new SimpleSchema({
 Schemas.HealthData = new SimpleSchema({
   userId: {
     type: Object,
-    label: "User Id"
+    label: "User Id",
+    optional: false
   },
   timestamp: {
     type: Date,
-    label: "Timestamp"
+    label: "Timestamp",
+    optional: false
   },
   BPM: {
     type: Number,
-    label: "BPM"
+    label: "BPM",
+    decimal: false,
+    optional: true,
+    defaultValue: 0
   },
   IBI: {
     type: Number,
-    label: "IBI"
+    decimal: false,
+    label: "IBI",
+    optional: true,
+    defaultValue: 0
   },
   conductance: {
     type: Number,
-    label: "Skin Conductance"
+    decimal: true,
+    label: "Skin Conductance",
+    optional: true,
+    defaultValue: 0.0
   },
   statisticalData: {
-    type: Number,
-    label: "Statistics"
+    type: [Number],
+    label: "Statistics",
+    optional: true,
+    defaultValue: []
   }
 });
