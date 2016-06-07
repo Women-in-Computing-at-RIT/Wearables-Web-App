@@ -40,7 +40,7 @@ Schemas.User = new SimpleSchema({
   },
   familyIds: {
     type: [Object],
-    label: "Family Id"
+    label: "Family Ids"
   },
   apiAuthKey: {
     type: String,
@@ -49,5 +49,96 @@ Schemas.User = new SimpleSchema({
   apiAuthType: {
     type: Object,
     label: "API Auth Type"
+  }
+});
+
+Schemas.Family = new SimpleSchema({
+  familyName: {
+    type: "String",
+    label: "Family Name"
+  },
+  familyId: {
+    type: Object,
+    label: "Family Id"
+  },
+  userIds: {
+    type: [Object],
+    label: "User Ids"
+  }
+});
+
+Schemas.Relationship = new SimpleSchema({
+  relationshipType: {
+    type: String,
+    label: "Relationship Type"
+  },
+  userId: {
+    type: Object,
+    label: "User Id"
+  }
+});
+
+Schemas.Task = new SimpleSchema({
+  taskLabel: {
+    type: String,
+    label: "Task"
+  },
+  startTime: {
+    type: Date,
+    label: "Start Time"
+  },
+  endTime: {
+    type: Date,
+    label: "End Time"
+  },
+  duration: {
+    type: Date,
+    label: "Duration"
+  }
+});
+
+Schemas.Device = new SimpleSchema({
+  deviceId: {
+    type: Object,
+    label: "Device Id"
+  },
+  logId: {
+    type: String,
+    label: "Log Id"
+  },
+  status: {
+    type: Object,
+    label: "Status"
+  },
+  version: {
+    type: String,
+    label: "Version"
+  }
+});
+
+Schemas.HealthData = new SimpleSchema({
+  userId: {
+    type: Object,
+    label: "User Id"
+  },
+  timestamp: {
+    type: Date,
+    label: "Timestamp"
+  },
+  BPM: {
+    type: Number,
+    label: "BPM"
+  },
+  IBI: {
+    type: Number,
+    label: "IBI"
+  },
+  conductance: {
+    type: Number,
+    label: "Skin Conductance"
+  },
+  statisticalData: {
+    type: Number,
+    label: "Statistics"
   }
 });
