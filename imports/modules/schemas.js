@@ -24,20 +24,25 @@ import {Gender, Ethnicity} from './enums';
  */
 const Schemas = {};
 
-Schemas.User = new SimpleSchema({
-  emails: {
-    type: Array
-  },
-  'emails.$': {
-    type: Object
-  },
-  'emails.$.address': {
+Schemas.UserProfile = new SimpleSchema({
+  firstName: {
     type: String,
-    max: 254,
-    regEx: SimpleSchema.RegEx.Email
+    optional: false,
+    min: 3,
+    max: 40
   },
-  'emails.$.verified': {
-    type: Boolean
+  lastName: {
+    type: String,
+    optional: false,
+    min: 3,
+    max: 40
+  },
+  dateOfBirth: {
+    type: Date,
+    label: "Date of Birth",
+    min: moment('1900-1-1').toDate(),
+    max: () => moment().toDate(),
+    optional: false
   },
   gender: {
     type: String,
@@ -53,13 +58,6 @@ Schemas.User = new SimpleSchema({
     optional: false,
     custom: () => Ethnicity.fromString(this.value) === null ? "Invalid ethnicity value!" : true
   },
-  dateOfBirth: {
-    type: Date,
-    label: "Date of Birth",
-    min: moment('1900-1-1').toDate(),
-    max: () => moment().toDate(),
-    optional: false
-  },
   phoneNumber: {
     type: Number,
     label: "Phone Number",
@@ -67,6 +65,49 @@ Schemas.User = new SimpleSchema({
     max: 15,
     optional: false,
     regEx: /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g
+  }
+});
+
+Schemas.User = new SimpleSchema({
+  username: {
+    type: String,
+    optional: true
+  },
+  emails: {
+    type: Array
+  },
+  'emails.$': {
+    type: Object,
+    optional: true
+  },
+  'emails.$.address': {
+    type: String,
+    max: 254,
+    regEx: SimpleSchema.RegEx.Email
+  },
+  'emails.$.verified': {
+    type: Boolean
+  },
+  createdAt: {
+    type: Date
+  },
+  profile: {
+    type: Schemas.UserProfile,
+    optional: true
+  },
+  services: {
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
+  roles: {
+    type: Object,
+    optional: true,
+    blackbox: true
+  },
+  heartbeat: {
+    type: Date,
+    optional: true
   },
   deviceId: {
     type: Object,

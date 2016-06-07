@@ -12,7 +12,7 @@ class Enum2 extends Enum {
   /**
    * @returns {string} Name of enum option
      */
-  label() {
+  get label() {
     let tmp = super.toString();
     let i = tmp.indexOf('.');
     return tmp.substring(i+1);
