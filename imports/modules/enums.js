@@ -169,7 +169,7 @@ class FamilyRelationship extends Enum2 {
       return FamilyRelationship.FAMILY;
   }
 
-  get name() {
+  get typeName() {
     return ChangeCase.title(this.label);
   }
 
