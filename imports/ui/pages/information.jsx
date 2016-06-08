@@ -9,7 +9,7 @@ import {Row, Col} from 'react-bootstrap';
 export const Profile = () => (
   <Row>
     <Col xs={ 12 }>
-      <h4 className="page-header">Profile</h4>
+      <h2 className="page-header">Profile</h2>
     </Col>
   </Row>
 );
