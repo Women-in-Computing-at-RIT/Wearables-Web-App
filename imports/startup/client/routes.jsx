@@ -6,7 +6,7 @@ import {Meteor} from 'meteor/meteor';
 
 import {App} from '../../ui/layouts/app';
 import {Index} from '../../ui/pages/index';
-import {Info} from '../../ui/pages/information';
+import {Profile} from '../../ui/pages/information';
 import {NotFound} from '../../ui/pages/not-found';
 
 /**
@@ -43,7 +43,7 @@ Meteor.startup(() => {
     <Router history={ browserHistory }>
       <Route path="/" component={ App } onEnter={ redirectAuth('/home') }>
         <IndexRoute name="index" component={Index}/>
-        <Route name="info" path="/info" component={Info}/>
+        <Route name="info" path="/info" component={Profile}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>
