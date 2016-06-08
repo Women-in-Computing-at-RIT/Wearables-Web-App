@@ -110,13 +110,13 @@ Schemas.User = new SimpleSchema({
     optional: true
   },
   deviceId: {
-    type: Object,
+    type: String,
     label: "Device Id",
     optional: true,
     defaultValue: null
   },
   familyIds: {
-    type: [Object],
+    type: [String],
     label: "Family Ids",
     optional: true,
     defaultValue: []
@@ -144,7 +144,7 @@ Schemas.Family = new SimpleSchema({
     optional: false
   },
   userIds: {
-    type: [Object],
+    type: [String],
     label: "User Ids",
     optional: true,
     defaultValue: []
@@ -158,12 +158,12 @@ Schemas.Relationship = new SimpleSchema({
     optional: false
   },
   fromId: {
-    type: Object,
+    type: String,
     label: "User Id",
     optional: false
   },
   toId: {
-    type: Object,
+    type: String,
     label: "User Id",
     optional: false
   }
@@ -232,7 +232,7 @@ Schemas.Device = new SimpleSchema({
 
 Schemas.HealthData = new SimpleSchema({
   userId: {
-    type: Object,
+    type: String,
     label: "User Id",
     optional: false
   },

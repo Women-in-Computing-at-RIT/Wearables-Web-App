@@ -15,7 +15,7 @@ class Enum2 extends Enum {
   get label() {
     let tmp = super.toString();
     let i = tmp.indexOf('.');
-    return tmp.substring(i+1);
+    return tmp.substring(i + 1);
   }
 }
 
