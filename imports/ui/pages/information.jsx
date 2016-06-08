@@ -3,9 +3,16 @@
  * authors: Cara Steinberg
  */
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
+// import ReactAutoForm from 'meteor-react-autoform';
+import {AddProfile} from '../../ui/components/insertProfile';
 
-export const Info = () =>
-  <Jumbotron className="text-center">
-    <h2>Thank you for signing up!</h2>
-  </Jumbotron>;
+export const Profile = () => (
+  <Row>
+    <Col xs={ 12 }>
+      <h4 className="page-header">Profile</h4>
+      <AddProfile />
+    </Col>
+  </Row>
+);
+
+
