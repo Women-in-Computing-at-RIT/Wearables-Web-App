@@ -138,5 +138,255 @@ Ethnicity.initEnum({
   OTHER: {}
 });
 
+class FamilyRelationship extends Enum2 {
 
-export {Gender, Ethnicity};
+  static fromString(relStr) {
+    relStr = ChangeCase.upper(relStr);
+
+    for(let rel of FamilyRelationship.enumValues)
+      if(relStr === rel.name)
+        return rel;
+
+    return null;
+  }
+
+  relationTo(other) {
+    if(other === FamilyRelationship.FATHER) {
+      return this.toFather;
+    }else if(other === FamilyRelationship.MOTHER){
+      return this.toMother;
+    }else if(other === FamilyRelationship.SON){
+      return this.toSon
+    }else if(other === FamilyRelationship.DAUGHTER) {
+      return this.toDaughter;
+    }else if(other === FamilyRelationship.SIBLING) {
+      return this.toSibling;
+    }else if(other === FamilyRelationship.FAMILY) {
+      return this.toFamily;
+    }else if(other === FamilyRelationship.FRIEND) {
+      return this.toFriend;
+    } else
+      return FamilyRelationship.FAMILY;
+  }
+
+  get name() {
+    return ChangeCase.title(this.label);
+  }
+
+  toString() {
+    return this.name;
+  }
+
+  get toFather() {
+    return FamilyRelationship.FAMILY;
+  }
+  get toMother() {
+    return FamilyRelationship.FAMILY;
+  }
+  get toHusband() {
+    return FamilyRelationship.FAMILY;
+  }
+  get toWife() {
+    return FamilyRelationship.FAMILY;
+  }
+  get toSon() {
+    return FamilyRelationship.FAMILY;
+  }
+  get toDaughter() {
+    return FamilyRelationship.FAMILY;
+  }
+  get toSibling() {
+    return FamilyRelationship.SIBLING;
+  }
+  get toFamily() {
+    return FamilyRelationship.FAMILY;
+  }
+  get toFriend() {
+    return FamilyRelationship.FRIEND;
+  }
+}
+
+FamilyRelationship.initEnum({
+  HUSBAND: {
+    get toFather() {
+      return FamilyRelationship.SON;
+    },
+    get toMother() {
+      return FamilyRelationship.SON;
+    },
+    get toHusband() {
+      return FamilyRelationship.HUSBAND;
+    },
+    get toWife() {
+      return FamilyRelationship.HUSBAND;
+    },
+    get toSon() {
+      return FamilyRelationship.FATHER;
+    },
+    get toDaughter() {
+      return FamilyRelationship.FATHER;
+    }
+  },
+  WIFE: {
+    get toFather() {
+      return FamilyRelationship.DAUGHTER;
+    },
+    get toMother() {
+      return FamilyRelationship.DAUGHTER;
+    },
+    get toHusband() {
+      return FamilyRelationship.WIFE;
+    },
+    get toWife() {
+      return FamilyRelationship.WIFE;
+    },
+    get toSon() {
+      return FamilyRelationship.MOTHER;
+    },
+    get toDaughter() {
+      return FamilyRelationship.MOTHER;
+    }
+  },
+  FATHER: {
+    get toFather() {
+      return FamilyRelationship.SON;
+    },
+    get toMother() {
+      return FamilyRelationship.SON;
+    },
+    get toHusband() {
+      return FamilyRelationship.HUSBAND;
+    },
+    get toWife() {
+      return FamilyRelationship.HUSBAND;
+    },
+    get toSon() {
+      return FamilyRelationship.FATHER;
+    },
+    get toDaughter() {
+      return FamilyRelationship.FATHER;
+    }
+  },
+  MOTHER: {
+    get toFather() {
+      return FamilyRelationship.DAUGHTER;
+    },
+    get toMother() {
+      return FamilyRelationship.DAUGHTER;
+    },
+    get toHusband() {
+      return FamilyRelationship.WIFE;
+    },
+    get toWife() {
+      return FamilyRelationship.WIFE;
+    },
+    get toSon() {
+      return FamilyRelationship.MOTHER;
+    },
+    get toDaughter() {
+      return FamilyRelationship.MOTHER;
+    }
+  },
+  SON: {
+    get toFather() {
+      return FamilyRelationship.SON;
+    },
+    get toMother() {
+      return FamilyRelationship.SON;
+    },
+    get toHusband() {
+      return FamilyRelationship.HUSBAND;
+    },
+    get toWife() {
+      return FamilyRelationship.HUSBAND;
+    },
+    get toSon() {
+      return FamilyRelationship.FATHER;
+    },
+    get toDaughter() {
+      return FamilyRelationship.FATHER;
+    }
+  },
+  DAUGHTER: {
+    get toFather() {
+      return FamilyRelationship.DAUGHTER;
+    },
+    get toMother() {
+      return FamilyRelationship.DAUGHTER;
+    },
+    get toHusband() {
+      return FamilyRelationship.WIFE;
+    },
+    get toWife() {
+      return FamilyRelationship.WIFE;
+    },
+    get toSon() {
+      return FamilyRelationship.MOTHER;
+    },
+    get toDaughter() {
+      return FamilyRelationship.MOTHER;
+    }
+  },
+  SIBLING: {
+    get toFather() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toMother() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toHusband() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toWife() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toSon() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toDaughter() {
+      return FamilyRelationship.FAMILY;
+    }
+  },
+  FAMILY: {
+    get toFather() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toMother() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toHusband() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toWife() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toSon() {
+      return FamilyRelationship.FAMILY;
+    },
+    get toDaughter() {
+      return FamilyRelationship.FAMILY;
+    }
+  },
+  FRIEND: {
+    get toFather() {
+      return FamilyRelationship.FRIEND;
+    },
+    get toMother() {
+      return FamilyRelationship.FRIEND;
+    },
+    get toHusband() {
+      return FamilyRelationship.FRIEND;
+    },
+    get toWife() {
+      return FamilyRelationship.FRIEND;
+    },
+    get toSon() {
+      return FamilyRelationship.FRIEND;
+    },
+    get toDaughter() {
+      return FamilyRelationship.FRIEND;
+    }
+  }
+});
+
+export {Gender, Ethnicity, FamilyRelationship};

@@ -153,11 +153,16 @@ Schemas.Family = new SimpleSchema({
 
 Schemas.Relationship = new SimpleSchema({
   relationshipType: {
-    type: Object,
+    type: String,
     label: "Relationship Type",
     optional: false
   },
-  userId: {
+  fromId: {
+    type: Object,
+    label: "User Id",
+    optional: false
+  },
+  toId: {
     type: Object,
     label: "User Id",
     optional: false
