@@ -4,12 +4,12 @@
  */
 import React from 'react';
 import {Row, Col, Jumbotron} from 'react-bootstrap';
-// import ReactAutoForm from 'meteor-react-autoform';
+import {ProfileForm} from '../components/profileForm';
 
 export const Profile = React.createClass({
-  propTypes: {
-    profile: React.PropTypes.element.isRequired
-  },
+  // propTypes: {
+  //   profile: React.PropTypes.element.isRequired
+  // },
   render() {
     return <div>
       <Jumbotron className="text-center"><h3>Thank you for signing up!</h3></Jumbotron>
@@ -20,7 +20,8 @@ export const Profile = React.createClass({
       </Row>
       <Row>
         <Col>
-          { this.props.profile }
+          <ProfileForm/>
+          {/*{ this.props.profile }*/}
         </Col>
       </Row>
     </div>;
