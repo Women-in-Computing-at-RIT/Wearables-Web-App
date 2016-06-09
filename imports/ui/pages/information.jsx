@@ -5,6 +5,7 @@
 import React from 'react';
 import {Row, Col, Jumbotron} from 'react-bootstrap';
 import {ProfileForm} from '../components/profileForm';
+import Schemas from '../../modules/schemas';
 
 export const Profile = React.createClass({
   // propTypes: {
@@ -15,12 +16,17 @@ export const Profile = React.createClass({
       <Jumbotron className="text-center"><h3>Thank you for signing up!</h3></Jumbotron>
       <Row>
         <Col xs={12}>
+          <h4 className="text-center">Please provide more information about yourself.</h4>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
           <h2 className="page-header">Profile</h2>
         </Col>
       </Row>
       <Row>
         <Col>
-          <ProfileForm/>
+          <ProfileForm schema={Schemas.UserProfile}/>
           {/*{ this.props.profile }*/}
         </Col>
       </Row>
