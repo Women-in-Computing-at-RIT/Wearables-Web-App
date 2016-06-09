@@ -1,7 +1,7 @@
 import {Random} from 'meteor/random';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-import {Gender, Ethnicity} from './enums';
+import {Gender, Ethnicity, FamilyRelationship, NotificationType} from './enums';
 
 /**
  * A centralized store for all Collection-related schemas created from the simple-schema package. The
@@ -45,14 +45,14 @@ Schemas.UserProfile = new SimpleSchema({
     optional: false
   },
   gender: {
-    type: String,
+    type: Gender,
     label: "Gender",
     max: 20,
     optional: false,
     custom: () => Gender.fromString(this.value) === null ? "Invalid gender value!" : true
   },
   ethnicity: {
-    type: String,
+    type: Ethnicity,
     label: "Ethnicity",
     max: 40,
     optional: false,
@@ -153,7 +153,7 @@ Schemas.Family = new SimpleSchema({
 
 Schemas.Relationship = new SimpleSchema({
   relationshipType: {
-    type: String,
+    type: FamilyRelationship,
     label: "Relationship Type",
     optional: false
   },
@@ -267,6 +267,29 @@ Schemas.HealthData = new SimpleSchema({
     label: "Statistics",
     optional: true,
     defaultValue: []
+  }
+});
+
+Schemas.Notification = new SimpleSchema({
+  timestamp: {
+    type: Date,
+    optional: false,
+    autoValue: () => moment().toDate()
+  },
+  targetId: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Id,
+    optional: false
+  },
+  type: {
+    type: NotificationType,
+    optional: false
+  },
+  data: {
+    type: Object,
+    optional: true,
+    blackbox: true,
+    defaultValue: {}
   }
 });
 

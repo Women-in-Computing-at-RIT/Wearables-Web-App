@@ -2,13 +2,12 @@ import {Enum} from 'enumify';
 import * as ChangeCase from 'change-case';
 
 /**
- * Small extension of the {@link Enum} class adding a label method that gets the label of the given enum option.
+ * Small extension of the {@link Enum} class adding a label method that gets the label of the enum option.
  *
  * @author Matthew Crocco
  * @class
  */
 class Enum2 extends Enum {
-
   /**
    * @returns {string} Name of enum option
      */
@@ -39,10 +38,18 @@ class Gender extends Enum2 {
     genderStr = ChangeCase.title(genderStr);
 
     for(let gender of Gender.enumValues)
-      if(genderStr === gender.toString() || genderStr === gender.shorthand || genderStr === gender.symbolic)
+      if(genderStr === gender.shorthand || genderStr === gender.symbolic || genderStr === gender.label || genderStr === gender.toString())
         return gender;
 
     return null;
+  }
+
+  static typeName() {
+    return "U_GEN";
+  }
+
+  toJSONValue() {
+    return this.shorthand;
   }
 
   toString() {
@@ -92,10 +99,18 @@ class Ethnicity extends Enum2 {
     ethnicStr = ChangeCase.upper(ethnicStr);
 
     for(let eth of Ethnicity.enumValues)
-      if(ethnicStr === eth.name || ChangeCase.title(ethnicStr) === eth.asOption())
+      if(ethnicStr === eth.label || ethnicStr === eth.name || ChangeCase.title(ethnicStr) === eth.asOption())
         return eth;
 
     return Ethnicity.OTHER;
+  }
+
+  static typeName() {
+    return "U_ETH";
+  }
+
+  toJSONValue() {
+    return this.label;
   }
 
   toString() {
@@ -169,12 +184,16 @@ class FamilyRelationship extends Enum2 {
       return FamilyRelationship.FAMILY;
   }
 
-  get typeName() {
-    return ChangeCase.title(this.label);
+  static typeName() {
+    return 'FRel';
+  }
+
+  toJSONValue() {
+    return this.toString();
   }
 
   toString() {
-    return this.name;
+    return ChangeCase.title(this.label);
   }
 
   get toFather() {
@@ -389,4 +408,34 @@ FamilyRelationship.initEnum({
   }
 });
 
-export {Gender, Ethnicity, FamilyRelationship};
+class NotificationType extends Enum2 {
+
+  static fromString(notifStr) {
+    notifStr = ChangeCase.upper(notifStr);
+
+    for(let type of NotificationType.enumValues)
+      if(notifStr === ChangeCase.upper(type.label) || notifStr === ChangeCase.upper(type.toString()))
+        return type;
+
+    return null;
+  }
+
+  static fromJSONValue(jsonValue) {
+    for(let type of NotificationType.enumValues)
+      if(jsonValue === type.toJSONValue())
+        return type;
+
+    return null;
+  }
+
+  static typeName() {
+    return 'NOTIF';
+  }
+
+  toJSONValue() {
+    return this.label;
+  }
+}
+NotificationType.initEnum(['ALERT', 'YES_NO', 'PUSH']);
+
+export {Gender, Ethnicity, FamilyRelationship, NotificationType};

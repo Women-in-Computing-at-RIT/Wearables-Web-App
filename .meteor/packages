@@ -48,3 +48,6 @@ random
 dburles:factory
 mdg:validated-method
 email
+underscore
+themeteorchef:jquery-validation
+nimble:restivus
