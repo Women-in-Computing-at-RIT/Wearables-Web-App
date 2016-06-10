@@ -1,55 +1,65 @@
 import React from 'react';
 import Schemas from '../../modules/schemas';
-import ReactAutoForm from 'meteor-react-autoform';
 import { Form, FormGroup, FormControl, ButtonGroup, Button } from 'react-bootstrap';
 import {updateUserProfile} from '../../../imports/api/users/methods';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 const onSubmit = (event) => {
   event.preventDefault();
-  alert('Submitted');
+  Bert.alert('Submitted');
 };
 
-// export const ProfileForm = () => (
-  // <div>
-  //   <ReactAutoForm schema={Schemas.UserProfile} type="insert" onSubmit={(docId) => { console.log("New document", docId); }}/>
-  // </div>
-  // <FormGroup>
-  //   <FormControl
-  //     type="text"
-  //     // onKeyUp={ updateUserProfile }
-  //     placeholder="Field"
-  //   />
-  // </FormGroup>
 export const ProfileForm = React.createClass({
-  getInitialState: function() {
+  getInitialState () {
     return {value: Schemas.UserProfile.firstName};
   },
-  handleChange: function(event) {
+  handleChange (event) {
     this.setState({value: event.target.value});
   },
+  renderField (id, label, field) {
+    return <div>
+      <label htmlFor={id}>{label}</label><br/>
+      {field}
+    </div>
+  },
+
+  renderTextInput (id, label) {
+    return this.renderField(id, label,
+      <input type="text"
+      value={this.state.value}
+      placeholder={label}
+      onChange={this.handleChange}
+      />
+    )
+  },
+
   render() {
     return (
       <FormGroup>
         <Form schema={Schemas.UserProfile} id="userProfileForm" onsubmit={this.onSubmit}>
+          {this.renderTextInput('firstName', 'First Name')}
+          {this.renderTextInput('lastName', 'Last Name')}
+          <label for="dob">Date of Birth (mm/dd/yyyy)</label><br/>
           <input
             type="text"
             value={this.state.value}
-            label="First Name"
-            placeholder="First Name"
+            id="dob"
+            placeholder="Date of Birth"
             onChange={this.handleChange}
-          />
+          /><br/>
+          <label for="gender">Gender</label><br/>
+          <select class="form-control" id="gender">
+            <option value="" selected>Select Gender</option>
+            <option>Female</option>
+            <option>Male</option>
+          </select><br/>
           <ButtonGroup>
             <Button type="submit">Submit</Button>
           </ButtonGroup>
         </Form>
       </FormGroup>
-    //   <Form schema={Schemas.UserProfile} id="userProfileForm" onsubmit={this.onSubmit}>
-    //     <input type="text" name={Schemas.UserProfile.firstName} placeholder="First Name"/>
-    //     <Button type="submit">Submit</Button>
-    //   </Form>
     );
   }
 });
-
 
 
