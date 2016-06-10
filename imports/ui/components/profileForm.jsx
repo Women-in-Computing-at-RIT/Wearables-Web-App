@@ -5,10 +5,6 @@ import { Form, FormGroup, FormControl, ButtonGroup, Button } from 'react-bootstr
 import {updateUserProfile} from '../../../imports/api/users/methods';
 import { Bert } from 'meteor/themeteorchef:bert';
 
-// const onSubmit = (event) => {
-//   event.preventDefault();
-//   Bert.alert('Submitted');
-// };
 let genders = ['Female', 'Male'];
 let ethnicities = ['White/Caucasian', 'Black/African American',
   'Asian', 'American Indian or Alaskan Native',
@@ -52,12 +48,14 @@ export const ProfileForm = React.createClass({
     let data = {
       firstName: this.refs.Schemas.UserProfile.firstName.ReactDom.findDOMNode().value,
       lastName: this.refs.Schemas.UserProfile.lastName.ReactDom.findDOMNode().value,
+      email: this.refs.Schemas.User.emails.ReactDom.findDOMNode().value,
       dateOfBirth: this.refs.Schemas.UserProfile.dateOfBirth.ReactDom.findDOMNode().value,
       gender: this.refs.Schemas.UserProfile.gender.ReactDom.findDOMNode().value
     };
     return data;
   },
-  handleSubmit () {
+  handleSubmit (e) {
+    e.preventDefault();
     this.setState({submitted: this.refs.ProfileForm.getFormData()});
     console.log("Submitted");
     // Bert.alert('Submitted');
@@ -69,6 +67,7 @@ export const ProfileForm = React.createClass({
         <Form schema={Schemas.UserProfile} id="userProfileForm" onsubmit={this.handleSubmit}>
           {this.renderTextInput('firstName', 'First Name', 'First Name')}
           {this.renderTextInput('lastName', 'Last Name', 'Last Name')}
+          {this.renderTextInput('email', 'Email', 'Email')}
           {this.renderTextInput('dob', 'Date of Birth', 'mm/dd/yyyy')}
           {this.renderSelect('gender', 'Gender', genders)}
           {this.renderSelect('ethnicity', 'Ethnicity', ethnicities)}
