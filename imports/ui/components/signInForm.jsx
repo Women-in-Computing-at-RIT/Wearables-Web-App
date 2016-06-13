@@ -24,9 +24,7 @@ export const SignInForm = React.createClass({
           <label htmlFor="password">Password</label>
           <input className="form-control" type="password" placeholder="Enter Password" id="password"/>
           <br/>
-          <ButtonGroup>
-            <Button type="submit">Submit</Button>
-          </ButtonGroup>
+          <Button type="submit" className="center-block">Submit</Button>
         </Form>
       </FormGroup>
     );

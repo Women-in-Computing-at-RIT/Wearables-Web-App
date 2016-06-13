@@ -6,6 +6,7 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import {SignInForm} from '../components/signInForm';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export const SignInModal = React.createClass ({
     getInitialState() {
@@ -30,6 +31,9 @@ export const SignInModal = React.createClass ({
             </Modal.Header>
             <Modal.Body>
               <SignInForm/>
+              <LinkContainer to="/forgotPassword">
+                <h5 className="text-right"><a href="/forgotPassword">Forgot Password?</a></h5>
+              </LinkContainer>
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.close}>Close</Button>
