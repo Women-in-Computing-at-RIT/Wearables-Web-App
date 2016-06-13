@@ -26,9 +26,7 @@ export const RegisterForm = React.createClass({
           <label htmlFor="password">Confirm Password</label>
           <input className="form-control" type="password" placeholder="Re-enter Password" id="password"/>
           <br/>
-          <ButtonGroup>
-            <Button type="submit">Submit</Button>
-          </ButtonGroup>
+          <Button type="submit" className="center-block">Submit</Button>
         </Form>
       </FormGroup>
     );
