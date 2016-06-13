@@ -1,13 +1,19 @@
 /**
- * Created by Matthew on 6/6/2016.
+ * file: index.jsx
+ * authors: Matthew Crocco, Cara Steinberg
  */
 
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
+import {SignInModal} from '../components/signInModal';
+import {RegisterModal} from '../components/registerModal';
 
+const styles = {maxWidth: 500};
 export const Index = () =>
   <Jumbotron className="text-center">
     <h2>Test</h2>
     <p>Lorem ipsum sit amet dolor asent</p>
+    <Button className="btn-lg center-block" block style={styles}><SignInModal/></Button>
+    <Button className="btn-lg center-block" block style={styles}><RegisterModal/></Button>
   </Jumbotron>;
 

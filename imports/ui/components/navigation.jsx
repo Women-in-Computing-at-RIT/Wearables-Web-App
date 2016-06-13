@@ -1,7 +1,12 @@
+/**
+ * file: navigation.jsx
+ * authors: Matthew Crocco, Cara Steinberg
+ */
+
 import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { browserHistory, Link } from 'react-router';
-import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import {SignInModal} from '../components/signInModal';
 import {RegisterModal} from '../components/registerModal';
 
@@ -69,17 +74,19 @@ export class AppNavigation extends React.Component {
   }
 
   render() {
-    return <Navbar>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">Placeholder</Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse>
-        {AppNavigation.renderNavigation(this.props.hasUser)}
-      </Navbar.Collapse>
-    </Navbar>;
+    return (
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Placeholder</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          {AppNavigation.renderNavigation(this.props.hasUser)}
+        </Navbar.Collapse>
+      </Navbar>
+    );
   }
 }
 
