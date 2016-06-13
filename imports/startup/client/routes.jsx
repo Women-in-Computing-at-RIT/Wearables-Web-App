@@ -9,7 +9,7 @@ import {Index} from '../../ui/pages/index';
 import {Profile} from '../../ui/pages/information';
 import {NotFound} from '../../ui/pages/not-found';
 import {ContactPage} from '../../ui/pages/contact';
-import {ResetPassword} from '../../ui/pages/resetPassword';
+import {ForgotPassword} from '../../ui/pages/forgotPassword';
 
 /**
  * An onEnter action that requires the user accessing that route to be authenticated. If the user is not authenticated
@@ -47,7 +47,7 @@ Meteor.startup(() => {
         <IndexRoute name="index" component={Index}/>
         <Route name="info" path="/info" component={Profile}/>
         <Route name="contact" path="/contact" component={ContactPage}/>
-        <Route name="resetPassword" path="/forgotPassword" component={ResetPassword}/>
+        <Route name="resetPassword" path="/forgotPassword" component={ForgotPassword}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>
