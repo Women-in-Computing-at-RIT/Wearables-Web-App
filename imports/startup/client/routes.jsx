@@ -8,6 +8,7 @@ import {App} from '../../ui/layouts/app';
 import {Index} from '../../ui/pages/index';
 import {Profile} from '../../ui/pages/information';
 import {NotFound} from '../../ui/pages/not-found';
+import {ContactPage} from '../../ui/pages/contact';
 
 /**
  * An onEnter action that requires the user accessing that route to be authenticated. If the user is not authenticated
@@ -44,6 +45,7 @@ Meteor.startup(() => {
       <Route path="/" component={ App } onEnter={ redirectAuth('/home') }>
         <IndexRoute name="index" component={Index}/>
         <Route name="info" path="/info" component={Profile}/>
+        <Route name="contact" path="/contact" component={ContactPage}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>

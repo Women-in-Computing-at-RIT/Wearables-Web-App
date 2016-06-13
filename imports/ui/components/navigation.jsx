@@ -75,7 +75,7 @@ export class AppNavigation extends React.Component {
 
   render() {
     return (
-      <Navbar>
+      <Navbar className="navbar-static-top">
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Placeholder</Link>

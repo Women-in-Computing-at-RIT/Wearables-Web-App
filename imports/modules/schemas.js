@@ -1,3 +1,8 @@
+/**
+ * file: schemas.js
+ * authors: Matthew Crocco, Cara Steinberg
+ */
+
 import {Random} from 'meteor/random';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
