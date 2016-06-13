@@ -2,6 +2,8 @@ import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { browserHistory, Link } from 'react-router';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
+import {SignInModal} from '../components/signInModal';
+import {RegisterModal} from '../components/registerModal';
 
 const handleLogout = () => Meteor.logout(() => browserHistory.push('/signin'));
 
@@ -19,30 +21,47 @@ const getUserName = () => {
 };
 
 // Navigation specification for anonymous users
-export const PublicNavigation = () =>
-  <Nav pullRight>
-    <LinkContainer to="signin">
-      <NavItem eventKey={1} href="/signin">Sign In</NavItem>
-    </LinkContainer>
-    <LinkContainer to="register">
-      <NavItem eventKey={2} href="/register">Register</NavItem>
-    </LinkContainer>
-  </Nav>;
+// export const PublicNavigation = () =>
+export const PublicNavigation = React.createClass ({
+  render() {
+    return (
+      <Nav pullRight>
+        {/*<LinkContainer to="signin">
+         <NavItem eventKey={1} href="/signin" onClick={this.open}>Sign In</NavItem>
+         </LinkContainer>
+        <LinkContainer to="register">
+         <NavItem eventKey={2} href="/register">Register</NavItem>
+         </LinkContainer>*/}
+        <LinkContainer to="/contact">
+          <NavItem event={3} href="/contact">Contact Us</NavItem>
+        </LinkContainer>
+        <NavItem eventKey={1}><SignInModal/></NavItem>
+        <NavItem eventKey={2}><RegisterModal/></NavItem>
+      </Nav>
+    );
+  }
+});
 
 // Navigation specification for authenticated users
-export const AuthNavigation = () =>
-  <Nav pullRight>
-    <LinkContainer to="/home">
-      <NavItem eventKey={1} href="/home">Profile</NavItem>
-    </LinkContainer>
-    <LinkContainer to="/schedule">
-      <NavItem event={2} href="/schedule">Schedule</NavItem>
-    </LinkContainer>
-    <LinkContainer to="/contact">
-      <NavItem event={3} href="/contact">Contact Us</NavItem>
-    </LinkContainer>
-    <NavItem event={4} onClick={handleLogout}>Sign Out</NavItem>
-  </Nav>;
+// export const AuthNavigation = () =>
+export const AuthNavigation = React.createClass ({
+  render() {
+    return (
+      <Nav pullRight>
+        <LinkContainer to="/home">
+          <NavItem eventKey={1} href="/home">Profile</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/schedule">
+          <NavItem event={2} href="/schedule">Schedule</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/contact">
+          <NavItem event={3} href="/contact">Contact Us</NavItem>
+        </LinkContainer>
+        <NavItem event={4} onClick={handleLogout}>Sign Out</NavItem>
+      </Nav>
+    );
+  }
+});
 
 export class AppNavigation extends React.Component {
   static renderNavigation(hasUser) {
