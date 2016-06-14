@@ -24,9 +24,9 @@ export const ResetPassword = React.createClass ({
           <FormGroup>
             <Form schema={Schemas.User} id="resetPasswordForm" onsubmit={this.handleSubmit}>
               <label htmlFor="passwordCur">Current Password</label>
-              <input className="form-control" type="password" id="passwordCur"/>
+              <input className="form-control" type="password" id="passwordCur"/><br/>
               <label htmlFor="passwordNew">New Password</label>
-              <input className="form-control" type="password" id="passwordNew"/>
+              <input className="form-control" type="password" id="passwordNew"/><br/>
               <label htmlFor="passwordCon">Confirm Password</label>
               <input className="form-control" type="password" id="passwordCon"/>
               <br/>

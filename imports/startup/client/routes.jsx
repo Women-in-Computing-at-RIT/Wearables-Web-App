@@ -6,11 +6,14 @@ import {Meteor} from 'meteor/meteor';
 
 import {App} from '../../ui/layouts/app';
 import {Index} from '../../ui/pages/index';
-import {Profile} from '../../ui/pages/information';
+import {CreateProfile} from '../../ui/pages/information';
 import {NotFound} from '../../ui/pages/not-found';
 import {ContactPage} from '../../ui/pages/contact';
 import {ForgotPassword} from '../../ui/pages/forgotPassword';
 import {ResetPassword} from '../../ui/pages/resetPassword';
+import {HomePage} from '../../ui/pages/homePage';
+import {ProfilePage} from '../../ui/pages/profilePage';
+import {Schedule} from '../../ui/pages/schedule';
 
 /**
  * An onEnter action that requires the user accessing that route to be authenticated. If the user is not authenticated
@@ -46,10 +49,13 @@ Meteor.startup(() => {
     <Router history={ browserHistory }>
       <Route path="/" component={ App } onEnter={ redirectAuth('/home') }>
         <IndexRoute name="index" component={Index}/>
-        <Route name="info" path="/info" component={Profile}/>
+        <Route name="info" path="/info" component={CreateProfile}/>
         <Route name="contact" path="/contact" component={ContactPage}/>
         <Route name="forgotPassword" path="/forgotPassword" component={ForgotPassword}/>
         <Route name="resetPassword" path="/resetPassword" component={ResetPassword}/>
+        <Route name="homePage" path="/home" component={HomePage}/>
+        <Route name="profilePage" path="/profile" component={ProfilePage}/>
+        <Route name="schedule" path="/schedule" component={Schedule}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>

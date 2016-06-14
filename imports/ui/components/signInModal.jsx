@@ -6,7 +6,7 @@
 import React from 'react';
 import {Modal, Button, Row, Col} from 'react-bootstrap';
 import {SignInForm} from '../components/signInForm';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router';
 import {RegisterModal} from '../components/registerModal';
 
 export const SignInModal = React.createClass ({
@@ -36,11 +36,9 @@ export const SignInModal = React.createClass ({
                 <Col xs={9}>
                   <h5 className="text-left">Not a member?
                   <Button className="btn-link"><RegisterModal/></Button></h5>
-                  </Col>
-                  <Col xs={3}>
-                  <LinkContainer to="/forgotPassword">
-                    <h5 className="text-right"><a href="/forgotPassword">Forgot Password?</a></h5>
-                  </LinkContainer>
+                </Col>
+                <Col xs={3}>
+                  <Link className="pull-right" to="/forgotPassword">Forgot Password?</Link>
                 </Col>
               </Row>
             </Modal.Body>

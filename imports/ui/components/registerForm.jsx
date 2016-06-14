@@ -5,30 +5,56 @@
 
 import React from 'react';
 import Schemas from '../../modules/schemas';
-import { Form, FormGroup, ButtonGroup, Button } from 'react-bootstrap';
+import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
+
 
 
 export const RegisterForm = React.createClass({
   handleSubmit (e) {
     e.preventDefault();
-    this.setState({submitted: this.refs.ProfileForm.getFormData()});
-    console.log("Submitted");
   },
 
   render() {
     return (
-      <FormGroup>
-        <Form schema={Schemas.User} id="registerForm" onsubmit={this.handleSubmit}>
-          <label htmlFor="email">Enter Email Address</label>
-          <input className="form-control" type="email" placeholder="Email" id="email"/>
-          <label htmlFor="passwordCre">Create Password</label>
-          <input className="form-control" type="password" placeholder="Enter Password" id="passwordCre"/>
-          <label htmlFor="passwordCon">Confirm Password</label>
-          <input className="form-control" type="password" placeholder="Re-enter Password" id="passwordCon"/>
-          <br/>
-          <Button type="submit" className="center-block">Submit</Button>
-        </Form>
-      </FormGroup>
+      <form ref="signup" className="signup" onSubmit={ this.handleSubmit }>
+        <FormGroup>
+          <ControlLabel>First Name</ControlLabel>
+          <FormControl
+            type="text"
+            ref="firstName"
+            name="firstName"
+            placeholder="First Name"
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Last Name</ControlLabel>
+          <FormControl
+            type="text"
+            ref="lastName"
+            name="lastName"
+            placeholder="Last Name"
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Email Address</ControlLabel>
+          <FormControl
+            type="text"
+            ref="emailAddress"
+            name="emailAddress"
+            placeholder="Email Address"
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Password</ControlLabel>
+          <FormControl
+            type="password"
+            ref="password"
+            name="password"
+            placeholder="Password"
+          />
+        </FormGroup>
+        <Button type="submit" className="center-block" bsStyle="success">Register</Button>
+      </form>
     );
   }
 });

@@ -5,28 +5,38 @@
 
 import React from 'react';
 import Schemas from '../../modules/schemas';
-import { Form, FormGroup, ButtonGroup, Button } from 'react-bootstrap';
-
+import { FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
 export const SignInForm = React.createClass({
-  handleSubmit (e) {
+  handleSubmit(e) {
     e.preventDefault();
-    this.setState({submitted: this.refs.ProfileForm.getFormData()});
-    console.log("Submitted");
   },
 
   render() {
     return (
-      <FormGroup>
-        <Form schema={Schemas.User} id="signInForm" onsubmit={this.handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input className="form-control" type="email" placeholder="Email Address" id="email"/>
-          <label htmlFor="password">Password</label>
-          <input className="form-control" type="password" placeholder="Enter Password" id="password"/>
-          <br/>
-          <Button type="submit" className="center-block">Submit</Button>
-        </Form>
-      </FormGroup>
+      <form ref="signin" className="signin" onSubmit={ this.handleSubmit }>
+        <FormGroup>
+          <ControlLabel>Email Address</ControlLabel>
+          <FormControl
+            type="email"
+            ref="emailAddress"
+            name="emailAddress"
+            placeholder="Email Address"
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>
+            <span className="pull-left">Password</span>
+          </ControlLabel>
+          <FormControl
+            type="password"
+            ref="password"
+            name="password"
+            placeholder="Password"
+          />
+        </FormGroup>
+        <Button type="submit" className="center-block" bsStyle="success">Sign In</Button>
+      </form>
     );
   }
 });

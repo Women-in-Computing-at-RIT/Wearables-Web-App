@@ -65,16 +65,14 @@ export const ProfileForm = React.createClass({
     return (
       <FormGroup>
         <Form schema={Schemas.UserProfile} id="userProfileForm" onsubmit={this.handleSubmit}>
-          {this.renderTextInput('firstName', 'First Name', 'First Name')}
-          {this.renderTextInput('lastName', 'Last Name', 'Last Name')}
-          {this.renderTextInput('email', 'Email', 'Email')}
-          {this.renderTextInput('dob', 'Date of Birth', 'mm/dd/yyyy')}
-          {this.renderSelect('gender', 'Gender', genders)}
-          {this.renderSelect('ethnicity', 'Ethnicity', ethnicities)}
-          {this.renderTextInput('phoneNumber', 'Phone Number', 'xxx-xxx-xxxx')}
-          <ButtonGroup>
-            <Button type="submit">Submit</Button>
-          </ButtonGroup>
+          {this.renderTextInput('firstName', 'First Name', 'First Name')}<br/>
+          {this.renderTextInput('lastName', 'Last Name', 'Last Name')}<br/>
+          {this.renderTextInput('email', 'Email', 'address@email.com')}<br/>
+          {this.renderTextInput('dob', 'Date of Birth', 'mm/dd/yyyy')}<br/>
+          {this.renderSelect('gender', 'Gender', genders)}<br/>
+          {this.renderSelect('ethnicity', 'Ethnicity', ethnicities)}<br/>
+          {this.renderTextInput('phoneNumber', 'Phone Number', 'xxx-xxx-xxxx')}<br/>
+          <Button type="submit" className="center-block">Submit</Button>
         </Form>
       </FormGroup>
     );

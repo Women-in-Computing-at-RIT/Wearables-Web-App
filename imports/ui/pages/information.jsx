@@ -7,7 +7,7 @@ import {Row, Col, Jumbotron} from 'react-bootstrap';
 import {ProfileForm} from '../components/profileForm';
 import Schemas from '../../modules/schemas';
 
-export const Profile = React.createClass({
+export const CreateProfile = React.createClass({
   // propTypes: {
   //   profile: React.PropTypes.element.isRequired
   // },
