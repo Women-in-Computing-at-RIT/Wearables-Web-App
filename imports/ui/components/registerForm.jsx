@@ -4,20 +4,28 @@
  */
 
 import React from 'react';
-import Schemas from '../../modules/schemas';
-import { Row, Col, FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
-
+import {FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
 
 export const RegisterForm = React.createClass({
-  handleSubmit (e) {
-    e.preventDefault();
+  propTypes: {
+    submitAction: React.PropTypes.func.isRequired
   },
+
+  getDefaultProps() {
+    return {
+      submitBtnLabel: "Register"
+    };
+  },
+
+  // handleSubmit (e) {
+  //   e.preventDefault();
+  // },
 
   render() {
     return (
-      <form ref="signup" className="signup" onSubmit={ this.handleSubmit }>
-        <FormGroup>
+      <form ref="register" className="register" onSubmit={ this.props.submitAction }>
+        {/*<FormGroup>
           <ControlLabel>First Name</ControlLabel>
           <FormControl
             type="text"
@@ -34,14 +42,14 @@ export const RegisterForm = React.createClass({
             name="lastName"
             placeholder="Last Name"
           />
-        </FormGroup>
+        </FormGroup>*/}
         <FormGroup>
           <ControlLabel>Email Address</ControlLabel>
           <FormControl
-            type="text"
-            ref="emailAddress"
-            name="emailAddress"
-            placeholder="Email Address"
+            type="email"
+            ref="email"
+            id="email"
+            placeholder="Enter Email"
           />
         </FormGroup>
         <FormGroup>
@@ -53,7 +61,16 @@ export const RegisterForm = React.createClass({
             placeholder="Password"
           />
         </FormGroup>
-        <Button type="submit" className="center-block" bsStyle="success">Register</Button>
+        {/*<FormGroup>
+          <ControlLabel>Confirm Password</ControlLabel>
+          <FormControl
+            type="password"
+            ref="passwordCon"
+            name="passwordCon"
+            placeholder="Re-Enter Password"
+          />
+        </FormGroup>*/}
+        <Button type="submit" className="center-block" bsStyle="success">{this.props.submitBtnLabel}</Button>
       </form>
     );
   }

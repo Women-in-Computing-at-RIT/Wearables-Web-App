@@ -35,7 +35,9 @@ export const ProfileForm = React.createClass({
         defaultValue={id}
       />
       // value={this.state.value}
+      // placeholder={placeHolder}
       // onChange={this.handleChange}
+      // />
     )
   },
   renderSelect (id, label, values) {
@@ -60,8 +62,8 @@ export const ProfileForm = React.createClass({
   },
   handleSubmit (e) {
     e.preventDefault();
-    // this.setState({submitted: this.refs.ProfileForm.getFormData()});
-    // console.log("Submitted");
+    this.setState({submitted: this.refs.ProfileForm.getFormData()});
+    console.log("Submitted");
     // Bert.alert('Submitted');
   },
 
