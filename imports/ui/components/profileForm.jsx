@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Schemas from '../../modules/schemas';
-import { Form, FormGroup, FormControl, ButtonGroup, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, Button,ControlLabel } from 'react-bootstrap';
 import {updateUserProfile} from '../../../imports/api/users/methods';
 import { Bert } from 'meteor/themeteorchef:bert';
 
@@ -21,17 +21,21 @@ export const ProfileForm = React.createClass({
   // },
   renderField (id, label, field) {
     return <div>
-      <label htmlFor={id}>{label}</label><br/>
+      <ControlLabel><span className="pull-left">{label}</span></ControlLabel>
       {field}
-    </div>
+      </div>
   },
   renderTextInput (id, label, placeHolder) {
     return this.renderField(id, label,
-      <input type="text" className="form-control" defaultValue={id}
-      // value={this.state.value}
-      placeholder={placeHolder}
-      // onChange={this.handleChange}
+      <FormControl
+        type="text"
+        ref={id}
+        name={id}
+        placeholder={placeHolder}
+        defaultValue={id}
       />
+      // value={this.state.value}
+      // onChange={this.handleChange}
     )
   },
   renderSelect (id, label, values) {
@@ -56,25 +60,37 @@ export const ProfileForm = React.createClass({
   },
   handleSubmit (e) {
     e.preventDefault();
-    this.setState({submitted: this.refs.ProfileForm.getFormData()});
-    console.log("Submitted");
+    // this.setState({submitted: this.refs.ProfileForm.getFormData()});
+    // console.log("Submitted");
     // Bert.alert('Submitted');
   },
 
   render() {
     return (
-      <FormGroup>
-        <Form schema={Schemas.UserProfile} id="userProfileForm" onsubmit={this.handleSubmit}>
-          {this.renderTextInput('firstName', 'First Name', 'First Name')}<br/>
-          {this.renderTextInput('lastName', 'Last Name', 'Last Name')}<br/>
-          {this.renderTextInput('email', 'Email', 'address@email.com')}<br/>
-          {this.renderTextInput('dob', 'Date of Birth', 'mm/dd/yyyy')}<br/>
-          {this.renderSelect('gender', 'Gender', genders)}<br/>
-          {this.renderSelect('ethnicity', 'Ethnicity', ethnicities)}<br/>
-          {this.renderTextInput('phoneNumber', 'Phone Number', 'xxx-xxx-xxxx')}<br/>
-          <Button type="submit" className="center-block">Submit</Button>
-        </Form>
-      </FormGroup>
+        <form ref="userProfileForm" className="userProfileForm" onSubmit={ this.handleSubmit }>
+          <FormGroup>
+            {this.renderTextInput('firstName', 'First Name', 'First Name')}
+          </FormGroup>
+          <FormGroup>
+            {this.renderTextInput('lastName', 'Last Name', 'Last Name')}
+          </FormGroup>
+          <FormGroup>
+            {this.renderTextInput('email', 'Email', 'address@email.com')}
+          </FormGroup>
+          <FormGroup>
+            {this.renderTextInput('dob', 'Date of Birth', 'mm/dd/yyyy')}
+          </FormGroup>
+          <FormGroup>
+            {this.renderSelect('gender', 'Gender', genders)}
+          </FormGroup>
+          <FormGroup>
+            {this.renderSelect('ethnicity', 'Ethnicity', ethnicities)}
+          </FormGroup>
+          <FormGroup>
+            {this.renderTextInput('phoneNumber', 'Phone Number', 'xxx-xxx-xxxx')}
+          </FormGroup>
+          <Button type="submit" className="center-block">Submit</Button><br/>
+        </form>
     );
   }
 });
