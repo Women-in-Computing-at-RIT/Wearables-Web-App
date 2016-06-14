@@ -1,5 +1,5 @@
 /**
- * file: resetPassword.jsx
+ * file: forgotPassword.jsx
  * authors: Cara Steinberg
  */
 
@@ -24,7 +24,7 @@ export const ForgotPassword = React.createClass ({
             Please enter your email address, and we'll send you a link and instructions to reset your password.
           </h4>
           <FormGroup>
-            <Form schema={Schemas.User} id="signInForm" onsubmit={this.handleSubmit}>
+            <Form schema={Schemas.User} id="forgotPasswordForm" onsubmit={this.handleSubmit}>
               <label htmlFor="email">Enter Email Address</label>
               <input className="form-control" type="email" placeholder="Email" id="email"/>
               <br/>

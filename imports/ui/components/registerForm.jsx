@@ -18,13 +18,13 @@ export const RegisterForm = React.createClass({
   render() {
     return (
       <FormGroup>
-        <Form schema={Schemas.User} id="signInForm" onsubmit={this.handleSubmit}>
+        <Form schema={Schemas.User} id="registerForm" onsubmit={this.handleSubmit}>
           <label htmlFor="email">Enter Email Address</label>
           <input className="form-control" type="email" placeholder="Email" id="email"/>
-          <label htmlFor="password">Create Password</label>
-          <input className="form-control" type="password" placeholder="Enter Password" id="password"/>
-          <label htmlFor="password">Confirm Password</label>
-          <input className="form-control" type="password" placeholder="Re-enter Password" id="password"/>
+          <label htmlFor="passwordCre">Create Password</label>
+          <input className="form-control" type="password" placeholder="Enter Password" id="passwordCre"/>
+          <label htmlFor="passwordCon">Confirm Password</label>
+          <input className="form-control" type="password" placeholder="Re-enter Password" id="passwordCon"/>
           <br/>
           <Button type="submit" className="center-block">Submit</Button>
         </Form>
