@@ -5,13 +5,11 @@
 
 import React from 'react';
 import Schemas from '../../modules/schemas';
-import {Button, Row, Col, Form, FormGroup} from 'react-bootstrap';
+import {Button, Row, Col, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 export const ForgotPassword = React.createClass ({
   handleSubmit (e) {
     e.preventDefault();
-    this.setState({submitted: this.refs.ProfileForm.getFormData()});
-    console.log("Submitted");
   },
   render() {
     return (
@@ -23,14 +21,20 @@ export const ForgotPassword = React.createClass ({
           <h4 className="text-left">
             Please enter your email address, and we'll send you a link and instructions to reset your password.
           </h4>
-          <FormGroup>
-            <Form schema={Schemas.User} id="forgotPasswordForm" onsubmit={this.handleSubmit}>
-              <label htmlFor="email">Enter Email Address</label>
-              <input className="form-control" type="email" placeholder="Email" id="email"/>
-              <br/>
+            <form ref="forgot" className="forgot" onSubmit={ this.handleSubmit }>
+              <FormGroup>
+                <ControlLabel>
+                  <span className="pull-left">Enter Email Address</span>
+                </ControlLabel>
+                <FormControl
+                  type="email"
+                  ref="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </FormGroup>
               <Button type="submit" className="center-block">Submit</Button>
-            </Form>
-          </FormGroup>
+            </form>
         </Col>
       </Row>
     );

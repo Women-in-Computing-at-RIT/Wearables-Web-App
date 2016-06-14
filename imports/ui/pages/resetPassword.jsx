@@ -5,7 +5,7 @@
 
 import React from 'react';
 import Schemas from '../../modules/schemas';
-import {Button, Row, Col, Form, FormGroup} from 'react-bootstrap';
+import {Button, Row, Col,FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 
 export const ResetPassword = React.createClass ({
   handleSubmit (e) {
@@ -20,19 +20,40 @@ export const ResetPassword = React.createClass ({
           <h2 className="page-header">Reset Password</h2>
         </Col>
         <Col xs={12}>
-          <h4 className="text-left">Create a new Password</h4>
-          <FormGroup>
-            <Form schema={Schemas.User} id="resetPasswordForm" onsubmit={this.handleSubmit}>
-              <label htmlFor="passwordCur">Current Password</label>
-              <input className="form-control" type="password" id="passwordCur"/><br/>
-              <label htmlFor="passwordNew">New Password</label>
-              <input className="form-control" type="password" id="passwordNew"/><br/>
-              <label htmlFor="passwordCon">Confirm Password</label>
-              <input className="form-control" type="password" id="passwordCon"/>
-              <br/>
+          <h4 className="text-center">Create a new Password</h4><br/>
+          <form ref="reset" className="reset" onSubmit={ this.handleSubmit }>
+            <FormGroup>
+              <ControlLabel>
+                <span className="pull-left">Current Password</span>
+              </ControlLabel>
+              <FormControl
+                type="password"
+                ref="passwordCur"
+                name="passwordCur"
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>
+                <span className="pull-left">New Password</span>
+              </ControlLabel>
+              <FormControl
+                type="password"
+                ref="passwordNew"
+                name="passwordNew"
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>
+                <span className="pull-left">Confirm Password</span>
+              </ControlLabel>
+              <FormControl
+                type="password"
+                ref="passwordCon"
+                name="passwordCon"
+              />
+            </FormGroup>
               <Button type="submit" className="center-block">Submit</Button>
-            </Form>
-          </FormGroup>
+          </form>
         </Col>
       </Row>
     );
