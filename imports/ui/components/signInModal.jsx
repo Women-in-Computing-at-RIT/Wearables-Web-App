@@ -13,20 +13,6 @@ import {Bert} from 'meteor/themeteorchef:bert';
 import {handleLogin} from '../../modules/login';
 
 export const SignInModal = React.createClass ({
-  // loginWithPassword(e) {
-  //   e.preventDefault();
-  //
-  //   Meteor.loginWithPassword({
-  //     email:'example@gmail.com',
-  //     password: 'password'
-  //   }, function(error) {
-  //     if (error) {
-  //       console.log("There was an error:" + error.reason);
-  //     } else {
-  //       Bert.alert('Logged In!', 'success');
-  //     }
-  //   });
-  // },
   getInitialState() {
       return { showModal: false };
     },
@@ -49,9 +35,6 @@ export const SignInModal = React.createClass ({
             </Modal.Header>
             <Modal.Body>
               <SignInForm />
-              {/*schema={Schemas.User}
-               signInBtnLabel="Sign In"
-               submitAction={this.loginWithPassword}*/}
               <Row>
                 <Col xs={9}>
                   <h5 className="text-left">Not a member?

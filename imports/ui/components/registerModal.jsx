@@ -20,7 +20,7 @@ export const RegisterModal = React.createClass ({
   createUser(doc) {
     doc.preventDefault();
     Accounts.createUser ({
-      email:'example@gmail.com',
+      email:'caralin3@gmail.com',
       password: 'password'
       }, function (error) {
         if (error) {

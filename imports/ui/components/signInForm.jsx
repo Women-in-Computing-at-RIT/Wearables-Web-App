@@ -8,15 +8,6 @@ import Schemas from '../../modules/schemas';
 import { FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
 export const SignInForm = React.createClass({
-  // propTypes: {
-  //   submitAction: React.PropTypes.func.isRequired
-  // },
-  //
-  // getDefaultProps() {
-  //   return {
-  //     signInBtnLabel: "Sign In"
-  //   };
-  // },
   handleSubmit (e) {
     e.preventDefault();
     console.log("Submitted");
