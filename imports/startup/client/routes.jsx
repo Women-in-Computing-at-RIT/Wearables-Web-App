@@ -47,13 +47,15 @@ const redirectAuth = (to) => (next, repl) => {
 Meteor.startup(() => {
   render(
     <Router history={ browserHistory }>
+      <Route path="/" component={ App }>
+        <Route name="homePage" path="/home" component={HomePage}/>
+      </Route>
       <Route path="/" component={ App } onEnter={ redirectAuth('/home') }>
         <IndexRoute name="index" component={Index}/>
         <Route name="info" path="/info" component={CreateProfile}/>
         <Route name="contact" path="/contact" component={ContactPage}/>
         <Route name="forgotPassword" path="/forgotPassword" component={ForgotPassword}/>
         <Route name="resetPassword" path="/resetPassword" component={ResetPassword}/>
-        <Route name="homePage" path="/home" component={HomePage}/>
         <Route name="profilePage" path="/profile" component={ProfilePage}/>
         <Route name="schedule" path="/schedule" component={Schedule}/>
       </Route>
