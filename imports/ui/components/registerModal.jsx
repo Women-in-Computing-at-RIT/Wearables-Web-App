@@ -11,6 +11,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import {RegisterForm} from '../components/registerForm';
 import {SignInModal} from '../components/signInModal'
 import {Bert} from 'meteor/themeteorchef:bert';
+import { Accounts } from 'meteor/accounts-base';
 
 import getInputValue from '../../modules/get-input-value';
 import Schemas from '../../modules/schemas';
@@ -32,11 +33,14 @@ export const RegisterModal = React.createClass ({
     //   email = $('#email').val(),
     //   password = $('#password').val().trim();
 
-    Accounts.createUser (doc, function (error) {
+    Accounts.createUser ({
+      email:'example@gmail.com',
+      password: 'password'
+      }, function (error) {
         if (error) {
           console.log("there was an error: " + error.reason);
         } else {
-          Bert.alert('Logged in!', 'success');
+          Bert.alert('Registered!', 'success');
         }
       }
     );
