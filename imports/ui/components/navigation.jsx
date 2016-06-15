@@ -31,12 +31,6 @@ export const PublicNavigation = React.createClass ({
   render() {
     return (
       <Nav pullRight>
-        {/*<LinkContainer to="signin">
-         <NavItem eventKey={1} href="/signin" onClick={this.open}>Sign In</NavItem>
-         </LinkContainer>
-        <LinkContainer to="register">
-         <NavItem eventKey={2} href="/register">Register</NavItem>
-         </LinkContainer>*/}
         <LinkContainer to="/contact">
           <NavItem event={3} href="/contact">Contact Us</NavItem>
         </LinkContainer>

@@ -8,9 +8,26 @@ import {Modal, Button, Row, Col} from 'react-bootstrap';
 import {SignInForm} from '../components/signInForm';
 import { Link } from 'react-router';
 import {RegisterModal} from '../components/registerModal';
+import {Bert} from 'meteor/themeteorchef:bert';
+
+import {handleLogin} from '../../modules/login';
 
 export const SignInModal = React.createClass ({
-    getInitialState() {
+  // loginWithPassword(e) {
+  //   e.preventDefault();
+  //
+  //   Meteor.loginWithPassword({
+  //     email:'example@gmail.com',
+  //     password: 'password'
+  //   }, function(error) {
+  //     if (error) {
+  //       console.log("There was an error:" + error.reason);
+  //     } else {
+  //       Bert.alert('Logged In!', 'success');
+  //     }
+  //   });
+  // },
+  getInitialState() {
       return { showModal: false };
     },
 
@@ -31,7 +48,10 @@ export const SignInModal = React.createClass ({
               <Modal.Title className="text-center">Sign In</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <SignInForm/>
+              <SignInForm />
+              {/*schema={Schemas.User}
+               signInBtnLabel="Sign In"
+               submitAction={this.loginWithPassword}*/}
               <Row>
                 <Col xs={9}>
                   <h5 className="text-left">Not a member?
