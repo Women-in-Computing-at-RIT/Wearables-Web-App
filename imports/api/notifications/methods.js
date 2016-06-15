@@ -9,7 +9,9 @@ import {ValidatedMethod} from 'meteor/mdg:validated-method';
 
 export const pushGlobalNotification = createSided(new Supplier(() => pushGlobalNotificationMethod),
   ({timestamp, type, data}) => Meteor.users.find().fetch().forEach(({_id}) =>
-    Notifications.insert({timestamp: timestamp, type: type, data: data, targetId: _id})));
+    Notifications.insert({timestamp: timestamp, type: type, data: data, targetId: _id})
+  )
+);
 
 export const pushNotification = createSided(new Supplier(() => pushNotificationMethod),
   ({timestamp, type, data, targetId}) => {
