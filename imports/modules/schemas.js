@@ -93,10 +93,6 @@ Schemas.User = new SimpleSchema({
   'emails.$.verified': {
     type: Boolean
   },
-  password: {
-    type: String,
-    min: 6
-  },
   createdAt: {
     type: Date
   },
