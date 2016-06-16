@@ -9,4 +9,3 @@ describe('Families collection', function() {
     expect(Families).to.be.a('object').and.not.null.and.not.undefined;
   });
 });
-

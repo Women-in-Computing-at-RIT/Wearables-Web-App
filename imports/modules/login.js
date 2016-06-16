@@ -8,7 +8,7 @@ import {Bert} from 'meteor/themeteorchef:bert';
 import getInputValue from './get-input-value';
 
 const login = (comp) => {
-  const email = getInputValue(comp.refs.email);
+  const email = getInputValue(comp.refs.emailAddress);
   const password = getInputValue(comp.refs.password);
 
   Meteor.loginWithPassword(email, password, (error) => {
@@ -27,7 +27,7 @@ const login = (comp) => {
 };
 
 const validate = (comp) => {
-  $(comp.refs.login).validate({
+  $(comp.refs.signin).validate({
     rules: {
       email: {
         required: true,
@@ -52,9 +52,13 @@ const validate = (comp) => {
   });
 };
 
-export const handleLogin = (options) => {
-  if(options.component)
-    validate(options.component);
-
-  throw new Error('No component provided in login options');
+const handleLogin = ({component}) => {
+  if(!_.isNull(component) && !_.isUndefined(component))
+    validate(component);
+  else
+    throw new Error('No component provided in login options');
 };
+
+export {login, handleLogin};
+
+

@@ -7,14 +7,12 @@ import * as ChangeCase from 'change-case';
  * @author Matthew Crocco
  * @class
  */
-class Enum2 extends Enum {
+export class Enum2 extends Enum {
   /**
    * @returns {string} Name of enum option
      */
   get label() {
-    let tmp = super.toString();
-    let i = tmp.indexOf('.');
-    return tmp.substring(i + 1);
+    return this.name;
   }
 }
 
@@ -53,7 +51,7 @@ class Gender extends Enum2 {
   }
 
   toString() {
-    return ChangeCase.title(super.label());
+    return ChangeCase.title(this.label);
   }
 }
 
@@ -114,7 +112,7 @@ class Ethnicity extends Enum2 {
   }
 
   toString() {
-    return ChangeCase.title(super.label());
+    return ChangeCase.title(this.label);
   }
 
   asOption() {

@@ -53,3 +53,6 @@ themeteorchef:jquery-validation
 nimble:restivus
 practicalmeteor:chai
 practicalmeteor:mocha
+gadicc:blaze-react-component
+meteor-tool
+msavin:mongol

@@ -33,7 +33,7 @@ Schemas.UserProfile = new SimpleSchema({
   firstName: {
     type: String,
     optional: false,
-    min: 3,
+    min: 1,
     max: 40
   },
   lastName: {
@@ -52,22 +52,18 @@ Schemas.UserProfile = new SimpleSchema({
   gender: {
     type: Gender,
     label: "Gender",
-    max: 20,
-    optional: false,
-    custom: () => Gender.fromString(this.value) === null ? "Invalid gender value!" : true
+    blackbox: true,
+    optional: false
   },
   ethnicity: {
     type: Ethnicity,
     label: "Ethnicity",
-    max: 40,
-    optional: false,
-    custom: () => Ethnicity.fromString(this.value) === null ? "Invalid ethnicity value!" : true
+    blackbox: true,
+    optional: false
   },
   phoneNumber: {
-    type: Number,
+    type: String,
     label: "Phone Number",
-    min: 13,
-    max: 15,
     optional: false,
     regEx: /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g
   }
@@ -92,10 +88,6 @@ Schemas.User = new SimpleSchema({
   },
   'emails.$.verified': {
     type: Boolean
-  },
-  password: {
-    type: String,
-    min: 6
   },
   createdAt: {
     type: Date
@@ -301,5 +293,22 @@ Schemas.Notification = new SimpleSchema({
     defaultValue: {}
   }
 });
+
+Schemas.SignIn = new SimpleSchema({
+  email: {
+    type: String,
+    max: 254,
+    regEx: SimpleSchema.RegEx.Email,
+    optional: false
+  },
+  password: {
+    type: String,
+    min: 3,
+    max: 255,
+    optional: false
+  }
+});
+
+Schemas.Register = Schemas.SignIn;
 
 export default Schemas;

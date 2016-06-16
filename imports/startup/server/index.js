@@ -1,5 +1,6 @@
 import './accounts/email-templates';
 import './fixtures';
+import './serialization';
 
 // Initialize the Admin Site config, this is a globally available value (hence no let/const/var)
 AdminConfig = {
