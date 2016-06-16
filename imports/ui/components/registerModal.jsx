@@ -17,8 +17,8 @@ import {browserHistory} from 'react-router';
 import Schemas from '../../modules/schemas';
 
 export const RegisterModal = React.createClass ({
-  createUser(doc) {
-    doc.preventDefault();
+  createUser(e) {
+    e.preventDefault();
     const
       email = $('#email').val(),
       password = $('#password').val().trim();
@@ -32,7 +32,6 @@ export const RegisterModal = React.createClass ({
         } else {
           Bert.alert('Registered!', 'success');
           Accounts.sendVerificationEmail(Meteor.userId(), email);
-          browserHistory.push('/info');
         }
       }
     );

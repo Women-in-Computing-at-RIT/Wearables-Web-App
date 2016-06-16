@@ -16,8 +16,9 @@ emailTemplates.verifyEmail = {
 
   text(user, url) {
     const userEmail = user.emails[0].address;
+    const username = user.username;
     // const urlWithoutHash = url.replace('#/', '');
-    return "Thank you for registering with the email\n" +
+    return "Thank you" + username + " for registering with the email\n" +
       userEmail + "\nTo activate your account please click the following link:\n\n"
     + url + "\n\n"
   }
