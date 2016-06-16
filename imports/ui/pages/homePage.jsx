@@ -14,7 +14,7 @@ export const HomePage = React.createClass ({
     return (
       <Row>
         <Col xs={5}>
-          <h2 className="text-left">{Meteor.users.emails[0].address}'s Profile</h2>
+          <h2 className="text-left">User's Profile</h2>
           {this.props.content}
         </Col>
         <Col xs={7}>

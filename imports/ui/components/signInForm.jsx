@@ -31,6 +31,7 @@ export class SignInForm extends React.Component {
             type="email"
             ref="emailAddress"
             name="emailAddress"
+            id="email"
             placeholder="Email Address"
           />
           <FormControl.Feedback />
@@ -43,6 +44,7 @@ export class SignInForm extends React.Component {
             type="password"
             ref="password"
             name="password"
+            id="password"
             placeholder="Password"
           />
           <FormControl.Feedback />
