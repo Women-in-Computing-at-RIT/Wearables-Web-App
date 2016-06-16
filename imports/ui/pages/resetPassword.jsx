@@ -4,8 +4,10 @@
  */
 
 import React from 'react';
-import Schemas from '../../modules/schemas';
 import {Button, Row, Col,FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import { Accounts } from 'meteor/accounts-base';
+
+import Schemas from '../../modules/schemas';
 
 export const ResetPassword = React.createClass ({
   handleSubmit (e) {
@@ -30,6 +32,7 @@ export const ResetPassword = React.createClass ({
                 type="password"
                 ref="passwordCur"
                 name="passwordCur"
+                placeholder="Enter current password"
               />
             </FormGroup>
             <FormGroup>
@@ -40,6 +43,7 @@ export const ResetPassword = React.createClass ({
                 type="password"
                 ref="passwordNew"
                 name="passwordNew"
+                placeholder="Enter new password"
               />
             </FormGroup>
             <FormGroup>
@@ -50,6 +54,7 @@ export const ResetPassword = React.createClass ({
                 type="password"
                 ref="passwordCon"
                 name="passwordCon"
+                placeholder="Re-enter new password"
               />
             </FormGroup>
               <Button type="submit" className="center-block">Submit</Button>

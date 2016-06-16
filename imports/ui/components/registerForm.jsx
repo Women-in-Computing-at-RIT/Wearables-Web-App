@@ -6,6 +6,7 @@
 import React from 'react';
 import {FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
+import Schemas from '../../modules/schemas';
 
 export const RegisterForm = React.createClass({
   propTypes: {
@@ -18,19 +19,15 @@ export const RegisterForm = React.createClass({
     };
   },
 
-  // handleSubmit (e) {
-  //   e.preventDefault();
-  // },
-
   render() {
     return (
-      <form ref="register" className="register" onSubmit={ this.props.submitAction }>
-        {/*<FormGroup>
+      <form schema={Schemas.User} ref="register" className="register" onSubmit={ this.props.submitAction }>
+        <FormGroup>
           <ControlLabel>First Name</ControlLabel>
           <FormControl
             type="text"
             ref="firstName"
-            name="firstName"
+            id="firstName"
             placeholder="First Name"
           />
         </FormGroup>
@@ -39,10 +36,19 @@ export const RegisterForm = React.createClass({
           <FormControl
             type="text"
             ref="lastName"
-            name="lastName"
+            id="lastName"
             placeholder="Last Name"
           />
-        </FormGroup>*/}
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Username</ControlLabel>
+          <FormControl
+            type="text"
+            ref="username"
+            id="username"
+            placeholder="Enter Username"
+          />
+        </FormGroup>
         <FormGroup>
           <ControlLabel>Email Address</ControlLabel>
           <FormControl
@@ -57,7 +63,7 @@ export const RegisterForm = React.createClass({
           <FormControl
             type="password"
             ref="password"
-            name="password"
+            id="password"
             placeholder="Password"
           />
         </FormGroup>
@@ -66,7 +72,7 @@ export const RegisterForm = React.createClass({
           <FormControl
             type="password"
             ref="passwordCon"
-            name="passwordCon"
+            id="passwordCon"
             placeholder="Re-Enter Password"
           />
         </FormGroup>*/}

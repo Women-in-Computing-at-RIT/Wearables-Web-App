@@ -12,35 +12,33 @@ import {RegisterForm} from '../components/registerForm';
 import {SignInModal} from '../components/signInModal'
 import {Bert} from 'meteor/themeteorchef:bert';
 import { Accounts } from 'meteor/accounts-base';
+import {Router, browserHistory} from 'react-router';
 
-import getInputValue from '../../modules/get-input-value';
 import Schemas from '../../modules/schemas';
 
 export const RegisterModal = React.createClass ({
-  // getDefaultProps() {
-  //   let signInMsg = "Already registered?";
-  //     return {
-  //       signInLink: <LinkContainer to="/">
-  //         <h5 className="text-center">{signInMsg}
-  //           <Button className="btn-link"><SignInModal/></Button></h5>
-  //         </LinkContainer>
-  //     }
-  // },
-
   createUser(doc) {
     doc.preventDefault();
-    // const
-    //   email = $('#email').val(),
-    //   password = $('#password').val().trim();
+    const
+      firstName = $('#firstName').val(),
+      lastName = $('#lastName').val(),
+      username = $('#username').val(),
+      email = $('#email').val(),
+      password = $('#password').val().trim();
 
     Accounts.createUser ({
-      email:'example@gmail.com',
-      password: 'password'
-      }, function (error) {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      email: email,
+      password: password
+    }, function (error) {
         if (error) {
           console.log("there was an error: " + error.reason);
         } else {
           Bert.alert('Registered!', 'success');
+          Accounts.sendVerificationEmail(Meteor.userId(), email);
+          browserHistory.push('/info');
         }
       }
     );
@@ -75,7 +73,6 @@ export const RegisterModal = React.createClass ({
               <h5 className="text-center">Already registered?
               <Button className="btn-link"><SignInModal/></Button></h5>
             </LinkContainer>
-            {/*this.props.signInLink*/}
            </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.close}>Close</Button>

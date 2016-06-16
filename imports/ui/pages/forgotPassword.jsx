@@ -4,12 +4,27 @@
  */
 
 import React from 'react';
-import Schemas from '../../modules/schemas';
+import $ from 'jquery';
+import 'jquery-validation';
 import {Button, Row, Col, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
+import { Accounts } from 'meteor/accounts-base';
+
+import Schemas from '../../modules/schemas';
 
 export const ForgotPassword = React.createClass ({
   handleSubmit (e) {
     e.preventDefault();
+
+    Accounts.forgotPassword({
+      email: 'example@gmail.com'
+      }, function (error) {
+        if (error) {
+          console.log("there was an error: " + error.reason);
+        } else {
+          console.log("Email sent!");
+        }
+      }
+    )
   },
   render() {
     return (
