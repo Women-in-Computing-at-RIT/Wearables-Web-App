@@ -22,12 +22,14 @@ export const RegisterModal = React.createClass ({
     const
       firstName = $('#firstName').val(),
       lastName = $('#lastName').val(),
+      username = $('#username').val(),
       email = $('#email').val(),
       password = $('#password').val().trim();
 
     Accounts.createUser ({
       firstName: firstName,
       lastName: lastName,
+      username: username,
       email: email,
       password: password
     }, function (error) {

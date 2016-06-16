@@ -3,6 +3,7 @@
  * authors: Matthew Crocco, Cara Steinberg
  */
 
+import {Meteor} from 'meteor/meteor';
 import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { browserHistory, Link } from 'react-router';
@@ -10,7 +11,12 @@ import { LinkContainer } from 'react-router-bootstrap';
 import {SignInModal} from '../components/signInModal';
 import {RegisterModal} from '../components/registerModal';
 
-const handleLogout = () => Meteor.logout(() => browserHistory.push('/'));
+const handleLogout = () => Meteor.logout(() => {
+  // Meteor.call('clearUsers');
+  browserHistory.push('/')
+  }
+);
+
 
 /**
  * Gets the name of the logged in user. If no user is logged in (hope that never happens) or the User has no profile,

@@ -1,5 +1,6 @@
 import {Accounts} from 'meteor/accounts-base';
 
+process.env.MAIL_URL = 'smtp://USERNAME:PASSWORD@HOST:PORT/';
 const name = 'Stress Monitor';
 const email = '<support@stress.com';
 const from = `${name} ${email}`;
@@ -14,10 +15,11 @@ emailTemplates.verifyEmail = {
   },
 
   text(user, url) {
-    const urlWithoutHash = url.replace('#/', 'info');
-    return "Thank you for registering with the email" +
-      user.email + "!\nTo activate your account please click the following link:\n\n"
-    + urlWithoutHash + "\n\n"
+    const userEmail = user.emails[0].address;
+    // const urlWithoutHash = url.replace('#/', '');
+    return "Thank you for registering with the email\n" +
+      userEmail + "\nTo activate your account please click the following link:\n\n"
+    + url + "\n\n"
   }
 };
 
@@ -36,3 +38,7 @@ emailTemplates.resetPassword = {
     ${email}.`;
   }
 };
+
+Accounts.config({
+  sendVerificationEmail: true
+});

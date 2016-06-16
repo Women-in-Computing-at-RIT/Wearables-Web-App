@@ -9,8 +9,8 @@ import {SignInForm} from '../components/signInForm';
 import { Link } from 'react-router';
 import {RegisterModal} from '../components/registerModal';
 import {Bert} from 'meteor/themeteorchef:bert';
+import {Router, browserHistory} from 'react-router';
 
-import {handleLogin} from '../../modules/login';
 import Schemas from '../../modules/schemas';
 
 export const SignInModal = React.createClass ({

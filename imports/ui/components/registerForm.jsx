@@ -6,6 +6,7 @@
 import React from 'react';
 import {FormGroup, Button, ControlLabel, FormControl } from 'react-bootstrap';
 
+import Schemas from '../../modules/schemas';
 
 export const RegisterForm = React.createClass({
   propTypes: {
@@ -20,7 +21,7 @@ export const RegisterForm = React.createClass({
 
   render() {
     return (
-      <form ref="register" className="register" onSubmit={ this.props.submitAction }>
+      <form schema={Schemas.User} ref="register" className="register" onSubmit={ this.props.submitAction }>
         <FormGroup>
           <ControlLabel>First Name</ControlLabel>
           <FormControl
@@ -39,7 +40,7 @@ export const RegisterForm = React.createClass({
             placeholder="Last Name"
           />
         </FormGroup>
-        {/*<FormGroup>
+        <FormGroup>
           <ControlLabel>Username</ControlLabel>
           <FormControl
             type="text"
@@ -47,7 +48,7 @@ export const RegisterForm = React.createClass({
             id="username"
             placeholder="Enter Username"
           />
-        </FormGroup>*/}
+        </FormGroup>
         <FormGroup>
           <ControlLabel>Email Address</ControlLabel>
           <FormControl
@@ -66,7 +67,7 @@ export const RegisterForm = React.createClass({
             placeholder="Password"
           />
         </FormGroup>
-        <FormGroup>
+        {/*<FormGroup>
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
             type="password"
@@ -74,7 +75,7 @@ export const RegisterForm = React.createClass({
             id="passwordCon"
             placeholder="Re-Enter Password"
           />
-        </FormGroup>
+        </FormGroup>*/}
         <Button type="submit" className="center-block" bsStyle="success">{this.props.submitBtnLabel}</Button>
       </form>
     );
