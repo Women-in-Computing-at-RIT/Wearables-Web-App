@@ -12,25 +12,31 @@ import {RegisterForm} from '../components/registerForm';
 import {SignInModal} from '../components/signInModal'
 import {Bert} from 'meteor/themeteorchef:bert';
 import { Accounts } from 'meteor/accounts-base';
+import {Router, browserHistory} from 'react-router';
 
-import getInputValue from '../../modules/get-input-value';
 import Schemas from '../../modules/schemas';
 
 export const RegisterModal = React.createClass ({
   createUser(doc) {
     doc.preventDefault();
     const
+      firstName = $('#firstName').val(),
+      lastName = $('#lastName').val(),
       email = $('#email').val(),
       password = $('#password').val().trim();
 
     Accounts.createUser ({
+      firstName: firstName,
+      lastName: lastName,
       email: email,
       password: password
     }, function (error) {
         if (error) {
           console.log("there was an error: " + error.reason);
         } else {
-          Bert.alert('Registered!' + email, 'success');
+          Bert.alert('Registered!', 'success');
+          Accounts.sendVerificationEmail(Meteor.userId(), email);
+          browserHistory.push('/info');
         }
       }
     );

@@ -18,19 +18,15 @@ export const RegisterForm = React.createClass({
     };
   },
 
-  // handleSubmit (e) {
-  //   e.preventDefault();
-  // },
-
   render() {
     return (
       <form ref="register" className="register" onSubmit={ this.props.submitAction }>
-        {/*<FormGroup>
+        <FormGroup>
           <ControlLabel>First Name</ControlLabel>
           <FormControl
             type="text"
             ref="firstName"
-            name="firstName"
+            id="firstName"
             placeholder="First Name"
           />
         </FormGroup>
@@ -39,8 +35,17 @@ export const RegisterForm = React.createClass({
           <FormControl
             type="text"
             ref="lastName"
-            name="lastName"
+            id="lastName"
             placeholder="Last Name"
+          />
+        </FormGroup>
+        {/*<FormGroup>
+          <ControlLabel>Username</ControlLabel>
+          <FormControl
+            type="text"
+            ref="username"
+            id="username"
+            placeholder="Enter Username"
           />
         </FormGroup>*/}
         <FormGroup>
@@ -61,15 +66,15 @@ export const RegisterForm = React.createClass({
             placeholder="Password"
           />
         </FormGroup>
-        {/*<FormGroup>
+        <FormGroup>
           <ControlLabel>Confirm Password</ControlLabel>
           <FormControl
             type="password"
             ref="passwordCon"
-            name="passwordCon"
+            id="passwordCon"
             placeholder="Re-Enter Password"
           />
-        </FormGroup>*/}
+        </FormGroup>
         <Button type="submit" className="center-block" bsStyle="success">{this.props.submitBtnLabel}</Button>
       </form>
     );

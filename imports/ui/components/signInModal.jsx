@@ -11,6 +11,7 @@ import {RegisterModal} from '../components/registerModal';
 import {Bert} from 'meteor/themeteorchef:bert';
 
 import {handleLogin} from '../../modules/login';
+import Schemas from '../../modules/schemas';
 
 export const SignInModal = React.createClass ({
   getInitialState() {
@@ -25,7 +26,22 @@ export const SignInModal = React.createClass ({
       this.setState({ showModal: true });
     },
 
-    render() {
+  loginWithPassword(e) {
+    e.preventDefault();
+    const
+      email = $('#email').val(),
+      password = $('#password').val().trim();
+
+    Meteor.loginWithPassword(email, password, function(error) {
+      if (error) {
+        console.log("There was an error:" + error.reason);
+      } else {
+        Bert.alert('Logged In!', 'success');
+      }
+    });
+  },
+
+  render() {
       return (
         <div>
           <div href="/" onClick={this.open}>Sign In</div>
@@ -34,7 +50,10 @@ export const SignInModal = React.createClass ({
               <Modal.Title className="text-center">Sign In</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <SignInForm />
+              <SignInForm schema={Schemas.User}
+                          signInBtnLabel="Sign In"
+                          signInAction={this.loginWithPassword}
+              />
               <Row>
                 <Col xs={9}>
                   <h5 className="text-left">Not a member?
