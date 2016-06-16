@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-import {AppNavigation} from '../components/navigation';
+import AppNavigation from '../containers/navigation';
 
 export const App = React.createClass({
   propTypes: {

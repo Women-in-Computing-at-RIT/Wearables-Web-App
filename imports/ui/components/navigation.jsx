@@ -8,14 +8,12 @@ import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { browserHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-import {SignInModal} from '../components/signInModal';
-import {RegisterModal} from '../components/registerModal';
+import {SignInModal} from './signin-modal';
+import {RegisterModal} from './register-modal';
 
-const handleLogout = () => Meteor.logout(() => {
-  // Meteor.call('clearUsers');
-  browserHistory.push('/')
-  }
-);
+import {isLoggedIn} from '../../modules/login';
+
+const handleLogout = () => Meteor.logout(() => browserHistory.push('/'));
 
 
 /**
@@ -32,25 +30,18 @@ const getUserName = () => {
 };
 
 // Navigation specification for anonymous users
-export const PublicNavigation = React.createClass ({
-  render() {
-    return (
+export const PublicNavigation = () => (
       <Nav pullRight>
         <LinkContainer to="/contact">
           <NavItem event={3} href="/contact">Contact Us</NavItem>
         </LinkContainer>
         <NavItem eventKey={1}><SignInModal/></NavItem>
         <NavItem eventKey={2}><RegisterModal/></NavItem>
-        <NavItem event={4} onClick={handleLogout}>Sign Out</NavItem>
       </Nav>
-    );
-  }
-});
+);
 
 // Navigation specification for authenticated users
-export const AuthNavigation = React.createClass ({
-  render() {
-    return (
+export const AuthNavigation = () => (
       <Nav pullRight>
         <LinkContainer to="/home">
           <NavItem eventKey={1} href="/home">Profile</NavItem>
@@ -61,14 +52,18 @@ export const AuthNavigation = React.createClass ({
         <LinkContainer to="/contact">
           <NavItem event={3} href="/contact">Contact Us</NavItem>
         </LinkContainer>
-        <NavItem event={4} onClick={handleLogout}>Sign Out</NavItem>
+        <LinkContainer to="/">
+          <NavItem event={4} href="/" onClick={handleLogout}>Sign Out</NavItem>
+        </LinkContainer>
       </Nav>
-    );
-  }
-});
+);
 
 export class AppNavigation extends React.Component {
-  static renderNavigation(hasUser) {
+  constructor(props) {
+    super(props);
+  }
+
+  renderNavigation(hasUser) {
     return hasUser ? <AuthNavigation /> : <PublicNavigation />;
   }
 
@@ -82,7 +77,7 @@ export class AppNavigation extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          {AppNavigation.renderNavigation(this.props.hasUser)}
+          {this.renderNavigation(this.props.hasUser)}
         </Navbar.Collapse>
       </Navbar>
     );

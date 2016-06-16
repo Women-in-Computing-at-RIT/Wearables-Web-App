@@ -9,10 +9,10 @@ import {Index} from '../../ui/pages/index';
 import {CreateProfile} from '../../ui/pages/information';
 import {NotFound} from '../../ui/pages/not-found';
 import {ContactPage} from '../../ui/pages/contact';
-import {ForgotPassword} from '../../ui/pages/forgotPassword';
-import {ResetPassword} from '../../ui/pages/resetPassword';
-import {HomePage} from '../../ui/pages/homePage';
-import {ProfilePage} from '../../ui/pages/profilePage';
+import {ForgotPassword} from '../../ui/pages/forgot-password';
+import {ResetPassword} from '../../ui/pages/reset-password';
+import {HomePage} from '../../ui/pages/home';
+import {ProfilePage} from '../../ui/pages/profile';
 import {Schedule} from '../../ui/pages/schedule';
 
 /**

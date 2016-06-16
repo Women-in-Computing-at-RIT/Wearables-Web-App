@@ -5,7 +5,7 @@
 
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
-import {ProfileForm} from '../../ui/components/profileForm';
+import {ProfileForm} from '../components/profile-form';
 
 export const ProfilePage = React.createClass ({
   render() {

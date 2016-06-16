@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import 'jquery-validation';
 
-import ReactDOM from 'react-dom';
-
 import {browserHistory} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 import {Bert} from 'meteor/themeteorchef:bert';
@@ -78,6 +76,8 @@ const handleLogin = ({component}) => {
     throw new Error('No component provided in login options');
 };
 
-export {login, handleLogin};
+const isLoggedIn = () => !Meteor.loggingIn() && Meteor.user();
+
+export {login, handleLogin, isLoggedIn};
 
 

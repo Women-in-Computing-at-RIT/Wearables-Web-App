@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import {Row, Col, Jumbotron} from 'react-bootstrap';
-import {ProfileForm} from '../components/profileForm';
+import {ProfileForm} from '../components/profile-form';
 import Schemas from '../../modules/schemas';
 
 export const CreateProfile = React.createClass({

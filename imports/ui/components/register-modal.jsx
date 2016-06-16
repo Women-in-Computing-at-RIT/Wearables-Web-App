@@ -8,8 +8,8 @@ import 'jquery-validation';
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import {RegisterForm} from '../components/registerForm';
-import {SignInModal} from '../components/signInModal'
+import {RegisterForm} from './register-form';
+import {SignInModal} from './signin-modal'
 import {Bert} from 'meteor/themeteorchef:bert';
 import { Accounts } from 'meteor/accounts-base';
 import {browserHistory} from 'react-router';

@@ -5,9 +5,9 @@
 
 import React from 'react';
 import {Modal, Button, Row, Col} from 'react-bootstrap';
-import {SignInForm} from '../components/signInForm';
+import {SignInForm} from './signin-form';
 import { Link } from 'react-router';
-import {RegisterModal} from '../components/registerModal';
+import {RegisterModal} from './register-modal';
 import {Bert} from 'meteor/themeteorchef:bert';
 import {Router, browserHistory} from 'react-router';
 

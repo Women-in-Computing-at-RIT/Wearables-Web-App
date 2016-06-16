@@ -1,6 +1,5 @@
 import {Accounts} from 'meteor/accounts-base';
 
-process.env.MAIL_URL = 'smtp://USERNAME:PASSWORD@HOST:PORT/';
 const name = 'Stress Monitor';
 const email = '<support@stress.com';
 const from = `${name} ${email}`;

@@ -5,8 +5,8 @@
 
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
-import {SignInModal} from '../components/signInModal';
-import {RegisterModal} from '../components/registerModal';
+import {SignInModal} from '../components/signin-modal';
+import {RegisterModal} from '../components/register-modal';
 
 const styles = {maxWidth: 500};
 export const Index = () =>
