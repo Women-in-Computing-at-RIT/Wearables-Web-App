@@ -294,21 +294,4 @@ Schemas.Notification = new SimpleSchema({
   }
 });
 
-Schemas.SignIn = new SimpleSchema({
-  email: {
-    type: String,
-    max: 254,
-    regEx: SimpleSchema.RegEx.Email,
-    optional: false
-  },
-  password: {
-    type: String,
-    min: 3,
-    max: 255,
-    optional: false
-  }
-});
-
-Schemas.Register = Schemas.SignIn;
-
 export default Schemas;

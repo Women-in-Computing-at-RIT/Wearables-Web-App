@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import 'jquery-validation';
 
+import ReactDOM from 'react-dom';
+
 import {browserHistory} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 import {Bert} from 'meteor/themeteorchef:bert';
@@ -17,19 +19,16 @@ const login = (comp) => {
     else {
       Bert.alert('Logged in!', 'success');
 
-      const {location} = comp.props;
-      if(location.state && location.state.nextPathname)
-        browserHistory.push(location.state.nextPathname);
-      else
-        browserHistory.push('/');
+      browserHistory.push('/home');
     }
   });
 };
 
 const validate = (comp) => {
+  let ignoreOnce = false;
   $(comp.refs.signin).validate({
     rules: {
-      email: {
+      emailAddress: {
         required: true,
         email: true
       },
@@ -48,6 +47,26 @@ const validate = (comp) => {
     },
     submitHandler() {
       login(comp);
+    },
+    invalidHandler(event, validator) {
+      comp.setState({
+        emailError: validator.errorMap.hasOwnProperty('emailAddress'),
+        passwordError: validator.errorMap.hasOwnProperty('password'),
+        errorMessage: `${validator.numberOfInvalids()} ${validator.numberOfInvalids() === 1 ? 'error has' : 'errors have'} occurred`
+      });
+
+      ignoreOnce = true;
+    },
+    onkeyup() {
+      if(ignoreOnce)
+        return ignoreOnce = false;
+
+      comp.setState({
+        emailError: false,
+        passwordError: false
+      });
+
+      return !ignoreOnce;
     }
   });
 };
