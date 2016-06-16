@@ -22,7 +22,7 @@ export const RegisterForm = React.createClass({
   render() {
     return (
       <form schema={Schemas.User} ref="register" className="register" onSubmit={ this.props.submitAction }>
-        <FormGroup>
+        {/*<FormGroup>
           <ControlLabel>First Name</ControlLabel>
           <FormControl
             type="text"
@@ -48,7 +48,7 @@ export const RegisterForm = React.createClass({
             id="username"
             placeholder="Enter Username"
           />
-        </FormGroup>
+        </FormGroup>*/}
         <FormGroup>
           <ControlLabel>Email Address</ControlLabel>
           <FormControl

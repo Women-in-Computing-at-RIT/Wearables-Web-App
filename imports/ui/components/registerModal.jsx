@@ -12,7 +12,7 @@ import {RegisterForm} from '../components/registerForm';
 import {SignInModal} from '../components/signInModal'
 import {Bert} from 'meteor/themeteorchef:bert';
 import { Accounts } from 'meteor/accounts-base';
-import {Router, browserHistory} from 'react-router';
+import {browserHistory} from 'react-router';
 
 import Schemas from '../../modules/schemas';
 
@@ -20,16 +20,10 @@ export const RegisterModal = React.createClass ({
   createUser(doc) {
     doc.preventDefault();
     const
-      firstName = $('#firstName').val(),
-      lastName = $('#lastName').val(),
-      username = $('#username').val(),
       email = $('#email').val(),
       password = $('#password').val().trim();
 
     Accounts.createUser ({
-      firstName: firstName,
-      lastName: lastName,
-      username: username,
       email: email,
       password: password
     }, function (error) {

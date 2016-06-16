@@ -6,14 +6,18 @@ import {Meteor} from 'meteor/meteor';
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 
+import Schemas from '../../modules/schemas';
+
 export const HomePage = React.createClass ({
+
   render() {
     return (
       <Row>
-        <Col xs={4}>
-          <h2 className="text-left">{Meteor.user()}'s Profile</h2>
+        <Col xs={5}>
+          <h2 className="text-left">{Meteor.users.emails[0].address}'s Profile</h2>
+          {this.props.content}
         </Col>
-        <Col xs={8}>
+        <Col xs={7}>
           <h2 className="text-left">Family Name</h2>
         </Col>
       </Row>
