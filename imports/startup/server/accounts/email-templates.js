@@ -8,6 +8,19 @@ const emailTemplates = Accounts.emailTemplates;
 emailTemplates.siteName = name;
 emailTemplates.from = from;
 
+emailTemplates.verifyEmail = {
+  subject() {
+    return `[${name}] Email Registration Confirmation`;
+  },
+
+  text(user, url) {
+    const urlWithoutHash = url.replace('#/', 'info');
+    return "Thank you for registering with the email" +
+      user.email + "!\nTo activate your account please click the following link:\n\n"
+    + urlWithoutHash + "\n\n"
+  }
+};
+
 emailTemplates.resetPassword = {
   subject() {
     return `[${name}] Reset Your Password`;
