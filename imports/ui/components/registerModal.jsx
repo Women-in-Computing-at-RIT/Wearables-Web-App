@@ -19,14 +19,18 @@ import Schemas from '../../modules/schemas';
 export const RegisterModal = React.createClass ({
   createUser(doc) {
     doc.preventDefault();
+    const
+      email = $('#email').val(),
+      password = $('#password').val().trim();
+
     Accounts.createUser ({
-      email:'caralin3@gmail.com',
-      password: 'password'
-      }, function (error) {
+      email: email,
+      password: password
+    }, function (error) {
         if (error) {
           console.log("there was an error: " + error.reason);
         } else {
-          Bert.alert('Registered!', 'success');
+          Bert.alert('Registered!' + email, 'success');
         }
       }
     );

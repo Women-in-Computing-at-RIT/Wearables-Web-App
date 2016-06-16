@@ -57,7 +57,7 @@ export const RegisterForm = React.createClass({
           <FormControl
             type="password"
             ref="password"
-            name="password"
+            id="password"
             placeholder="Password"
           />
         </FormGroup>
