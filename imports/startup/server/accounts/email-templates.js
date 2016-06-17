@@ -1,7 +1,7 @@
 import {Accounts} from 'meteor/accounts-base';
 
 const name = 'Stress Monitor';
-const email = '<support@stress.com';
+const email = 'support@stress.com';
 const from = `${name} ${email}`;
 const emailTemplates = Accounts.emailTemplates;
 
@@ -15,11 +15,11 @@ emailTemplates.verifyEmail = {
 
   text(user, url) {
     const userEmail = user.emails[0].address;
-    const username = user.username;
-    // const urlWithoutHash = url.replace('#/', '');
-    return "Thank you" + username + " for registering with the email\n" +
+    const urlWithoutHash = url.replace('#/', '/info');
+    return "Thank you for registering with the email\n" +
       userEmail + "\nTo activate your account please click the following link:\n\n"
-    + url + "\n\n"
+    + urlWithoutHash + "\n\n If you did not request this reset, please ignore this email." +
+      " If you feel something is wrong, please contact our support team: <" + email + ">"
   }
 };
 
@@ -31,11 +31,10 @@ emailTemplates.resetPassword = {
     const userEmail = user.emails[0].address;
     const urlWithoutHash = url.replace('#/', '');
 
-    return `A password reset has been requested for the account related to this
-    address (${userEmail}). To reset the password, visit the following link:
-    \n\n${urlWithoutHash}\n\n If you did not request this reset, please ignore
-    this email. If you feel something is wrong, please contact our support team:
-    ${email}.`;
+    return "A password reset has been requested for the account related to this email address ("
+      +  userEmail + "). To reset the password, visit the following link:\n\n"
+      + urlWithoutHash + "\n\n If you did not request this reset, please ignore this email." +
+      " If you feel something is wrong, please contact our support team: <" + email + ">"
   }
 };
 
