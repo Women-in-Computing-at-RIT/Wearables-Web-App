@@ -29,6 +29,7 @@ export const RegisterModal = React.createClass ({
     }, function (error) {
         if (error) {
           console.log("there was an error: " + error.reason);
+          Bert.alert(error.reason, 'warning');
         } else {
           Bert.alert('Registered!', 'success');
           Accounts.sendVerificationEmail(Meteor.userId(), email);
