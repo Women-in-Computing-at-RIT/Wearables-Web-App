@@ -12,8 +12,6 @@ import Schemas from '../../modules/schemas';
 export const ResetPassword = React.createClass ({
   handleSubmit (e) {
     e.preventDefault();
-    this.setState({submitted: this.refs.ProfileForm.getFormData()});
-    console.log("Submitted");
   },
   render() {
     return (

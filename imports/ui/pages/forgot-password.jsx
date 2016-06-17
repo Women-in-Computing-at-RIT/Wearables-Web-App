@@ -10,11 +10,12 @@ import {Button, Row, Col, FormGroup, FormControl, ControlLabel} from 'react-boot
 import { Accounts } from 'meteor/accounts-base';
 import {Bert} from 'meteor/themeteorchef:bert';
 
+
 export const ForgotPassword = React.createClass ({
   handleSubmit (e) {
     e.preventDefault();
     const email = $('#email').val();
-    
+
     Accounts.forgotPassword({
       email: email
       }, function (error) {
@@ -40,9 +41,7 @@ export const ForgotPassword = React.createClass ({
           </h4>
             <form ref="forgot" className="forgot" onSubmit={ this.handleSubmit }>
               <FormGroup>
-                <ControlLabel>
-                  <span className="pull-left">Enter Email Address</span>
-                </ControlLabel>
+                <ControlLabel className="pull-left">Enter Email Address</ControlLabel>
                 <FormControl
                   type="email"
                   ref="email"
