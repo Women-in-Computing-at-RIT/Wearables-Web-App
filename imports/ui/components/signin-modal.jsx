@@ -60,7 +60,7 @@ export const SignInModal = React.createClass ({
                   <Button className="btn-link"><RegisterModal/></Button></h5>
                 </Col>
                 <Col xs={3}>
-                  <Link className="pull-right" to="/forgotPassword">Forgot Password?</Link>
+                  <Link className="pull-right" to="/forgot-password">Forgot Password?</Link>
                 </Col>
               </Row>
             </Modal.Body>

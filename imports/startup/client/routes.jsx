@@ -53,8 +53,8 @@ Meteor.startup(() => {
         <Route name="index" path="/" component={Index} onEnter={ redirectAuth('/home')}/>
         <Route name="info" path="/info" component={CreateProfile}/>
         <Route name="contact" path="/contact" component={ContactPage}/>
-        <Route name="forgotPassword" path="/forgotPassword" component={ForgotPassword}/>
-        <Route name="resetPassword" path="/resetPassword" component={ResetPassword}/>
+        <Route name="forgot-password" path="/forgot-password" component={ForgotPassword}/>
+        <Route name="reset-password" path="/reset-password" component={ResetPassword}/>
         <Route name="profilePage" path="/profile" component={ProfilePage}/>
         <Route name="schedule" path="/schedule" component={Schedule}/>
       </Route>
