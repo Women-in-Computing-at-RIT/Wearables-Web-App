@@ -25,7 +25,7 @@ export class SignInForm extends React.Component {
   render() {
     return (
       <form ref="signin" className="signin" onSubmit={ this.handleSubmit }>
-        <FormGroup controlId="emailGroup" {...(this.state.emailError ? {validationState: 'error'} : {})}>
+        <FormGroup id="emailGroup" {...(this.state.emailError ? {validationState: 'error'} : {})}>
           <ControlLabel className="pull-left">Email Address</ControlLabel>
           <FormControl
             type="email"
@@ -36,7 +36,7 @@ export class SignInForm extends React.Component {
           />
           <FormControl.Feedback />
         </FormGroup>
-        <FormGroup controlId="passwordGroup" {...(this.state.passwordError ? {validationState: 'error'} : {})}>
+        <FormGroup id="passwordGroup" {...(this.state.passwordError ? {validationState: 'error'} : {})}>
           <ControlLabel>
             <span className="pull-left">Password</span>
           </ControlLabel>
