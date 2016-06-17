@@ -29,11 +29,11 @@ emailTemplates.resetPassword = {
   },
   text(user, url) {
     const userEmail = user.emails[0].address;
-    const urlWithoutHash = url.replace('#/', '');
+    url = url.replace('/#', '');
 
     return "A password reset has been requested for the account related to this email address ("
       +  userEmail + "). To reset the password, visit the following link:\n\n"
-      + urlWithoutHash + "\n\n If you did not request this reset, please ignore this email." +
+      + url + "\n\n If you did not request this reset, please ignore this email." +
       " If you feel something is wrong, please contact our support team: <" + email + ">"
   }
 };
