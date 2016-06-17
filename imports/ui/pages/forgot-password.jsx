@@ -8,20 +8,22 @@ import $ from 'jquery';
 import 'jquery-validation';
 import {Button, Row, Col, FormGroup, FormControl, ControlLabel} from 'react-bootstrap';
 import { Accounts } from 'meteor/accounts-base';
-
-import Schemas from '../../modules/schemas';
+import {Bert} from 'meteor/themeteorchef:bert';
 
 export const ForgotPassword = React.createClass ({
   handleSubmit (e) {
     e.preventDefault();
-
+    const email = $('#email').val();
+    
     Accounts.forgotPassword({
-      email: 'example@gmail.com'
+      email: email
       }, function (error) {
         if (error) {
           console.log("there was an error: " + error.reason);
+          Bert.alert(error.reason, 'warning');
         } else {
           console.log("Email sent!");
+          Bert.alert("Email sent", 'success');
         }
       }
     )
@@ -44,7 +46,7 @@ export const ForgotPassword = React.createClass ({
                 <FormControl
                   type="email"
                   ref="email"
-                  name="email"
+                  id="email"
                   placeholder="Email"
                 />
               </FormGroup>
