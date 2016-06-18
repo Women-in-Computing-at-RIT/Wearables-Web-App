@@ -41,7 +41,11 @@
     "react",
     "import",
     "jsx-a11y",
-    "meteor"
+    "meteor",
+    "lodash"
+  ],
+  "extends" : [
+    "plugin:lodash/recommended"
   ],
 
   "rules": {

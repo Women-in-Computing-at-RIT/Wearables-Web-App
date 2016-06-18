@@ -5,15 +5,26 @@
 
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
-import {SignInModal} from '../components/signin-modal';
-import {RegisterModal} from '../components/register-modal';
+
+import PubSub from 'pubsub-js';
+
+import {AuthState} from '../components/auth-modal';
+import {AUTH_MODAL_TOPIC} from '../../modules/subscriptions';
 
 const styles = {maxWidth: 500};
-export const Index = () =>
-  <Jumbotron className="text-center">
-    <h2>Welcome!</h2>
-    <p>Lorem ipsum sit amet dolor asent</p>
-    <Button className="btn-lg center-block" block style={styles}><SignInModal/></Button>
-    <Button className="btn-lg center-block" block style={styles}><RegisterModal/></Button>
-  </Jumbotron>;
+export class Index extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
+  render() {
+    return (
+      <Jumbotron className="text-center">
+      <h2>Welcome!</h2>
+      <p>Lorem ipsum sit amet dolor asent</p>
+      <Button className="btn-lg center-block" block style={styles} onClick={() => PubSub.publish(AUTH_MODAL_TOPIC, AuthState.SIGN_IN)}>Sign In</Button>
+      <Button className="btn-lg center-block" block style={styles} onClick={() => PubSub.publish(AUTH_MODAL_TOPIC, AuthState.REGISTER)}>Register</Button>
+    </Jumbotron>);
+  }
+}
 

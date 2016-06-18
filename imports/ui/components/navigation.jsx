@@ -8,9 +8,8 @@ import React from 'react';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { browserHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-import {SignInModal} from './signin-modal';
-import {RegisterModal} from './register-modal';
 
+import {AuthModal, AuthState} from './auth-modal';
 import {isLoggedIn} from '../../modules/login';
 
 const handleLogout = () => Meteor.logout(() => browserHistory.push('/'));
@@ -30,13 +29,13 @@ const getUserName = () => {
 };
 
 // Navigation specification for anonymous users
-export const PublicNavigation = () => (
+export const PublicNavigation = ({parent}) => (
       <Nav pullRight>
         <LinkContainer to="/contact">
           <NavItem event={3} href="/contact">Contact Us</NavItem>
         </LinkContainer>
-        <NavItem eventKey={1}><SignInModal/></NavItem>
-        <NavItem eventKey={2}><RegisterModal/></NavItem>
+        <NavItem id="signin-navitem" eventKey={1} onClick={() => parent.refs.authModal.open(AuthState.SIGN_IN)}>Sign In</NavItem>
+        <NavItem id="register-navitem" eventKey={2} onClick={() => parent.refs.authModal.open(AuthState.REGISTER)}>Register</NavItem>
       </Nav>
 );
 
@@ -61,10 +60,12 @@ export const AuthNavigation = () => (
 export class AppNavigation extends React.Component {
   constructor(props) {
     super(props);
+
+    this.renderNavigation = this.renderNavigation.bind(this);
   }
 
   renderNavigation(hasUser) {
-    return hasUser ? <AuthNavigation /> : <PublicNavigation />;
+    return hasUser ? <AuthNavigation /> : <PublicNavigation parent={this} />;
   }
 
   render() {
@@ -78,6 +79,7 @@ export class AppNavigation extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           {this.renderNavigation(this.props.hasUser)}
+          {isLoggedIn() ? <div></div> : <AuthModal ref="authModal" authState={AuthState.SIGN_IN}/>}
         </Navbar.Collapse>
       </Navbar>
     );

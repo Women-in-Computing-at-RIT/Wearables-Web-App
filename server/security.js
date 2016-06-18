@@ -1,3 +1,5 @@
+_ = lodash;
+
 import {Security} from 'meteor/ongoworks:security';
 
 import Schemas from '../imports/modules/schemas';
