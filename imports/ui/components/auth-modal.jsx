@@ -2,12 +2,11 @@ import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 
 import * as ChangeCase from 'change-case';
-import PubSub from 'pubsub-js';
 
 import {RegisterForm} from './register-form';
 import {SignInForm} from './signin-form';
 import {Enum2} from '../../modules/enums';
-import {AUTH_MODAL_TOPIC} from '../../modules/subscriptions';
+import {Topics, EventBus} from '../../modules/subscriptions';
 
 export class AuthState extends Enum2 {
   toString() {
@@ -35,12 +34,12 @@ export class AuthModal extends React.Component {
   
   componentDidMount() {
     this.setState({
-      subToken: PubSub.subscribe(AUTH_MODAL_TOPIC, (m, n) => this.open(n))
+      subToken: EventBus.subscribe(Topics.auth.modal, (m, n) => this.open(n))
     });
   }
 
   componentWillUnmount() {
-    PubSub.unsubscribe(this.state.subToken);
+    EventBus.unsubscribe(this.state.subToken);
     this.setState({
       subToken: null
     });
@@ -65,13 +64,13 @@ export class AuthModal extends React.Component {
   renderAuthState() {
     switch(this.state.authState) {
       case AuthState.SIGN_IN:
-            return <SignInForm swapCallback={this.open}/>;
+            return <SignInForm authModalCallback={this.open}/>;
       case AuthState.REGISTER:
-            return <RegisterForm swapCallback={() => this.open(AuthState.SIGN_IN)}/>;
+            return <RegisterForm authModalCallback={(x) => this.open(_.isUndefined(x) ? AuthState.SIGN_IN : x)}/>;
       case AuthState.FORGOT_PASSWORD:
-            return <RegisterForm swapCallback={() => this.open(this.state.prevAuthState)} />;
+            return <RegisterForm authModalCallback={() => this.open(this.state.prevAuthState)} />;
       default:
-            return <SignInForm swapCallback={this.open}/>;
+            return <SignInForm authModalCallback={this.open}/>;
     }
   }
 

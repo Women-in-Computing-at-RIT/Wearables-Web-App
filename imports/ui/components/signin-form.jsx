@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Fade, Alert, FormGroup, ButtonGroup, Button, ControlLabel, FormControl, Pager, PageItem } from 'react-bootstrap';
+import { Collapse, Alert, FormGroup, ButtonGroup, Button, ControlLabel, FormControl, Pager, PageItem } from 'react-bootstrap';
 
 import {AuthState} from './auth-modal';
 import {handleLogin} from '../../modules/login';
@@ -24,6 +24,8 @@ export class SignInForm extends React.Component {
     e.preventDefault();
   }
   render() {
+
+    let swapCallback = this.props.authModalCallback;
     return (
         <form ref="signin" className="signin" onSubmit={ this.handleSubmit }>
           <FormGroup id="emailGroup" {...(this.state.emailError ? {validationState: 'error'} : {})}>
@@ -49,27 +51,27 @@ export class SignInForm extends React.Component {
             <FormControl.Feedback />
           </FormGroup>
           <Pager>
-            <PageItem next onClick={() => this.props.swapCallback(AuthState.REGISTER)}>Not a member?</PageItem>
-            <PageItem next onClick={() => this.props.swapCallback(AuthState.FORGOT_PASSWORD)}>Forgot your password?</PageItem>
+            <PageItem next onClick={() => swapCallback(AuthState.REGISTER)}>Not a member?</PageItem>
+            <PageItem next onClick={() => swapCallback(AuthState.FORGOT_PASSWORD)}>Forgot your password?</PageItem>
           </Pager>
           <ButtonGroup justified>
             <ButtonGroup>
               <Button type="submit" bsStyle="primary" >Submit</Button>
             </ButtonGroup>
             <ButtonGroup>
-              <Button onClick={() => this.props.swapCallback(null)} bsStyle="warning">Close</Button>
+              <Button onClick={() => swapCallback(null)} bsStyle="warning">Close</Button>
             </ButtonGroup>
           </ButtonGroup>
-          <Fade in={this.state.emailError || this.state.passwordError}>
+          <Collapse unmountOnExit={true} in={this.state.emailError || this.state.passwordError}>
             <Alert bsStyle="danger">
               <strong>{this.state.errorMessage}</strong>
             </Alert>
-          </Fade>
+          </Collapse>
         </form>
     );
   }
 }
 
 SignInForm.propTypes = {
-  swapCallback: React.PropTypes.func.isRequired
+  authModalCallback: React.PropTypes.func.isRequired
 };

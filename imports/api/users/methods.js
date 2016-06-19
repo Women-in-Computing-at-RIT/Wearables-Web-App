@@ -1,20 +1,40 @@
-/**
- * Created by Cara on 6/8/2016.
- */
+import createSided from '../../modules/sided-function';
+import {Supplier} from '../../modules/fp';
+
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
 
-import Schemas from '../../modules/schemas';
+export const isUserRegistered = createSided(new Supplier(() => isUserRegisteredMethod), ({userId}) => {
+  let user = Meteor.users.findOne(userId);
+  return !_.isNil(user) && _.find(user.emails, ({verified: verified}) => verified) >= 0;
+});
 
-export const updateUserProfile = new ValidatedMethod({
-  name: 'user.profile.update',
-  validate: Schemas.UserProfile.validator(),
-  run(profUpdates) {
-    let userProfile = Meteor.user().profile;
-    _.extend(userProfile, profUpdates);
-    Meteor.users.update(Meteor.userId(), {$set: {'profile': userProfile}});
-  }
+export const isEmailAvailable = createSided(new Supplier(() => isEmailAvailableMethod), ({email}) => {
+  return _.isNil(Meteor.users.findOne({'email.$.address': email}));
+});
+
+export const isUserRegisteredMethod = new ValidatedMethod({
+  name: 'user.auth.check',
+  validate: new SimpleSchema({
+    userId: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    }
+  }).validator(),
+  run: isUserRegistered
+});
+
+export const isEmailAvailableMethod = new ValidatedMethod({
+  name: 'user.auth.email.check',
+  validate: new SimpleSchema({
+    email: {
+      type: String,
+      max: 254,
+      regEx: SimpleSchema.RegEx.Email
+    }
+  }).validator(),
+  run: isEmailAvailable
 });
 
 // Meteor.methods({

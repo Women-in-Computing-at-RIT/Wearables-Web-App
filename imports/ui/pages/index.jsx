@@ -6,10 +6,8 @@
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 
-import PubSub from 'pubsub-js';
-
 import {AuthState} from '../components/auth-modal';
-import {AUTH_MODAL_TOPIC} from '../../modules/subscriptions';
+import {EventBus, Topics} from '../../modules/subscriptions';
 
 const styles = {maxWidth: 500};
 export class Index extends React.Component {
@@ -22,8 +20,8 @@ export class Index extends React.Component {
       <Jumbotron className="text-center">
       <h2>Welcome!</h2>
       <p>Lorem ipsum sit amet dolor asent</p>
-      <Button className="btn-lg center-block" block style={styles} onClick={() => PubSub.publish(AUTH_MODAL_TOPIC, AuthState.SIGN_IN)}>Sign In</Button>
-      <Button className="btn-lg center-block" block style={styles} onClick={() => PubSub.publish(AUTH_MODAL_TOPIC, AuthState.REGISTER)}>Register</Button>
+      <Button className="btn-lg center-block" block style={styles} onClick={() => EventBus.publish(Topics.auth.modal, AuthState.SIGN_IN)}>Sign In</Button>
+      <Button className="btn-lg center-block" block style={styles} onClick={() => EventBus.publish(Topics.auth.modal, AuthState.REGISTER)}>Register</Button>
     </Jumbotron>);
   }
 }

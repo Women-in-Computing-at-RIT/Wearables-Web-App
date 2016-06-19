@@ -3,6 +3,9 @@ _ = lodash;
 import './main.html';
 import '/imports/startup/client';
 
+import {Session} from 'meteor/session';
+import {Bert} from 'meteor/themeteorchef:bert';
+
 AdminConfig = {
   name: 'Stress Monitor',
   adminEmails: ['admin@admin.com'],
@@ -23,3 +26,10 @@ let intervalId = setInterval(() => {
   nexts.remove();
   clearInterval(intervalId);
 }, 20);
+
+Session.setDefault('needsVerification', false);
+
+if(Session.get('needsVerification')) {
+  Bert.alert('Cannot login, account unverified!', 'danger', 'fixed-top', 'fa-frown-o');
+  Session.set('needsVerification', false);
+}

@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 import {Meteor} from 'meteor/meteor';
+import {Session} from 'meteor/session';
 
 import {App} from '../../ui/layouts/app';
 import {Index} from '../../ui/pages/index';
@@ -28,6 +29,13 @@ const requireAuth = (next, repl) => {
       pathname: '/login',
       state: {nextPathname: next.location.pathname}
     });
+
+  if(!Meteor.user().emails[0].verified) {
+    Session.set('needsVerification', true);
+    repl({
+      pathname: '/'
+    });
+  }
 };
 
 /**

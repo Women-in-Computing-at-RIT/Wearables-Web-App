@@ -7,24 +7,8 @@
  * @author Matthew Crocco
  */
 class Existential {
-  constructor() {
-    if (new.target === Existential)
-      throw new TypeError('Can only instantiate subclasses of Existential!');
-
-    const required = ['exists', 'notExists'];
-    const getters = ['value'];
-
-    let desc;
-
-    // Ensure all properties are defined by subclass
-    for (let m of required)
-      if (_.isUndefined(desc = Object.getOwnPropertyDescriptor(this, this[m])))
-        throw new TypeError(`The method '${m}' is undefined for ${this.constructor.name}!`);
-
-    // Ensure all getters are defined by subclass
-    for (let m of getters)
-      if (_.isUndefined(desc = Object.getOwnPropertyDescriptor(this, this[m])) || _.isUndefined(desc.set))
-        throw new TypeError(`Missing getter '${m}' in ${this.constructor.name}`);
+  constructor(value) {
+    this._value = value;
   }
 
   /**
@@ -35,71 +19,52 @@ class Existential {
    * @returns {Existential} Nothing if value = null or undefined, otherwise Something
      */
   static of(value) {
-    if(_.isUndefined(value) || _.isNull(value))
-      return new Nothing();
+    if(_.isNil(value))
+      return Existential._EMPTY;
     else
-      return new Something(value);
+      return new Existential(value);
   }
 
   /**
-   * Always returns a {@link Nothing} instance. An alternative to 'return null', instead using
+   * Always returns a {@link Existential} instance. An alternative to 'return null', instead using
+   * 'return Existential.empty()'.
+   *
+   * @returns {Existential} An Existential representing a non-existent values.
+   */
+  static empty() {
+    return Existential._EMPTY;
+  }
+
+  /**
+   * Always returns a {@link Existential} instance. An alternative to 'return null', instead using
    * 'return Existential.ofNothing()'.
    *
-   * @returns {Nothing} An instance representing non-existent values.
+   * @returns {Existential} An Existential representing a non-existent values.
+   * @deprecated
      */
   static ofNothing() {
-    return new Nothing();
-  }
-
-  notExists() {
-    return !this.exists();
-  }
-}
-
-/**
- * An {@link Existential} type representing the non-existence of a value. Nothing.exists() returns false
- * and value is always null.
- *
- * @author Matthew Crocco
- */
-class Nothing extends Existential {
-  constructor() {
-    super();
-  }
-
-  exists() {
-    return false;
+    return Existential.empty();
   }
 
   get value() {
-    return  null;
-  }
-}
+    if(this.notExists())
+      throw new Error('Attempt to exist non-existent value! (Value is nil).');
 
-/**
- * Something represents the existence of some value, even if that value is unknown. It just is definitely
- * not null or undefined. Something.exists() always returns true and value is always some non-null, non-undefined
- * value.
- *
- * @author Matthew Crocco
- */
-class Something extends Existential {
-  _value;
-
-  constructor(initial) {
-    this._value = initial;
+    return this._value;
   }
 
   exists() {
-    return true;
+    return !this.notExists();
   }
 
-  get value(){
-    return this._value;
+  notExists() {
+    return _.isNil(this._value);
   }
 }
 
-export {Existential, Nothing, Something};
+Existential._EMPTY = new Existential(null);
+
+export {Existential};
 
 /**
  * A Supplier is a type wrapping a function that simply retrieves and returns an {@link Existential} type.
@@ -108,7 +73,6 @@ export {Existential, Nothing, Something};
  * @author Matthew Crocco
  */
 class Supplier {
-  _body;
 
   constructor(executionBody) {
     this._body = executionBody;

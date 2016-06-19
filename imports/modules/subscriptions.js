@@ -1,2 +1,7 @@
+import * as PubSub from 'pubsub-js';
+import {Topics} from './strings';
 
-export const AUTH_MODAL_TOPIC = 'auth.modal';
+const EventBus = PubSub;
+export {PubSub, EventBus, Topics};
+
+export default PubSub;

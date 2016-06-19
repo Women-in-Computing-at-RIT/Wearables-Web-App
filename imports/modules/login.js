@@ -5,6 +5,7 @@ import {browserHistory} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 import {Bert} from 'meteor/themeteorchef:bert';
 
+import {EmailMessages, PasswordMessages} from './strings';
 import getInputValue from './get-input-value';
 
 const login = (comp) => {
@@ -23,7 +24,7 @@ const login = (comp) => {
 };
 
 const validate = (comp) => {
-  let ignoreOnce = false;
+  let ignoreOnce;
   $(comp.refs.signin).validate({
     rules: {
       emailAddress: {
@@ -36,11 +37,11 @@ const validate = (comp) => {
     },
     messages: {
       emailAddress: {
-        required: 'An email address is required',
-        email: 'Invalid Email Address'
+        required: EmailMessages.required,
+        email: EmailMessages.invalid
       },
       password: {
-        required: 'A password is required'
+        required: PasswordMessages.required
       }
     },
     submitHandler() {
@@ -70,7 +71,7 @@ const validate = (comp) => {
 };
 
 const handleLogin = ({component}) => {
-  if(!_.isNull(component) && !_.isUndefined(component))
+  if(!_.isNil(component))
     validate(component);
   else
     throw new Error('No component provided in login options');
