@@ -69,14 +69,14 @@ export class RegisterForm extends React.Component {
             <FormControl.Feedback />
           </FormGroup>
           <Pager>
-            <PageItem next onClick={() => swapCallback()}>Go Back</PageItem>
+            <PageItem next onClick={() => swapCallback()}>Sign in</PageItem>
           </Pager>
           <ButtonGroup justified>
             <ButtonGroup>
               <Button type="submit" bsStyle="primary" >Submit</Button>
             </ButtonGroup>
             <ButtonGroup>
-              <Button onClick={() => swapCallback(null)} bsStyle="warning">Close</Button>
+              <Button onClick={() => swapCallback(null)}>Close</Button>
             </ButtonGroup>
           </ButtonGroup>
           <Collapse unmountOnExit={true} in={this.state.emailError || this.state.passwordError || this.state.mismatchError}>

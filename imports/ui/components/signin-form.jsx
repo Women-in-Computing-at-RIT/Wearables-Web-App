@@ -59,7 +59,7 @@ export class SignInForm extends React.Component {
               <Button type="submit" bsStyle="primary" >Submit</Button>
             </ButtonGroup>
             <ButtonGroup>
-              <Button onClick={() => swapCallback(null)} bsStyle="warning">Close</Button>
+              <Button onClick={() => swapCallback(null)}>Close</Button>
             </ButtonGroup>
           </ButtonGroup>
           <Collapse unmountOnExit={true} in={this.state.emailError || this.state.passwordError}>
