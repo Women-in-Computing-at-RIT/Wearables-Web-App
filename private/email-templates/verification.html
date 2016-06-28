@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>HTML email test</title>
+  <link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+
+<body itemscope itemtype="http://schema.org/EmailMessage">
+  <p>
+    Thank you for registering {{name}} ({{email}})!
+  </p>
+  <p>
+    To verify and activate your account please proceed to <a href="{{link}}">this activation link</a>
+    to fill in some finalizing information and get to seeing your device statistics!
+  </p>
+  <p>If you have received this email in error, please ignore this email.</p>\
+  <p>If you feel something is wrong please do not hesitate to contact support at {{supportEmail}} for assistance!</p>
+  <hr/>
+  <p><i>If the link above is not working, go to: {{link}}</i></p>
+</body>
+</html>

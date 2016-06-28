@@ -7,15 +7,3 @@
   {{!-- Target for React.js, everything React generates is under this div --}}
   <div id="react-root-container"></div>
 </body>
-
-<template name="profileUpdate">
-  {{#autoForm schema="SignIn" id="userSingIn"}}
-    <fieldset>
-      <legend>Sign In</legend>
-      {{> afFieldInput name="email" template="bootstrap3" type="email"}}
-      {{#if afFieldIsInvalid name="email" }}
-        <span class="help-block">{{{afFieldMessage name="email"}}}</span>
-      {{/if}}
-    </fieldset>
-  {{/autoForm}}
-</template>

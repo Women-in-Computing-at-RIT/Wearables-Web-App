@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 import {Bert} from 'meteor/themeteorchef:bert';
 
-import {EmailMessages, PasswordMessages} from './strings';
+import {EmailErrors, PasswordErrors} from './constants';
 import getInputValue from './get-input-value';
 
 const login = (comp) => {
@@ -26,6 +26,14 @@ const login = (comp) => {
 const validate = (comp) => {
   let ignoreOnce;
   $(comp.refs.signin).validate({
+    errorClass: 'has-error',
+    validClass: 'has-success',
+    wrapper: 'div',
+    errorPlacement(label, element) {
+      label.addClass('alert alert-danger validation-alert');
+      label.attr('role', 'alert');
+      label.insertAfter(element);
+    },
     rules: {
       emailAddress: {
         required: true,
@@ -35,13 +43,13 @@ const validate = (comp) => {
         required: true
       }
     },
-    messages: {
+    errors: {
       emailAddress: {
-        required: EmailMessages.required,
-        email: EmailMessages.invalid
+        required: EmailErrors.required,
+        email: EmailErrors.invalid
       },
       password: {
-        required: PasswordMessages.required
+        required: PasswordErrors.required
       }
     },
     submitHandler() {
@@ -77,7 +85,7 @@ const handleLogin = ({component}) => {
     throw new Error('No component provided in login options');
 };
 
-const isLoggedIn = () => !Meteor.loggingIn() && Meteor.user();
+const isLoggedIn = () => Meteor.loggingIn() || Meteor.userId();
 
 export {login, handleLogin, isLoggedIn};
 

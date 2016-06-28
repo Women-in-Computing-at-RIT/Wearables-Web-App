@@ -1,5 +1,5 @@
 import * as PubSub from 'pubsub-js';
-import {Topics} from './strings';
+import {Topics} from './constants';
 
 const EventBus = PubSub;
 export {PubSub, EventBus, Topics};

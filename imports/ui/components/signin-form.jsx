@@ -20,14 +20,11 @@ export class SignInForm extends React.Component {
     handleLogin({component: this});
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-  }
   render() {
 
     let swapCallback = this.props.authModalCallback;
     return (
-        <form ref="signin" className="signin" onSubmit={ this.handleSubmit }>
+        <form ref="signin" className="signin" onSubmit={ (e) => e.preventDefault() }>
           <FormGroup id="emailGroup" {...(this.state.emailError ? {validationState: 'error'} : {})}>
             <ControlLabel className="pull-left">Email Address</ControlLabel>
             <FormControl
@@ -63,7 +60,7 @@ export class SignInForm extends React.Component {
             </ButtonGroup>
           </ButtonGroup>
           <Collapse unmountOnExit={true} in={this.state.emailError || this.state.passwordError}>
-            <Alert bsStyle="danger">
+            <Alert className="validation-alert overview" bsStyle="danger">
               <strong>{this.state.errorMessage}</strong>
             </Alert>
           </Collapse>

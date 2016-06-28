@@ -1,6 +1,9 @@
 import createSided from '../../modules/sided-function';
 import {Supplier} from '../../modules/fp';
+import {EmailType} from '../../modules/enums';
+import {Exceptions} from '../../modules/constants';
 
+import {Accounts} from 'meteor/accounts-base';
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
@@ -12,6 +15,20 @@ export const isUserRegistered = createSided(new Supplier(() => isUserRegisteredM
 
 export const isEmailAvailable = createSided(new Supplier(() => isEmailAvailableMethod), ({email}) => {
   return _.isNil(Meteor.users.findOne({'email.$.address': email}));
+});
+
+export const sendEmailToUser = createSided(new Supplier(() => sendEmailToUserMethod), ({userId, emailType, email}) => {
+  email = _.isNil(email) ? null : email;
+  switch(emailType) {
+    case EmailType.VERIFY:
+          Accounts.sendVerificationEmail(userId, email);
+          break;
+    case EmailType.FORGOT_PASSWORD:
+          Accounts.sendResetPasswordEmail(userId, email);
+          break;
+    default:
+          throw new Meteor.Error(Exceptions.types.invalidEmailType, Exceptions.reasons.invalidEmailTypeTemplate(emailType));
+  }
 });
 
 export const isUserRegisteredMethod = new ValidatedMethod({
@@ -37,10 +54,21 @@ export const isEmailAvailableMethod = new ValidatedMethod({
   run: isEmailAvailable
 });
 
-// Meteor.methods({
-//   updateProfile(profile) {
-//     profile = users.find(_id).profile;
-//     profile = _.extend(profile, updateProfile);
-//     Meteor.users.update(_id, {$set: {'profile': profile}});
-//   }
-// });
+export const sendEmailToUserMethod = new ValidatedMethod({
+  name: 'user.auth.email.verify',
+  validate: new SimpleSchema({
+    userId: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    },
+    emailType: {
+      type: EmailType
+    },
+    email: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Email,
+      optional: true
+    }
+  }).validator(),
+  run: sendEmailToUser
+});

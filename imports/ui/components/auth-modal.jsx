@@ -5,6 +5,7 @@ import * as ChangeCase from 'change-case';
 
 import {RegisterForm} from './register-form';
 import {SignInForm} from './signin-form';
+import {ForgotPasswordForm} from './forgot-password-form';
 import {Enum2} from '../../modules/enums';
 import {Topics, EventBus} from '../../modules/subscriptions';
 
@@ -46,7 +47,6 @@ export class AuthModal extends React.Component {
   }
 
   open(state) {
-
     if(_.isNull(state))
       this.close();
     else if(_.isUndefined(state) || !(state instanceof AuthState))
@@ -62,13 +62,15 @@ export class AuthModal extends React.Component {
   }
 
   renderAuthState() {
+    const redirectToMain = (x) => this.open(_.isUndefined(x) ? AuthState.SIGN_IN : x);
+
     switch(this.state.authState) {
       case AuthState.SIGN_IN:
             return <SignInForm authModalCallback={this.open}/>;
       case AuthState.REGISTER:
-            return <RegisterForm authModalCallback={(x) => this.open(_.isUndefined(x) ? AuthState.SIGN_IN : x)}/>;
+            return <RegisterForm authModalCallback={redirectToMain}/>;
       case AuthState.FORGOT_PASSWORD:
-            return <RegisterForm authModalCallback={() => this.open(this.state.prevAuthState)} />;
+            return <ForgotPasswordForm authModalCallback={redirectToMain} />;
       default:
             return <SignInForm authModalCallback={this.open}/>;
     }

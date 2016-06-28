@@ -47,24 +47,26 @@ Schemas.UserProfile = new SimpleSchema({
     label: "Date of Birth",
     min: moment('01-01-1990', 'MM-DD-YYYY').toDate(),
     max: () => moment().toDate(),
-    optional: false
+    optional: true
   },
   gender: {
     type: Gender,
     label: "Gender",
     blackbox: true,
-    optional: false
+    optional: true,
+    defaultValue: Gender.MALE
   },
   ethnicity: {
     type: Ethnicity,
     label: "Ethnicity",
     blackbox: true,
-    optional: false
+    optional: true,
+    defaultValue: Ethnicity.CAUCASIAN
   },
   phoneNumber: {
     type: String,
     label: "Phone Number",
-    optional: false,
+    optional: true,
     regEx: /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g
   }
 });

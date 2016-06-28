@@ -1,20 +1,22 @@
 /**
  * file: homePage.jsx
- * authors: Cara Steinberg
+ * authors: Cara Steinberg, Matthew Crocco
  */
 import {Meteor} from 'meteor/meteor';
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 
-import Schemas from '../../modules/schemas';
+import {UserAccess} from '../../modules/user-utils';
 
 export const HomePage = React.createClass ({
 
   render() {
+    const user = new UserAccess(Meteor.user());
+
     return (
       <Row>
         <Col xs={5}>
-          <h2 className="text-left">{Meteor.userId()}'s Profile</h2>
+          <h2 className="text-left">{user.name}'s Profile</h2>
           {this.props.content}
         </Col>
         <Col xs={7}>

@@ -37,11 +37,30 @@ const users = [
       phoneNumber: '518-555-0184'
     },
     roles: ['admin']
+  },
+  {
+    email: 'unverified@unverified.com',
+    password: 'qwerty123',
+    customProps: {
+      deviceId: null,
+      familyIds: [],
+      apiAuthKey: null,
+      apiAuthType: null
+    },
+    profile: {
+      firstName: 'Alana',
+      lastName: 'Turing',
+      gender: Gender.FEMALE,
+      ethnicity: Ethnicity.ASIAN,
+      dateOfBirth: moment().toDate(),
+      phoneNumber: '508-222-3123'
+    },
+    roles: []
   }
 ];
 
 // Add each fixture to the database if that fixture does not aleady exist in the database
-users.forEach((fixture) => {
+_.forEach(users, (fixture) => {
 
   let {email, password, customProps, profile, roles} = fixture;
 

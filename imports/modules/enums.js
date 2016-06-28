@@ -1,6 +1,7 @@
 import {Enum} from 'enumify';
 import * as ChangeCase from 'change-case';
 
+/* eslint-disable lodash/prefer-constant */
 /**
  * Small extension of the {@link Enum} class adding a label method that gets the label of the enum option.
  *
@@ -121,6 +122,7 @@ class Ethnicity extends Enum2 {
 }
 
 // Enum initializer for Ethnicity
+//noinspection JSUnresolvedFunction
 Ethnicity.initEnum({
   CAUCASIAN: {
     asOption() {
@@ -169,7 +171,7 @@ class FamilyRelationship extends Enum2 {
     }else if(other === FamilyRelationship.MOTHER){
       return this.toMother;
     }else if(other === FamilyRelationship.SON){
-      return this.toSon
+      return this.toSon;
     }else if(other === FamilyRelationship.DAUGHTER) {
       return this.toDaughter;
     }else if(other === FamilyRelationship.SIBLING) {
@@ -436,4 +438,10 @@ class NotificationType extends Enum2 {
 }
 NotificationType.initEnum(['ALERT', 'YES_NO', 'PUSH']);
 
-export {Gender, Ethnicity, FamilyRelationship, NotificationType};
+class EmailType extends Enum2 {}
+
+EmailType.initEnum(['VERIFY', 'FORGOT_PASSWORD']);
+
+export {Gender, Ethnicity, FamilyRelationship, NotificationType, EmailType};
+
+/* eslint-enable lodash/prefer-constant */
