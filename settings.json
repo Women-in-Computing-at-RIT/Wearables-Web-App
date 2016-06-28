@@ -1,4 +1,4 @@
 {
-  "MAILGUN_DOMAIN": "monitor.com",
-  "MAILGUN_PASSWORD": "d3a16b835a9d4c6d2831686ae200278a"
+  "MAILGUN_DOMAIN": "",
+  "MAILGUN_PASSWORD": ""
 }
