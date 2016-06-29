@@ -93,8 +93,19 @@ EmailInfo.noreply = `${App.name} Do Not Reply <${EmailInfo.noreply}>`;
 
 App.email = EmailInfo;
 
+export const Routes = {
+  index: '/',
+  homepage: '/home',
+  unverified: '/unverified',
+  info: '/info',
+  schedule: '/schedule',
+  contact: '/contact',
+  resetPassword: '/password/reset'
+};
+
 export default {
   app: App,
   topics: Topics,
-  errors: Errors
+  errors: Errors,
+  routes: Routes
 };

@@ -7,6 +7,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
 import {Meteor} from 'meteor/meteor';
 
+import {Routes} from '../../modules/constants';
 import onlyIfVerified from '../../modules/only-if-verified';
 import {isLoggedIn} from '../../modules/login';
 
@@ -15,10 +16,8 @@ import {Index} from '../../ui/pages/index';
 import {CreateProfile} from '../../ui/pages/information';
 import {NotFound} from '../../ui/pages/not-found';
 import {ContactPage} from '../../ui/pages/contact';
-import {ForgotPassword} from '../../ui/pages/forgot-password';
 import {ResetPassword} from '../../ui/pages/reset-password';
 import {HomePage} from '../../ui/pages/home';
-import {ProfilePage} from '../../ui/pages/profile';
 import {Schedule} from '../../ui/pages/schedule';
 import {UnverifiedPage} from '../../ui/pages/unverified';
 
@@ -78,16 +77,14 @@ Meteor.startup(() => {
 
   const routes = (
     <Router history={ browserHistory }>
-      <Route path="/" component={ App }>
-        <IndexRoute name="index" component={Index} onEnter={ redirectAuth('/home')}/>
-        <Route name="unverified" path="/unverified" component={UnverifiedPage} onEnter={unverifiedCheck} />
-        <Route name="homePage" path="/home" component={HomePage} onEnter={ requireAuth }/>
-        <Route name="info" path="/info" component={CreateProfile}/>
-        <Route name="contact" path="/contact" component={ContactPage}/>
-        <Route name="forgot-password" path="/forgot-password" component={ForgotPassword}/>
-        <Route name="reset-password" path="/reset-password" component={ResetPassword}/>
-        <Route name="profilePage" path="/profile" component={ProfilePage}/>
-        <Route name="schedule" path="/schedule" component={Schedule}/>
+      <Route path={Routes.index} component={ App }>
+        <IndexRoute component={Index} onEnter={ redirectAuth('/home')}/>
+        <Route path={Routes.unverified} component={UnverifiedPage} onEnter={unverifiedCheck} />
+        <Route path={Routes.homepage} component={HomePage} onEnter={ requireAuth }/>
+        <Route path={Routes.info} component={CreateProfile}/>
+        <Route path={Routes.contact} component={ContactPage}/>
+        <Route path={Routes.resetPassword} component={ResetPassword}/>
+        <Route path={Routes.schedule} component={Schedule}/>
       </Route>
       <Route path="*" component={NotFound}/>
     </Router>

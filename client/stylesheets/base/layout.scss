@@ -1,4 +1,4 @@
-@mixin validation-state($color) {
+@mixin validation-state-input($color) {
   border-color: $color;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
@@ -18,15 +18,15 @@ footer.footer {
 
 .form-control {
   &.has-success {
-    @include validation-state(#3c763d);
+    @include validation-state-input(#3c763d);
   }
 
   &.has-error {
-    @include validation-state(#a94442);
+    @include validation-state-input(#a94442);
   }
 
   &.has-warning {
-    @include validation-state(#8a6d3b);
+    @include validation-state-input(#8a6d3b);
   }
 }
 

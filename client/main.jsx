@@ -25,7 +25,7 @@ let intervalId = setInterval(() => {
 
   nexts.remove();
   clearInterval(intervalId);
-}, 20);
+}, 10);
 
 Session.setDefault('needsVerification', false);
 
