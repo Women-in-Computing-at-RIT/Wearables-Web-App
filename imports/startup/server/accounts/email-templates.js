@@ -1,12 +1,8 @@
-import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {SSR} from 'meteor/meteorhacks:ssr';
 
 import {App} from '../../../modules/constants';
 import {UserAccess} from '../../../modules/user-utils';
-
-if(_.isNil(process.env.MAIL_URL) && Meteor.settings.MAILGUN_DOMAIN !== '')
-  process.env.MAIL_URL = `smtp://postmaster%40${Meteor.settings.MAILGUN_DOMAIN}:${Meteor.settings.MAILGUN_PASS}@smtp.mailgun.org:587`;
 
 SSR.compileTemplate("verifyEmail", Assets.getText('email-templates/verification.html'));
 const emailTemplates = Accounts.emailTemplates;

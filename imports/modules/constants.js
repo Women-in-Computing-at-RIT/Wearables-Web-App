@@ -44,12 +44,21 @@ export const ValidationErrors = {
 };
 
 export const ExceptionTypes = {
-  invalidEmailType: 'Email Type Invalid'
+  invalidEmailType: 'Email Type Invalid',
+  missingSetting: 'Missing Setting',
+  missingEnvironment: 'Missing Env Variable',
+  missingEnvironmentSetting: 'Missing Setting and Env Variable'
 };
 
 export const ExceptionReasons = {
   invalidEmailType: 'The given email type is invalid!',
-  invalidEmailTypeTemplate: (emailType) => `The given email, ${String(emailType)}, is not a valid email type!`
+  invalidEmailTypeTemplate: (emailType) => `The given email, ${String(emailType)}, is not a valid email type!`,
+  missingSetting: 'Missing a setting in settings.json!',
+  missingSettingTemplate: (settingName) => `${settingName} not declared in settings.json!`,
+  missingEnvironment: 'Missing environment variable!',
+  missingEnvironmentTemplate: (envName) => `${envName} not set!`,
+  missingEnvironmentSetting: 'Missing environment variable with no alternative supplied in settings!',
+  missingEnvironmentSettingTemplate: (name) => `${name} not set in environment variables and no alternative exists in settings.json`
 };
 
 export const Exceptions = {
