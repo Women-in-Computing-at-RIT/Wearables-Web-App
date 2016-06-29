@@ -5,7 +5,7 @@
 
 import React from 'react';
 import {FormGroup, Form, Col, Alert, Button, ButtonGroup, ControlLabel, InputGroup,
-  Collapse, FormControl, Pager, PageItem } from 'react-bootstrap';
+  Collapse, FormControl, Pager, PageItem, ProgressBar, HelpBlock } from 'react-bootstrap';
 
 import {handleRegister} from '../../modules/register';
 import {EventBus} from '../../modules/subscriptions';
@@ -19,7 +19,8 @@ export class RegisterForm extends React.Component {
       errorMessage: null,
       emailError: false,
       passwordError: false,
-      mismatchError: false
+      mismatchError: false,
+      passwordStrength: -1  // -1 means no progress, 0 means 20%, 1 means 40%, etc.
     };
   }
 
@@ -29,11 +30,12 @@ export class RegisterForm extends React.Component {
     const passwordVerifier = (m, {score, feedback, crack_times_display}) => {
       let newState = {
         passwordError: this.state.passwordError || score < App.auth.minPwdStrength,
-        passwordStrength: score
+        passwordStrength: score,
+        passwordErrorMessage: null
       };
 
       if(newState.passwordError && score < App.auth.minPwdStrength)
-        newState.passwordErrorMessage = `${feedback.warning} (Could be broken in ${crack_times_display.offline_fast_hashing_1e10_per_second}). ${feedback.suggestions}.`;
+        newState.passwordErrorMessage = `${feedback.warning + '. '}${feedback.suggestions}.`;
 
       this.setState(newState);
     };
@@ -51,6 +53,26 @@ export class RegisterForm extends React.Component {
     this.setState({
       subToken: null
     });
+  }
+
+  renderProgressBar() {
+    let progressParts = [];
+    const progressStyles = ['danger', 'danger', 'warning',  'success', 'success'];
+
+    for(let i = 0; i <= this.state.passwordStrength; i++)
+      progressParts[i] = <ProgressBar now={20} bsStyle={progressStyles[i]} key={i}/>;
+
+    return (
+      <FormGroup>
+        <Col componentClass={ControlLabel} sm={2}>Strength</Col>
+        <Col sm={10}>
+          <ProgressBar id="strength-bar">
+            {progressParts}
+          </ProgressBar>
+          <HelpBlock hidden={!_.isNil(this.state.passwordErrorMessage)}>{this.state.passwordErrorMessage}</HelpBlock>
+        </Col>
+      </FormGroup>
+    );
   }
 
   render() {
@@ -93,6 +115,7 @@ export class RegisterForm extends React.Component {
             <FormControl.Feedback/>
           </Col>
         </FormGroup>
+        {this.renderProgressBar()}
         <Pager>
           <PageItem next onClick={() => swapCallback()}>Sign in</PageItem>
         </Pager>

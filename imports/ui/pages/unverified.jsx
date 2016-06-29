@@ -7,6 +7,8 @@ import {PageHeader} from 'react-bootstrap';
 
 import {App} from '../../modules/constants';
 import {UserAccess} from '../../modules/user-utils';
+import {EmailType} from '../../modules/enums';
+
 import {createUserDataContainer} from '../containers/simple';
 
 export class UnverifiedPageInterface extends React.Component {
@@ -17,13 +19,14 @@ export class UnverifiedPageInterface extends React.Component {
     const user = new UserAccess(this.props.hasUser);
 
     const resendVerification = () => {
-      Accounts.sendVerificationEmail(Meteor.userId());
+      user.sendEmail(EmailType.VERIFY, _.noop);
+      // Accounts.sendVerificationEmail(Meteor.userId());
       Bert.alert(`Verification email resent to ${user.primaryEmail}!`, 'success');
     };
 
     return (
       <div>
-        <PageHeader>Uh oh, {user.name}!<small>It appears your account is unverified.</small></PageHeader>
+        <PageHeader>Uh oh, {user.name}!<small> It appears your account is unverified.</small></PageHeader>
         <section>
           <p>
             In order to access the site properly you must verify your email is correct by going to {user.primaryEmail} and

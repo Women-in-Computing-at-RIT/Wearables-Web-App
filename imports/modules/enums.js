@@ -90,7 +90,7 @@ class Ethnicity extends Enum2 {
    * Takes either the option representation or the string representation of an ethnicity and returns the correct
    * ethnicity object or null if none is found.
    *
-   * @param {String} ethnicStr Name or Option Label for desired Gender
+   * @param {String} ethnicStr Name or Option Label for desired ethnicity
    * @returns {Ethnicity} Ethnicity associated with given string
    * @static
    */
@@ -122,6 +122,8 @@ class Ethnicity extends Enum2 {
 }
 
 // Enum initializer for Ethnicity
+//noinspection all
+
 //noinspection JSUnresolvedFunction
 Ethnicity.initEnum({
   CAUCASIAN: {
@@ -153,8 +155,26 @@ Ethnicity.initEnum({
   OTHER: {}
 });
 
+/**
+ * Enumeration of supported family relationships. Relationships can be seen as an undirected graph
+ * which allows for disconnected nodes. Every two nodes can have at most one connection with each other
+ * consisting of the relationship each has with the other.
+ *
+ * At the moment this is supported fairly verbosely with every enum value having a method relating it
+ * to one other enum value.
+ *
+ * @author Matthew Crocco
+ */
 class FamilyRelationship extends Enum2 {
 
+  /**
+   * Takes either the string representation of a relationship and returns the correct
+   * relationship object or null if none is found.
+   *
+   * @param {String} relStr Name of desired FamilyRelationship
+   * @returns {FamilyRelationship} FamilyRelationship for the given name
+   * @static
+   */
   static fromString(relStr) {
     relStr = ChangeCase.upper(relStr);
 
@@ -408,6 +428,11 @@ FamilyRelationship.initEnum({
   }
 });
 
+/**
+ * Standard notification types supported.
+ *
+ * Alerts are 
+ */
 class NotificationType extends Enum2 {
 
   static fromString(notifStr) {
@@ -438,8 +463,10 @@ class NotificationType extends Enum2 {
 }
 NotificationType.initEnum(['ALERT', 'YES_NO', 'PUSH']);
 
+/**
+ *
+ */
 class EmailType extends Enum2 {}
-
 EmailType.initEnum(['VERIFY', 'FORGOT_PASSWORD']);
 
 export {Gender, Ethnicity, FamilyRelationship, NotificationType, EmailType};

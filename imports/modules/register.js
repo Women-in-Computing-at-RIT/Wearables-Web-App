@@ -78,7 +78,6 @@ const register = (component) => {
 };
 
 const validate = (component) => {
-  console.log("This");
   let ignoreOnce;
   $(ReactDOM.findDOMNode(component.refs.registration)).validate({
     errorClass: 'has-error',
@@ -142,18 +141,22 @@ const validate = (component) => {
         errorMessage: `${validator.numberOfInvalids()} ${validator.numberOfInvalids() === 1 ? 'error has' : 'errors have'} occurred`
       });
 
+      const [email, password, firstName, lastName] = [
+        getInputValue(component.refs.email),
+        getInputValue(component.refs.password),
+        getInputValue(component.refs.firstName),
+        getInputValue(component.refs.lastName)
+      ];
+
+      let result = zxcvbn(password, [firstName, lastName, email, ...App.siteDictionary]);
+      EventBus.publish(Topics.auth.passwordVerify, result);
+
       ignoreOnce = true;
     },
     onkeyup() {
       if(ignoreOnce)
         return ignoreOnce = false;
 
-      component.setState({
-        emailError: false,
-        passwordError: false,
-        mismatchError: false,
-        passwordErrorMessage: null
-      });
 
       const [email, password, firstName, lastName] = [
         getInputValue(component.refs.email),
@@ -162,12 +165,18 @@ const validate = (component) => {
         getInputValue(component.refs.lastName)
       ];
 
-      EventBus.publish(Topics.auth.passwordVerify, zxcvbn(password, [firstName, lastName, email, ...App.siteDictionary]));
+      let {score, feedback: {warning, suggestions}} = zxcvbn(password, [firstName, lastName, email, ...App.siteDictionary]);
+      component.setState({
+        emailError: false,
+        passwordError: false,
+        mismatchError: false,
+        passwordStrength: password.length === 0 ? -1 : score,
+        passwordErrorMessage: password.length === 0 ? null : `${warning ? warning + '. ' : ''}${suggestions.length > 0 ? suggestions + '.' : ''}`
+      });
 
       return !ignoreOnce;
     }
   });
-  console.log("succeeded");
 };
 
 const handleRegister = ({component}) => {
