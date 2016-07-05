@@ -10,14 +10,19 @@ import {UserAccess} from '../../modules/user-utils';
 
 export const HomePage = React.createClass ({
 
+
   render() {
     const user = new UserAccess(Meteor.user());
-
     return (
       <Row>
         <Col xs={5}>
           <h2 className="text-left">{user.name}'s Profile</h2>
-          {this.props.content}
+          <div>
+            <ul className="list-unstyled">
+              <li>Name: {user.name}</li>
+              <li>Email: {user.primaryEmail}</li>
+            </ul>
+          </div>
         </Col>
         <Col xs={7}>
           <h2 className="text-left">Family Name</h2>
