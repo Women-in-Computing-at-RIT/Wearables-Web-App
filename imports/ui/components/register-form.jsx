@@ -123,9 +123,9 @@ export class RegisterForm extends React.Component {
           <ButtonGroup>
             <Button type="submit" bsStyle="primary" >Submit</Button>
           </ButtonGroup>
-          <ButtonGroup>
+          {/*<ButtonGroup>
             <Button onClick={() => swapCallback(null)}>Close</Button>
-          </ButtonGroup>
+          </ButtonGroup>*/}
         </ButtonGroup>
         <Collapse unmountOnExit={true} in={this.state.emailError || this.state.passwordError || this.state.mismatchError}>
           <Alert className="validation-alert overview" bsStyle="danger">

@@ -34,15 +34,15 @@ export class ForgotPasswordForm extends React.Component {
           <FormControl.Feedback />
         </FormGroup>
         <Pager>
-          <PageItem next onClick={() => swapCallback()}>Sign in</PageItem>
+          <PageItem next onClick={() => swapCallback()}>Back to Sign in</PageItem>
         </Pager>
         <ButtonGroup justified>
           <ButtonGroup>
             <Button type="submit" bsStyle="primary" >Submit</Button>
           </ButtonGroup>
-          <ButtonGroup>
+          {/*<ButtonGroup>
             <Button onClick={() => swapCallback(null)}>Close</Button>
-          </ButtonGroup>
+          </ButtonGroup>*/}
         </ButtonGroup>
       </form>
     );
