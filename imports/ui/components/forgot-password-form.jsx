@@ -21,7 +21,7 @@ export class ForgotPasswordForm extends React.Component {
   render() {
     let swapCallback = this.props.authModalCallback;
     return (
-      <form ref="forgotPassword" className="forgotPassword" onsubmit={ (e) => e.preventDefault() }>
+      <form ref="forgotPassword" className="forgotPassword" onSubmit={ (e) => e.preventDefault() }>
         <FormGroup id="emailGroup" {...(this.state.emailError ? {validationState: 'error'} : {})}>
           <ControlLabel className="pull-left">Email Address</ControlLabel>
           <FormControl

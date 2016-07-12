@@ -61,18 +61,6 @@ const register = (component) => {
         } else
           Bert.alert(sendError.reason, 'danger');
       });
-      // UserApi.sendEmailToUser({
-      //   userId: user._id,
-      //   emailType: EmailType.VERIFY,
-      //   email: email
-      // }, (sendError) => {
-      //   if(!_.isNil(sendError)) {
-      //     Bert.alert(sendError.reason, 'danger');
-      //   } else {
-      //     Bert.alert(`Registration successful! Verification email set to ${email}.`, 'success');
-      //     browserHistory.push('/home');
-      //   }
-      // });
     }
   });
 };

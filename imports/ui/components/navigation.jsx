@@ -13,7 +13,21 @@ import {AuthModal, AuthState} from './auth-modal';
 import {Routes} from '../../modules/constants';
 import {isLoggedIn} from '../../modules/login';
 
-const handleLogout = () => Meteor.logout(() => browserHistory.push('/'));
+const handleLogout = () => Meteor.logout((error) => {
+  if(_.isNil(error))
+    browserHistory.push(Routes.index);
+  else
+    console.log(error);
+});
+
+// const handleLogout = (router) => Meteor.logout(() => {
+//   const id = Meteor.setInterval(() => {
+//     if(_.isNil(Meteor.userId())) {
+//       router.transitionTo(Routes.index);
+//       Meteor.clearInterval(id);
+//     }
+//   }, 500);
+// });
 
 // Navigation specification for anonymous users
 /* eslint-disable no-extra-parens */
@@ -28,7 +42,7 @@ export const PublicNavigation = ({parent}) => (
 );
 
 // Navigation specification for authenticated users
-export const AuthNavigation = () => (
+export const AuthNavigation = ({parent}) => (
       <Nav pullRight>
         <LinkContainer to={Routes.homepage}>
           <NavItem eventKey={1}>Profile</NavItem>
@@ -39,7 +53,7 @@ export const AuthNavigation = () => (
         <LinkContainer to={Routes.contact}>
           <NavItem event={3}>Contact Us</NavItem>
         </LinkContainer>
-        <NavItem event={4} onClick={handleLogout}>Sign Out</NavItem>
+        <NavItem event={4} href={Routes.index} onClick={handleLogout}>Sign Out</NavItem>
       </Nav>
 );
 

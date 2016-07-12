@@ -1,9 +1,8 @@
 import React from 'react';
 
-import {Accounts} from 'meteor/accounts-base';
 import {Bert} from 'meteor/themeteorchef:bert';
 
-import {PageHeader, Jumbotron} from 'react-bootstrap';
+import {Jumbotron} from 'react-bootstrap';
 
 import {App} from '../../modules/constants';
 import {UserAccess} from '../../modules/user-utils';
@@ -26,7 +25,7 @@ export class UnverifiedPageInterface extends React.Component {
 
     return (
       <div>
-        <Jumbotron className="text-center"><h2>Thank you, <strong>{user.name}</strong> for signing up!</h2></Jumbotron>
+        <Jumbotron className="text-center"><h2>Thank you, <strong>{user.nameAsTitle}</strong> for signing up!</h2></Jumbotron>
         <section>
           <p>
             An email has been sent to <strong>{user.primaryEmail}</strong> to verify your email address.

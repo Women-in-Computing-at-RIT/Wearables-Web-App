@@ -24,17 +24,17 @@ function createSided(client, server) {
     if(Meteor.isClient) {
       const clientFn = client instanceof Supplier ? client.get.value : client;
       if(clientFn instanceof ValidatedMethod)
-        clientFn.call(args, cb);
+        return clientFn.call(args, cb);
       else
-        clientFn(args, cb);
+        return clientFn(args, cb);
     } else {
       const serverFn = server instanceof Supplier ? server.get.value : server;
       if(serverFn instanceof ValidatedMethod) {
         // Methods should not be called server side! that was the point of this class!
         console.error(new TypeError("Should not call Method on Server!"));
-        serverFn.call(args, cb);
+        return serverFn.call(args, cb);
       } else
-        serverFn(args, cb);
+        return serverFn(args, cb);
     }
   };
 }

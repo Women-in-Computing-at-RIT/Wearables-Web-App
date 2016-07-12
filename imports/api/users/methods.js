@@ -17,18 +17,34 @@ export const isEmailAvailable = createSided(new Supplier(() => isEmailAvailableM
   return _.isNil(Meteor.users.findOne({'email.$.address': email}));
 });
 
-export const sendEmailToUser = createSided(new Supplier(() => sendEmailToUserMethod), ({userId, emailType, email}) => {
-  email = _.isNil(email) ? null : email;
+const sendEmail = (userId, emailType, email) => {
+  if(!Meteor.isServer)
+    throw new Meteor.Error(Exceptions.types.wrongSide, Exceptions.reasons.wrongSide);
+
   switch(emailType) {
     case EmailType.VERIFY:
-          Accounts.sendVerificationEmail(userId, email);
-          break;
+      Accounts.sendVerificationEmail(userId, email);
+      break;
     case EmailType.FORGOT_PASSWORD:
-          Accounts.sendResetPasswordEmail(userId, email);
-          break;
+      Accounts.sendResetPasswordEmail(userId, email);
+      break;
     default:
-          throw new Meteor.Error(Exceptions.types.invalidEmailType, Exceptions.reasons.invalidEmailTypeTemplate(emailType));
+      throw new Meteor.Error(Exceptions.types.invalidEmailType, Exceptions.reasons.invalidEmailTypeTemplate(emailType));
   }
+};
+
+export const sendEmailToUser = createSided(new Supplier(() => sendEmailToUserMethod), ({userId, emailType, email}) => {
+  email = _.isNil(email) ? null : email;
+  sendEmail(userId, emailType, email);
+});
+
+export const sendEmailToUserByEmail = createSided(new Supplier(() => sendEmailToUserByEmailMethod), ({email, emailType}) => {
+  const user = Meteor.users.findOne({'emails.address': email});
+
+  if(_.isNil(user))
+    throw new Meteor.Error(Exceptions.types.doesNotExist, Exceptions.reasons.doesNotExistTemplate(`User for ${email}`));
+
+  sendEmail(user._id, emailType, email);
 });
 
 export const isUserRegisteredMethod = new ValidatedMethod({
@@ -71,4 +87,31 @@ export const sendEmailToUserMethod = new ValidatedMethod({
     }
   }).validator(),
   run: sendEmailToUser
+});
+
+SimpleSchema.debug = true;
+export const sendEmailToUserByEmailMethod = new ValidatedMethod({
+  name: 'user.auth.password.forgot',
+  validate: new SimpleSchema({
+    email: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Email
+    },
+    emailType: {
+      type: Object,
+      blackbox: true,
+      custom: () => this.value instanceof EmailType
+    }
+  }).validator(),
+  applyOptions: {
+    throwStubExceptions: false
+  },
+  run: ({email, emailType}) => {
+    const user = Accounts.findUserByEmail(email);
+
+    if(_.isNil(user))
+      throw new Meteor.Error(Exceptions.types.doesNotExist, Exceptions.reasons.doesNotExistTemplate(`User for ${email}`));
+
+    sendEmail(user._id, emailType, email);
+  }
 });

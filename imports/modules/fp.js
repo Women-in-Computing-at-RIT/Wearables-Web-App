@@ -1,6 +1,6 @@
 /**
- * An existential type is an alternative to null values. A value is either {@link Nothing} or
- * {@link Something}. Both types are existential but one has a value and one has no value.
+ * An existential type is an alternative to null values. A value is either Nothing or
+ * Something. Both types are existential (and an Existential instance) but one has a value and one has no value.
  *
  * Either Existential Type should be instantiated using Existential.of and Existential.ofNothing.
  *

@@ -3,7 +3,6 @@ _ = lodash;
 import './main.html';
 import '/imports/startup/client';
 
-import {Session} from 'meteor/session';
 import {Bert} from 'meteor/themeteorchef:bert';
 
 AdminConfig = {
@@ -18,7 +17,7 @@ AdminConfig = {
  and the interval is cleared, ending the check.
  */
 let intervalId = setInterval(() => {
-  let nexts = $('#react-root-container').next('div');
+  let nexts = $('#react-root-container').next('div[style="width: 600px; margin: 0 auto; padding: 20px;"]');
 
   if(nexts.length === 0)
     return;
@@ -26,10 +25,3 @@ let intervalId = setInterval(() => {
   nexts.remove();
   clearInterval(intervalId);
 }, 10);
-
-Session.setDefault('needsVerification', false);
-
-if(Session.get('needsVerification')) {
-  Bert.alert('Cannot login, account unverified!', 'danger', 'fixed-top', 'fa-frown-o');
-  Session.set('needsVerification', false);
-}

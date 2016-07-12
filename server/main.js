@@ -1,3 +1,5 @@
+import './migrations';
+
 import {Meteor} from 'meteor/meteor';
 import {Exceptions} from '../imports/modules/constants';
 
@@ -5,12 +7,6 @@ import {Exceptions} from '../imports/modules/constants';
 
 if(_.isNil(process.env.MAIL_URL) && Meteor.settings.MAILGUN_DOMAIN !== '')
   process.env.MAIL_URL = `smtp://postmaster%40${Meteor.settings.MAILGUN_DOMAIN}:${Meteor.settings.MAILGUN_PASS}@smtp.mailgun.org:587`;
-
-if(_.isNil(process.env.CLOUDINARY_URL))
-  if(_.isNil(Meteor.settings.CLOUDINARY_URL))
-    throw new Meteor.Error(Exceptions.types.missingEnvironmentSetting, Exceptions.reasons.missingEnvironmentSettingTemplate('CLOUDINARY_URL'));
-  else
-    process.env.CLOUDINARY_URL = Meteor.settings.CLOUDINARY_URL;
 
 const cloudinaryChecks = [
   'CLOUDINARY_CLOUD_NAME',
@@ -25,6 +21,8 @@ _.forEach(cloudinaryChecks, (key) => {
     else
       process.env[key] = Meteor.settings[key];
 });
+
+process.env.CLOUDINARY_URL = process.env.CLOUDINARY_URL || `cloudinary://${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}@${process.env.CLOUDINARY_CLOUD_NAME}`;
 
 import '/imports/startup/server';
 import './security';

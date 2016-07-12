@@ -1,4 +1,5 @@
 import {Bert} from 'meteor/themeteorchef:bert';
+import * as ChangeCase from 'change-case';
 import * as UserApi from '../api/users/methods';
 
 
@@ -15,12 +16,17 @@ const defaultSendErrorHandler = (sendError, email) => {
 };
 
 class UserAccess {
+  
   constructor(user) {
     this.user = user;
   }
 
   get id() {
     return this.user._id;
+  }
+
+  get nameAsTitle() {
+    return ChangeCase.title(this.name);
   }
 
   get name() {

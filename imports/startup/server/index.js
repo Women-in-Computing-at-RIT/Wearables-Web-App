@@ -1,4 +1,7 @@
+import {Meteor} from 'meteor/meteor';
+
 import './accounts/email-templates';
+import './api';
 import './fixtures';
 import './serialization';
 
@@ -7,3 +10,7 @@ AdminConfig = {
   adminEmails: ['admin@admin.com'],
   collections: {}
 };
+
+Meteor.startup(() => {
+  Migrations.migrateTo('latest');
+});
