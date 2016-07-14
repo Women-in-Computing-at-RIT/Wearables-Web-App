@@ -4,8 +4,8 @@ import Blaze from 'meteor/gadicc:blaze-react-component';
 import { FormGroup, FormControl, Button,ControlLabel } from 'react-bootstrap';
 import React from 'react';
 
-import {EnumSelect} from './enum-select';
-import {Gender, Ethnicity} from '../../modules/enums';
+import {EnumSelect} from '../enum-select';
+import {Gender, Ethnicity} from '../../../modules/enums';
 
 export const ProfileForm = React.createClass({
   renderField (label, field) {

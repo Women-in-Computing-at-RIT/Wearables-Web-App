@@ -3,9 +3,9 @@ import {Modal, Button} from 'react-bootstrap';
 
 import * as ChangeCase from 'change-case';
 
-import {RegisterForm} from './register-form';
-import {SignInForm} from './signin-form';
-import {ForgotPasswordForm} from './forgot-password-form';
+import {RegisterForm} from './forms/register-form';
+import {SignInForm} from './forms/signin-form';
+import {ForgotPasswordForm} from './forms/forgot-password-form';
 import {Enum2} from '../../modules/enums';
 import {Topics, EventBus} from '../../modules/subscriptions';
 

@@ -15,6 +15,21 @@ export class Enum2 extends Enum {
   get label() {
     return this.name;
   }
+
+  /**
+   * @returns {string} Display name of enum value
+     */
+  get displayName() {
+    return this.asOption();
+  }
+
+  /**
+   * @returns {string} Dispay name of enum value
+     */
+  asOption() {
+    return this.label;
+  }
+
 }
 
 /**

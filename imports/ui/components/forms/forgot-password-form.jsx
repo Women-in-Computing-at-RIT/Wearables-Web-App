@@ -5,7 +5,7 @@
 import React from 'react';
 import {Collapse, Alert, FormGroup, ButtonGroup, Button, ControlLabel, FormControl, Pager, PageItem} from 'react-bootstrap';
 
-import {handleForgotPassword} from '../../modules/forgot-password';
+import {handleForgotPassword} from '../../../modules/forgot-password';
 
 export class ForgotPasswordForm extends React.Component {
   constructor(props) {
