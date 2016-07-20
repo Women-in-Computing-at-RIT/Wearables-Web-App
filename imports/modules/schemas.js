@@ -6,6 +6,7 @@
 import {Random} from 'meteor/random';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
+import {ImageResources} from './constants';
 import {Gender, Ethnicity, FamilyRelationship, NotificationType} from './enums';
 
 /**
@@ -68,6 +69,16 @@ Schemas.UserProfile = new SimpleSchema({
     label: "Phone Number",
     optional: true,
     regEx: /^\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g
+  },
+  profileImage: {
+    type: String,
+    autoValue: (isSet, unset, value, operator, field) => {
+      if(isSet)
+        return;
+
+      const {value: genderValue} = field('gender');
+      return ImageResources.profile.defaultProfileImageUrl(genderValue);
+    }
   }
 });
 
@@ -296,4 +307,7 @@ Schemas.Notification = new SimpleSchema({
   }
 });
 
+Schemas.GlobalNotification = Schemas.Notification.pick('timestamp', 'type', 'data');
+
 export default Schemas;
+export {Schemas};

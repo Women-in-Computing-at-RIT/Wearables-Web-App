@@ -4,8 +4,8 @@
  */
 
 import React from 'react';
-import {FormGroup, Form, Col, Alert, Button, ButtonGroup, ControlLabel, InputGroup,
-  Collapse, FormControl, Pager, PageItem, ProgressBar, HelpBlock } from 'react-bootstrap';
+import {Form, FormGroup, FormControl, Col, ControlLabel, Alert, Collapse, Pager, PageItem, ButtonGroup, Button,
+  ProgressBar, HelpBlock, Popover, OverlayTrigger, Overlay } from 'react-bootstrap';
 
 import {handleRegister} from '../../../modules/register';
 import {EventBus} from '../../../modules/subscriptions';
@@ -62,14 +62,18 @@ export class RegisterForm extends React.Component {
     for(let i = 0; i <= this.state.passwordStrength; i++)
       progressParts[i] = <ProgressBar now={20} bsStyle={progressStyles[i]} key={i}/>;
 
+    const bar = (
+      <ProgressBar id="strength-bar">
+        {progressParts}
+      </ProgressBar>
+    );
+
     return (
       <FormGroup>
         <Col componentClass={ControlLabel} sm={2}>Strength</Col>
         <Col sm={10}>
-          <ProgressBar id="strength-bar">
-            {progressParts}
-          </ProgressBar>
-          <HelpBlock hidden={!_.isNil(this.state.passwordErrorMessage)}>{this.state.passwordErrorMessage}</HelpBlock>
+          {bar}
+          <HelpBlock hidden={_.isNil(this.state.passwordErrorMessage)}>{this.state.passwordErrorMessage}</HelpBlock>
         </Col>
       </FormGroup>
     );

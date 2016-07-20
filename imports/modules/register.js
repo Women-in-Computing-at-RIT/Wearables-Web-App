@@ -22,14 +22,14 @@ const isEmailAvailable = (email) => {
   if(_.isNil(email) || !_.isString(email))
     throw new Error(`email is nil or not a string: ${email}`);
 
-  return UserApi.isEmailAvailable(email);
+  return UserApi.isEmailAvailableMethod.call({email});
 };
 
 const isRegistered = (userId) => {
   if(_.isNil(userId) || !_.isString(userId))
     throw new Error(`userId is nil or not a string: ${userId}`);
 
-  return UserApi.isUserRegistered({userId});
+  return UserApi.isUserRegisteredMethod.call({userId});
 };
 
 const register = (component) => {

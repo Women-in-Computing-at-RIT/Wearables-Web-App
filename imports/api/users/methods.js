@@ -1,5 +1,3 @@
-import createSided from '../../modules/sided-function';
-import {Supplier} from '../../modules/fp';
 import {EmailType} from '../../modules/enums';
 import {Exceptions} from '../../modules/constants';
 
@@ -7,15 +5,6 @@ import {Accounts} from 'meteor/accounts-base';
 import {Meteor} from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
-
-export const isUserRegistered = createSided(new Supplier(() => isUserRegisteredMethod), ({userId}) => {
-  let user = Meteor.users.findOne(userId);
-  return !_.isNil(user) && _.find(user.emails, ({verified: verified}) => verified) >= 0;
-});
-
-export const isEmailAvailable = createSided(new Supplier(() => isEmailAvailableMethod), ({email}) => {
-  return _.isNil(Meteor.users.findOne({'email.$.address': email}));
-});
 
 const sendEmail = (userId, emailType, email) => {
   if(!Meteor.isServer)
@@ -33,20 +22,6 @@ const sendEmail = (userId, emailType, email) => {
   }
 };
 
-export const sendEmailToUser = createSided(new Supplier(() => sendEmailToUserMethod), ({userId, emailType, email}) => {
-  email = _.isNil(email) ? null : email;
-  sendEmail(userId, emailType, email);
-});
-
-export const sendEmailToUserByEmail = createSided(new Supplier(() => sendEmailToUserByEmailMethod), ({email, emailType}) => {
-  const user = Meteor.users.findOne({'emails.address': email});
-
-  if(_.isNil(user))
-    throw new Meteor.Error(Exceptions.types.doesNotExist, Exceptions.reasons.doesNotExistTemplate(`User for ${email}`));
-
-  sendEmail(user._id, emailType, email);
-});
-
 export const isUserRegisteredMethod = new ValidatedMethod({
   name: 'user.auth.check',
   validate: new SimpleSchema({
@@ -55,7 +30,10 @@ export const isUserRegisteredMethod = new ValidatedMethod({
       regEx: SimpleSchema.RegEx.Id
     }
   }).validator(),
-  run: isUserRegistered
+  run: ({userId}) => {
+    let user = Meteor.users.findOne(userId);
+    return !_.isNil(user) && _.find(user.emails, ({verified: verified}) => verified) >= 0;
+  }
 });
 
 export const isEmailAvailableMethod = new ValidatedMethod({
@@ -67,7 +45,7 @@ export const isEmailAvailableMethod = new ValidatedMethod({
       regEx: SimpleSchema.RegEx.Email
     }
   }).validator(),
-  run: isEmailAvailable
+  run: ({email}) => _.isNil(Meteor.users.findOne({'email.$.address': email}))
 });
 
 export const sendEmailToUserMethod = new ValidatedMethod({
@@ -86,10 +64,12 @@ export const sendEmailToUserMethod = new ValidatedMethod({
       optional: true
     }
   }).validator(),
-  run: sendEmailToUser
+  run: ({userId, emailType, email}) => {
+    email = _.isNil(email) ? null : email;
+    sendEmail(userId, emailType, email);
+  }
 });
 
-SimpleSchema.debug = true;
 export const sendEmailToUserByEmailMethod = new ValidatedMethod({
   name: 'user.auth.password.forgot',
   validate: new SimpleSchema({
@@ -115,3 +95,15 @@ export const sendEmailToUserByEmailMethod = new ValidatedMethod({
     sendEmail(user._id, emailType, email);
   }
 });
+
+export const getUserByEmailMethod = new ValidatedMethod({
+    name: 'user.auth.find.email',
+    validate: new SimpleSchema({
+      email: {
+        type: String,
+        regEx: SimpleSchema.RegEx.Email
+      }
+    }).validator(),
+    run: ({email}) => Accounts.findUserByEmail(email)
+  }
+);

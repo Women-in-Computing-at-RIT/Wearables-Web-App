@@ -7,13 +7,13 @@ import {FamilyRelationship} from '../../modules/enums';
 const relationshipArgsSchema = new SimpleSchema({
   to: {
     type: String,
-    RegEx: SimpleSchema.RegEx.Id,
+    regEx: SimpleSchema.RegEx.Id,
     optional: false,
     custom: () => this.value === this.fields['from'].value ? 'Cannot have a relationship with self' : true
   },
   from: {
     type: String,
-    RegEx: SimpleSchema.RegEx.id,
+    regEx: SimpleSchema.RegEx.Id,
     optional: false,
     custom: () => this.value === this.fields['to'].value ? 'Cannot have a relationship with self' : true
   },
@@ -45,10 +45,7 @@ const changeRelationship = new ValidatedMethod({
 
 const deleteRelationship = new ValidatedMethod({
   name: 'relationship.delete',
-  validate: new SimpleSchema({
-    to: relationshipArgsSchema.to,
-    from: relationshipArgsSchema.from
-  }).validator(),
+  validate: relationshipArgsSchema.pick('to', 'from').validator(),
   run({to, from}) {
     Relationships.remove({toId: to, fromId: from});
   }

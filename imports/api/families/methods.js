@@ -49,7 +49,7 @@ const updateFamily = new ValidatedMethod({
 
     // Isolate User IDs from relationships
     // Map the relationship to a pair [toId, fromId] and then take the union of all of those (which is a flatten+unique)
-    let userIds = _.chain(relationships).map((r) => [r.toId, r.fromId]).union().value();
+    let userIds = _.chain(relationships).map((r) => [r.toId, r.fromId]).union().value(); //eslint-disable-line lodash/chain-style
 
     // Update Family with new ids (if not already in list)
     if(userIds.size > 0)
@@ -69,8 +69,8 @@ const updateFamily = new ValidatedMethod({
 });
 
 const deleteFamily = new ValidatedMethod({
-  name: 'families.remove.user',
-  rvalidate: new SimpleSchema({
+  name: 'families.remove.all',
+  validate: new SimpleSchema({
     _id: {type: String, regEx: SimpleSchema.RegEx.Id}
   }).validator(),
   run({_id}) {

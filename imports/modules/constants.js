@@ -1,4 +1,7 @@
-import {Meteor} from 'meteor/meteor'
+import {Meteor} from 'meteor/meteor';
+
+import {Gender} from './enums';
+import * as ChangeCase from 'change-case';
 
 /**
  * Usable with PubSub/EventBus as the "message" parameter, these are publications topics that can be subscribed
@@ -78,7 +81,9 @@ export const ValidationErrors = {
  */
 export const ExceptionTypes = {
   invalidEmailType: 'Email Type Invalid',
+  invalidSetting: 'Invalid Setting',
   missingSetting: 'Missing Setting',
+  invalidEnvironment: 'Invalid Env Variable',
   missingEnvironment: 'Missing Env Variable',
   missingEnvironmentSetting: 'Missing Setting and Env Variable',
   wrongSide: 'Wrong Side',
@@ -103,7 +108,9 @@ export const ExceptionReasons = {
     return `Code executed on ${Meteor.isServer ? 'server' : 'client'} but is ${Meteor.isServer ? 'client' : 'server'}-only`;
   },
   doesNotExist: 'The desired resource does not exist!',
-  doesNotExistTemplate: (what) => `${what} does not exist!`
+  doesNotExistTemplate: (what) => `${what} does not exist!`,
+  invalidCloudinaryUrl: 'Cloudinary URL is invalid! Should be of the form `cloudinary://<API_KEY>:<API_SECRET>@<CLOUD_NAME>',
+  invalidCloudinaryComponentTemplate: (compName, reason) => `${compName} part of cloudinary details is invalid, ${reason}`
 };
 
 /**
@@ -124,6 +131,20 @@ export const Errors = {
   validation: ValidationErrors
 };
 
+export const Settings = {
+  cloudinary: {
+    url: 'CLOUDINARY_URL',
+    apiKey: 'CLOUDINARY_API_KEY',
+    apiSecret: 'CLOUDINARY_API_SECRET',
+    cloudName: 'CLOUDINARY_CLOUD_NAME',
+    credentialSeparator: ':',
+    domainSeparator: '@',
+    protocol: 'cloudinary://'
+  }
+};
+
+Settings.cloudinary.urlComponents = [Settings.cloudinary.apiKey, Settings.cloudinary.apiSecret, Settings.cloudinary.cloudName];
+
 /**
  * App Metadata
  * @type {{name: string, version: string, domain: string, siteDictionary: string[], auth: {minPwdStrength: number}}}
@@ -135,7 +156,8 @@ export const App = {
   siteDictionary: ['stress', 'monitor'],
   auth: {
     minPwdStrength: 2
-  }
+  },
+  settings: Settings
 };
 
 /**
@@ -176,6 +198,29 @@ Routes.mapNameToPath = (name) => _.find(Routes, (value, key) => key === name);  
 Routes.reverse = Routes.reverseLookup = Routes.lookupReverse = Routes.mapPathToName;
 Routes.lookup = Routes.mapNameToPath;
 
+export const ImageResources = {
+  profile: {
+    defaultProfileImageUrl: (gender) => `Default/default_${ChangeCase.lower(gender.name)}`,
+  }
+};
+
+ImageResources.profile.defaultMaleProfileImageUrl = ImageResources.profile.defaultProfileImageUrl(Gender.MALE);
+ImageResources.profile.defaultFemaleProfileImageUrl = ImageResources.profile.defaultProfileImageUrl(Gender.FEMALE);
+
+export const Resources = {
+  images: ImageResources
+};
+
+export const Selectors = {
+  reactMountPoint: '#react-root-container',
+  get reactMountPointNoHash() {
+    return this.reactMountPoint.substring(1);
+  },
+  bug: {
+    ironRouter: 'div[style="width: 600px; margin: 0 auto; padding: 20px;"]'
+  }
+};
+
 /**
  * All constants, namespaced accordingly.
  */
@@ -183,7 +228,20 @@ export const All = {
   app: App,
   topics: Topics,
   errors: Errors,
-  routes: Routes
+  routes: Routes,
+  resources: Resources,
+  selectors: Selectors
 };
 
 export default All;
+
+function freezer(value) {
+  if(!_.isPlainObject(value))
+    return;
+
+  Object.freeze(value);
+
+  _.forOwn(value, freezer);
+}
+
+freezer(All);

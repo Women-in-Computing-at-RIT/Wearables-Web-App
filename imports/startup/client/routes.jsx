@@ -11,6 +11,8 @@ import {Routes} from '../../modules/constants';
 import onlyIfVerified from '../../modules/only-if-verified';
 import {isLoggedIn} from '../../modules/login';
 
+import {Selectors} from '../../modules/constants';
+
 import {App} from '../../ui/layouts/app';
 import {Index} from '../../ui/pages/index';
 import {CreateProfile} from '../../ui/pages/information';
@@ -98,9 +100,9 @@ Meteor.startup(() => {
       if(_.isNil(Meteor.user()))
         return;
 
-      render(routes, document.getElementById('react-root-container'));
+      render(routes, document.getElementById(Selectors.reactMountPointNoHash));
       c.stop();
     });
   else
-    render(routes, document.getElementById('react-root-container'));
+    render(routes, document.getElementById(Selectors.reactMountPointNoHash));
 });

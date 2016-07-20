@@ -1,4 +1,5 @@
 import {Bert} from 'meteor/themeteorchef:bert';
+
 import * as ChangeCase from 'change-case';
 import * as UserApi from '../api/users/methods';
 
@@ -50,7 +51,7 @@ class UserAccess {
   }
   
   sendEmail(emailType, cb) {
-    UserApi.sendEmailToUser({
+    UserApi.sendEmailToUserMethod.call({
       userId: this.user._id,
       emailType,
       email: this.primaryEmail

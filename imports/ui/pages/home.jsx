@@ -4,30 +4,37 @@
  */
 import {Meteor} from 'meteor/meteor';
 import React from 'react';
-import {Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col} from 'react-bootstrap';
 
-import {UserAccess} from '../../modules/user-utils';
+import {ProfileCard} from '../../ui/components/profile-card';
 
-export const HomePage = React.createClass ({
-
-
+export class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
-    const user = new UserAccess(Meteor.user());
     return (
-      <Row>
-        <Col xs={5}>
-          <h2 className="text-left">{user.name}'s Profile</h2>
-          <div>
-            <ul className="list-unstyled">
-              <li>Name: {user.name}</li>
-              <li>Email: {user.primaryEmail}</li>
-            </ul>
-          </div>
-        </Col>
-        <Col xs={7}>
-          <h2 className="text-left">Family Name</h2>
-        </Col>
-      </Row>
+      <Grid fluid={true}>
+        {/* Grid A (Spanning All Content) */}
+        <Row>
+          {/* Profile Card Area */}
+          <Col xs={4}>
+            <ProfileCard user={Meteor.user()}/>
+          </Col>
+          <Col xs={8}>
+            {/* Grid B Containing Family Info and Statistical Data */}
+            <Grid fluid={true}>
+              <Row>
+
+              </Row>
+              <Row>
+
+              </Row>
+            </Grid>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
-});
+}
