@@ -6,13 +6,13 @@ import ReactDOM from 'react-dom';
 import {Meteor} from 'meteor/meteor';
 import {Bert} from 'meteor/themeteorchef:bert';
 
-import {EmailErrors} from './constants';
-import getInputValue from './get-input-value';
+import {EmailErrors} from '../constants';
+import getInputValue from '../utility/get-input-value';
 
-import {EmailType} from './enums';
-import {UserAccess} from './user-utils';
+import {EmailType} from '../enums';
+import {UserAccess} from '../utility/user-utils';
 
-import * as UserApi from '../api/users/methods';
+import * as UserApi from '../../api/users/methods';
 
 const forgotPassword = (comp) => {
   const email = getInputValue(comp.refs.email);

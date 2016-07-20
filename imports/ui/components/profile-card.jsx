@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {UserAccess} from '../../modules/user-utils';
+import {UserAccess} from '../../modules/utility/user-utils';
 
 export class ProfileCard extends React.Component {
   constructor(props) {

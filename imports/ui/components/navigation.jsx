@@ -11,7 +11,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import {AuthModal, AuthState} from './auth-modal';
 import {Routes} from '../../modules/constants';
-import {isLoggedIn} from '../../modules/login';
+import {isLoggedIn} from '../../modules/auth/login';
 
 const handleLogout = (route) =>
   () => Meteor.logout((error) => {

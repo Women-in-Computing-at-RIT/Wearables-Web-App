@@ -5,8 +5,8 @@ import {browserHistory} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 import {Bert} from 'meteor/themeteorchef:bert';
 
-import {EmailErrors, PasswordErrors} from './constants';
-import getInputValue from './get-input-value';
+import {EmailErrors, PasswordErrors} from '../constants';
+import getInputValue from '../utility/get-input-value';
 
 const login = (comp) => {
   const email = getInputValue(comp.refs.emailAddress);

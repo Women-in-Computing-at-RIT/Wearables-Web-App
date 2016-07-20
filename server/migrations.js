@@ -14,20 +14,18 @@ if(Meteor.isServer) {
     version: 1,
     name: 'Adds profileImage field to every user if not already there. Uses the id `Default/default_<gender-name>`.',
     up: () => {
-      let users = Meteor.users.find().fetch(); //eslint-disable-line
+      const users = Meteor.users.find().fetch(); //eslint-disable-line
 
-      // Ignore users for witch profileImage is already set
-      users = _.filter(users, (u) => _.isNil(u.profile.profileImage));
-
-      _.forEach(users, (user) => {
+      _(users)
+        .filter((u) => _.isNil(u.profile.profileImage))
+        .forEach((user) => {
         const gender = user.profile.gender;
-        console.log(gender);
-        Meteor.users.update({_id: user._id},
-          {
-            $set: {
-              'profile.profileImage': ImageResources.profile.defaultProfileImageUrl(gender)
-            }
-          });
+
+        Meteor.users.update({_id: user._id}, {
+          $set: {
+            'profile.profileImage': ImageResources.profile.defaultProfileImageUrl(gender)
+          }
+        });
       });
     },
     down: () => Meteor.users.update({}, {$unset: {'profile.profileImage': ""}}, {validate: false, multi: true})

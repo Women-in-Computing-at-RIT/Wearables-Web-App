@@ -49,7 +49,7 @@ const updateFamily = new ValidatedMethod({
 
     // Isolate User IDs from relationships
     // Map the relationship to a pair [toId, fromId] and then take the union of all of those (which is a flatten+unique)
-    let userIds = _.chain(relationships).map((r) => [r.toId, r.fromId]).union().value(); //eslint-disable-line lodash/chain-style
+    let userIds = _(relationships).map((r) => [r.toId, r.fromId]).union().value();
 
     // Update Family with new ids (if not already in list)
     if(userIds.size > 0)

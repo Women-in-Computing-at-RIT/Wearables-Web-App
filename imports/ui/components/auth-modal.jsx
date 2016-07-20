@@ -7,7 +7,7 @@ import {RegisterForm} from './forms/register-form';
 import {SignInForm} from './forms/signin-form';
 import {ForgotPasswordForm} from './forms/forgot-password-form';
 import {Enum2} from '../../modules/enums';
-import {Topics, EventBus} from '../../modules/subscriptions';
+import {Topics, EventBus} from '../../modules/utility/subscriptions';
 
 export class AuthState extends Enum2 {
   toString() {

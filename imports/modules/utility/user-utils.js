@@ -1,7 +1,7 @@
 import {Bert} from 'meteor/themeteorchef:bert';
 
 import * as ChangeCase from 'change-case';
-import * as UserApi from '../api/users/methods';
+import * as UserApi from '../../api/users/methods';
 
 
 const getUserFullName = (user) => `${user.profile.firstName} ${user.profile.lastName}`;

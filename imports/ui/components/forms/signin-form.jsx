@@ -7,7 +7,7 @@ import React from 'react';
 import { Collapse, Alert, FormGroup, ButtonGroup, Button, ControlLabel, FormControl, Pager, PageItem } from 'react-bootstrap';
 
 import {AuthState} from '../auth-modal';
-import {handleLogin} from '../../../modules/login';
+import {handleLogin} from '../../../modules/auth/login';
 
 export class SignInForm extends React.Component {
   constructor(props) {

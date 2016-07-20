@@ -3,7 +3,7 @@
  * authors: Cara Steinberg
  */
 
-import {UserAccess} from '../../modules/user-utils';
+import {UserAccess} from '../../modules/utility/user-utils';
 import React from 'react';
 import {Row, Col} from 'react-bootstrap';
 

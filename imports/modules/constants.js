@@ -153,6 +153,7 @@ export const App = {
   name: 'StressMonitor',
   version: '1.0.0',
   domain: 'monitor.com',
+  adminEmails: ['admin@admin.com'], // TODO Remove from source code
   siteDictionary: ['stress', 'monitor'],
   auth: {
     minPwdStrength: 2

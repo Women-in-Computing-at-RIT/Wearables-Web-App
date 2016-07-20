@@ -7,8 +7,8 @@ import React from 'react';
 import {Form, FormGroup, FormControl, Col, ControlLabel, Alert, Collapse, Pager, PageItem, ButtonGroup, Button,
   ProgressBar, HelpBlock, Popover, OverlayTrigger, Overlay } from 'react-bootstrap';
 
-import {handleRegister} from '../../../modules/register';
-import {EventBus} from '../../../modules/subscriptions';
+import {handleRegister} from '../../../modules/auth/register';
+import {EventBus} from '../../../modules/utility/subscriptions';
 import {Topics, App} from '../../../modules/constants';
 
 export class RegisterForm extends React.Component {

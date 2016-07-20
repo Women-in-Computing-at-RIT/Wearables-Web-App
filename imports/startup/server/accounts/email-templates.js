@@ -2,7 +2,7 @@ import {Accounts} from 'meteor/accounts-base';
 import {SSR} from 'meteor/meteorhacks:ssr';
 
 import {App} from '../../../modules/constants';
-import {UserAccess} from '../../../modules/user-utils';
+import {UserAccess} from '../../../modules/utility/user-utils';
 
 SSR.compileTemplate("verifyEmail", Assets.getText('email-templates/verification.html'));
 const emailTemplates = Accounts.emailTemplates;

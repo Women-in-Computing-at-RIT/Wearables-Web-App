@@ -8,8 +8,8 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 
 import {Routes} from '../../modules/constants';
-import onlyIfVerified from '../../modules/only-if-verified';
-import {isLoggedIn} from '../../modules/login';
+import onlyIfVerified from '../../modules/auth/only-if-verified';
+import {isLoggedIn} from '../../modules/auth/login';
 
 import {Selectors} from '../../modules/constants';
 

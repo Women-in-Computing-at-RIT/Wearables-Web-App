@@ -5,7 +5,7 @@ import {Bert} from 'meteor/themeteorchef:bert';
 import {Jumbotron} from 'react-bootstrap';
 
 import {App} from '../../modules/constants';
-import {UserAccess} from '../../modules/user-utils';
+import {UserAccess} from '../../modules/utility/user-utils';
 import {EmailType} from '../../modules/enums';
 
 import {createUserDataContainer} from '../containers/simple';

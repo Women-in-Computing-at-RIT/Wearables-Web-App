@@ -8,14 +8,14 @@ import {browserHistory} from 'react-router';
 import {Accounts} from 'meteor/accounts-base';
 import {Bert} from 'meteor/themeteorchef:bert';
 
-import * as UserApi from '../api/users/methods';
+import * as UserApi from '../../api/users/methods';
 
-import {UserAccess} from '../modules/user-utils';
-import {EmailType} from '../modules/enums';
-import {App, Topics, EmailErrors, PasswordErrors, ProfileErrors} from './constants';
-import {EventBus} from '../modules/subscriptions';
+import {UserAccess} from '../utility/user-utils';
+import {EmailType} from '../enums';
+import {App, Topics, EmailErrors, PasswordErrors, ProfileErrors} from '../constants';
+import {EventBus} from '../utility/subscriptions';
 
-import getInputValue from './get-input-value';
+import getInputValue from '../utility/get-input-value';
 
 
 const isEmailAvailable = (email) => {
