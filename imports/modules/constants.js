@@ -87,7 +87,8 @@ export const ExceptionTypes = {
   missingEnvironment: 'Missing Env Variable',
   missingEnvironmentSetting: 'Missing Setting and Env Variable',
   wrongSide: 'Wrong Side',
-  doesNotExist: 'Does Not Exist'
+  doesNotExist: 'Does Not Exist',
+  typeMismatch: 'Type Mismatch'
 };
 
 /**
@@ -111,7 +112,9 @@ export const ExceptionReasons = {
   doesNotExist: 'The desired resource does not exist!',
   doesNotExistTemplate: (what) => `${what} does not exist!`,
   invalidCloudinaryUrl: 'Cloudinary URL is invalid! Should be of the form `cloudinary://<API_KEY>:<API_SECRET>@<CLOUD_NAME>',
-  invalidCloudinaryComponentTemplate: (compName, reason) => `${compName} part of cloudinary details is invalid, ${reason}`
+  invalidCloudinaryComponentTemplate: (compName, reason) => `${compName} part of cloudinary details is invalid, ${reason}`,
+  typeMismatch: 'Value is not valid type!',
+  typeMismatchTemplate: (x, type) => `${x} is not an instance of expected type: '${type.constructor.name}'`
 };
 
 /**
@@ -147,6 +150,18 @@ export const Settings = {
 
 Settings.cloudinary.urlComponents = [Settings.cloudinary.apiKey, Settings.cloudinary.apiSecret, Settings.cloudinary.cloudName];
 
+export const LoggingStrings = {
+  levels: [
+    'FATAL',
+    'ERROR',
+    'WARN',
+    'INFO',
+    'DEBUG'
+  ],
+  originClient: 'client',
+  originServer: 'server'
+};
+
 /**
  * App Metadata
  * @type {{name: string, version: string, domain: string, siteDictionary: string[], auth: {minPwdStrength: number}}}
@@ -160,7 +175,8 @@ export const App = {
   auth: {
     minPwdStrength: 2
   },
-  settings: Settings
+  settings: Settings,
+  logging: LoggingStrings
 };
 
 /**
