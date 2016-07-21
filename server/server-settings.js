@@ -41,3 +41,10 @@ if(_.isNil(process.env[CloudinaryKeys.url])) {
   // TODO More complete validation using invalidSetting Type and invalidCloudinaryComponentTemplate Reason
   _.assignIn(process.env, components);
 }
+
+if(_.isNil(process.env[CloudinaryKeys.version])) {
+  if(_.isNil(Meteor.settings[CloudinaryKeys.version]))
+    throw new Meteor.Error(Exceptions.types.missingEnvironmentSetting, Exceptions.reasons.missingEnvironmentSettingTemplate(CloudinaryKeys.version));
+
+  process.env[CloudinaryKeys.version] = Meteor.settings[CloudinaryKeys.version];
+}

@@ -22,6 +22,10 @@ class UserAccess {
     this.user = user;
   }
 
+  imageUrl(transformations = []) {
+    return $.cloudinary.url(this.user.profile.profileImage, transformations);
+  }
+
   get id() {
     return this.user._id;
   }

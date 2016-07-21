@@ -63,7 +63,7 @@ export class AppNavigation extends React.Component {
 
   render() {
     return (
-      <Navbar className="navbar-static-top">
+      <Navbar fixedTop={true}>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to={Routes.index}>Placeholder</Link>

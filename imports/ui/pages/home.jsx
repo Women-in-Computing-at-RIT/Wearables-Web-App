@@ -19,10 +19,10 @@ export class HomePage extends React.Component {
         {/* Grid A (Spanning All Content) */}
         <Row>
           {/* Profile Card Area */}
-          <Col xs={4}>
+          <Col xs={3}>
             <ProfileCard user={Meteor.user()}/>
           </Col>
-          <Col xs={8}>
+          <Col xs={9}>
             {/* Grid B Containing Family Info and Statistical Data */}
             <Grid fluid={true}>
               <Row>

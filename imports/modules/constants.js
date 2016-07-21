@@ -104,6 +104,7 @@ export const ExceptionReasons = {
   missingEnvironmentTemplate: (envName = "\<NOT PROVIDED\>") => `${envName} not set!`,
   missingEnvironmentSetting: 'Missing environment variable with no alternative supplied in settings!',
   missingEnvironmentSettingTemplate: (name = "\<NOT PROVIDED\>") => `${name} not set in environment variables and no alternative exists in settings.json`,
+  missingImageAltText: 'Missing Image',
   get wrongSide(){
     return `Code executed on ${Meteor.isServer ? 'server' : 'client'} but is ${Meteor.isServer ? 'client' : 'server'}-only`;
   },
@@ -133,6 +134,7 @@ export const Errors = {
 
 export const Settings = {
   cloudinary: {
+    version: 'CLOUDINARY_VERSION',
     url: 'CLOUDINARY_URL',
     apiKey: 'CLOUDINARY_API_KEY',
     apiSecret: 'CLOUDINARY_API_SECRET',
@@ -201,7 +203,7 @@ Routes.lookup = Routes.mapNameToPath;
 
 export const ImageResources = {
   profile: {
-    defaultProfileImageUrl: (gender) => `Default/default_${ChangeCase.lower(gender.name)}`,
+    defaultProfileImageUrl: (gender) => `Defaults/default_${ChangeCase.lower(gender.name)}.jpg`,
   }
 };
 

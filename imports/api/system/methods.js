@@ -7,6 +7,10 @@ export const fetchClientCloudinaryDetails = new ValidatedMethod({
   name: 'cloudinary.client.details',
   validate: new SimpleSchema({}).validator(),
   run: ({}) => {
-    return {cloud_name: process.env[Settings.cloudinary.cloudName]};
+    return {
+      cloud_name: process.env[Settings.cloudinary.cloudName],
+      api_key: process.env[Settings.cloudinary.apiKey],
+      version: process.env[Settings.cloudinary.version]
+    };
   }
 });

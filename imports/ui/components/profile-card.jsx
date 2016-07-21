@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {UserAccess} from '../../modules/utility/user-utils';
+import {ExceptionReasons} from '../../modules/constants';
 
 export class ProfileCard extends React.Component {
   constructor(props) {
@@ -10,9 +11,13 @@ export class ProfileCard extends React.Component {
   render() {
     const user = new UserAccess(this.props.user);
 
+    const profImgTransforms = [
+      {width: 200, height: 200, gravity: 'face', fetch_format: 'png'}
+    ];
+
     return (
       <div className="card">
-        <img className="card-img-top" data-src="" />
+        <img className="card-img-top" style={{width: "100%", height: "auto"}} src={user.imageUrl(profImgTransforms)} alt={ExceptionReasons.missingImageAltText}/>
         <div className="card-block">
           <h4 className="card-title">{user.nameAsTitle}</h4>
           <p className="card-text">This is just a test card</p>

@@ -15,6 +15,7 @@ export const App = React.createClass({
       <Grid>
         { this.props.children }
       </Grid>
+      <div className="push-footer"></div>
       <BaseFooter />
       </div>;
   }
