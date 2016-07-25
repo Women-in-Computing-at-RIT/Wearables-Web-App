@@ -21,6 +21,7 @@
     "change-case": "^2.3.1",
     "classnames": "^2.2.5",
     "enumify": "^1.0.4",
+    "hover.css": "^2.0.2",
     "jquery": "^2.2.4",
     "jquery-validation": "^1.15.0",
     "meteor-node-stubs": "~0.2.0",

@@ -1,12 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|PT+Sans:400,400i,700,700i|PT+Serif:400,700&subset=latin-ext');
 @import "variables";
-
-div#react-root-container > div > div.container {
-
-  min-height: 100%;
-  height: auto !important;
-
-  margin: $wic-navbar-size auto (-$wic-footer-height);
-}
 
 @mixin validation-state-input($color) {
   border-color: $color;
@@ -15,13 +8,42 @@ div#react-root-container > div > div.container {
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: $wic-background-color;
+  font-family: $wic-font-body;
+  font-size: 1em;
+  color: $wic-text-color-primary;
+}
+
+html {
+  padding-top: $wic-navbar-size;
+}
+
+div#react-root-container {
+  height: 100%
+}
+
+div#react-root-container > div {
+  height: 100%;
+}
+
+div.wrapper-footer {
+  min-height: 100%;
+  margin: 0 auto (-$wic-footer-height);
+}
+
 .push-footer {
-  width: 100%;
   height: $wic-footer-height;
 }
 
 .footer {
   @extend .push-footer;
+  width: 100%;
   background-color: #f5f5f5;
 
   &> div.container, &> div.container-fluid {
@@ -58,4 +80,40 @@ div#react-root-container > div > div.container {
 
 .password-strength-bar, #strength-bar {
   margin-top: 0.6em;
+}
+
+.navbar, .footer, .interface {
+  background-color: $wic-interface-color;
+  border-color: $wic-header-border-color;
+  color: $wic-text-color-alternate;
+
+  font-family: $wic-font-header;
+  font-weight: bold;
+
+  .navbar-brand, a, .text-muted {
+    color: $wic-text-color-alternate;
+  }
+
+}
+
+.navbar-default .navbar-nav {
+  &> li > a  {
+    color: $wic-text-color-alternate;
+
+    &:hover {
+
+    }
+  }
+
+  &> .active > a {
+    color: $wic-text-color-alternate;
+    background-color: $wic-interface-color;
+
+
+  }
+}
+
+.foreground-item {
+  background-color: $wic-foreground-color;
+  color: $wic-text-color-primary;
 }
