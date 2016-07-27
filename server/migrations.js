@@ -4,6 +4,7 @@
 import {Meteor} from 'meteor/meteor';
 import {ImageResources} from '../imports/modules/constants';
 
+/* eslint-disable lodash/prefer-lodash-method */
 if(Meteor.isServer) {
   Migrations.config({
     log: true,
@@ -30,4 +31,54 @@ if(Meteor.isServer) {
     },
     down: () => Meteor.users.update({}, {$unset: {'profile.profileImage': ""}}, {validate: false, multi: true})
   });
+
+  Migrations.add({
+    version: 2,
+    name: 'Move api details from root user object to a stressApi sub-document',
+    up: () => {
+      const users = Meteor.users.find().fetch();
+
+      _(users)
+        .thru((user) => {
+          user.stressApi = {
+            apiKey: user.apiAuthKey,
+            apiAuthType: user.apiAuthType
+          };
+
+          delete user.apiAuthKey;
+          delete user.apiAuthType;
+
+          return user;
+      }).forEach((user) => Meteor.users.update({_id: user._id}, {
+        $unset: {
+          apiAuthKey: "",
+          apiAuthType: ""
+        },
+        $set: {
+          stressApi: user.stressApi
+        }
+      }, {multi: true}));
+    },
+    down() {
+      const users = Meteor.users.find().fetch();
+
+      _(users)
+        .thru((user) => {
+          user.apiAuthKey = user.stressApi.apiKey;
+          user.apiAuthType = user.stressApi.apiAuthType;
+
+          delete user.stressApi;
+          return user;
+        }).forEach((user) => Meteor.users.update({_id: user._id}, {
+        $unset: {
+          stressApi: ""
+        },
+        $set: {
+          apiAuthKey: user.apiAuthKey,
+          apiAuthType: user.apiAuthType
+        }
+      }, {validate: false, multi: true}));
+    }
+  });
 }
+/* eslint-enable */

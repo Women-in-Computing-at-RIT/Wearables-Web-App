@@ -82,6 +82,21 @@ Schemas.UserProfile = new SimpleSchema({
   }
 });
 
+Schemas.StressApi = {
+  apiKey: {
+    type: String,
+    label: "API Auth Key",
+    optional: true,
+    defaultValue: null
+  },
+  apiAuthType: {
+    type: Object,
+    label: "API Auth Type",
+    optional: true,
+    defaultValue: null
+  }
+};
+
 Schemas.User = new SimpleSchema({
   username: {
     type: String,
@@ -135,17 +150,9 @@ Schemas.User = new SimpleSchema({
     optional: true,
     defaultValue: []
   },
-  apiAuthKey: {
-    type: String,
-    label: "API Auth Key",
-    optional: true,
-    defaultValue: null
-  },
-  apiAuthType: {
-    type: Object,
-    label: "API Auth Type",
-    optional: true,
-    defaultValue: null
+  stressApi: {
+    type: Schemas.StressApi,
+    optional: true
   }
 });
 

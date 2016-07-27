@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|PT+Sans:400,400i,700,700i|PT+Serif:400,700&subset=latin-ext');
+
+// Local Imports
 @import "variables";
+
+// NPM Imports
+// Hover.css Imports
+@import "/node_modules/hover.css/scss/effects/border-transitions/trim";
+@import "/node_modules/hover.css/scss/effects/border-transitions/underline-reveal";
+@import "/node_modules/hover.css/scss/effects/icons/icon-pop";
 
 @mixin validation-state-input($color) {
   border-color: $color;
@@ -97,19 +105,21 @@ div.wrapper-footer {
 }
 
 .navbar-default .navbar-nav {
-  &> li > a  {
+
+  .fa {
     color: $wic-text-color-alternate;
+  }
 
-    &:hover {
-
-    }
+  &> li > a  {
+    @include pop;
+    @include glow;
+    @include icon-pop;
+    color: $wic-text-color-alternate;
   }
 
   &> .active > a {
     color: $wic-text-color-alternate;
     background-color: $wic-interface-color;
-
-
   }
 }
 

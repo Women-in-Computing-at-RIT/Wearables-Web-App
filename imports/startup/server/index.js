@@ -1,7 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 
 import './accounts/email-templates';
-import '../../api/collections';
+import '../../api/index';
 import './api';
 import './fixtures';
 import './serialization';

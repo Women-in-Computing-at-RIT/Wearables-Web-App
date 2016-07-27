@@ -162,6 +162,34 @@ export const LoggingStrings = {
   originServer: 'server'
 };
 
+export const Api = {
+  displayName: "Stress API",
+  get name() {
+    return ChangeCase.pascal(this.displayName);
+  },
+  all: {
+    get userObjRoot() {
+      return `${ChangeCase.camel(this.name)}`;
+    },
+    tokenName: 'apiKey',
+    get apiUserTokenPath() {
+      return `${this.all.userObjRoot}.${this.all.tokenName}`;
+    },
+    get idHeader() {
+      return `X-${this.name}-Id`;
+    },
+    get tokenHeader() {
+      return `X-${this.name}-Token`;
+    }
+  },
+  v0: {
+    get base() {
+      return ChangeCase.param(this.name);
+    },
+    version: 'v0'
+  }
+};
+
 /**
  * App Metadata
  * @type {{name: string, version: string, domain: string, siteDictionary: string[], auth: {minPwdStrength: number}}}
@@ -176,7 +204,8 @@ export const App = {
     minPwdStrength: 2
   },
   settings: Settings,
-  logging: LoggingStrings
+  logging: LoggingStrings,
+  api: Api
 };
 
 /**
@@ -258,7 +287,8 @@ export const All = {
   errors: Errors,
   routes: Routes,
   resources: Resources,
-  selectors: Selectors
+  selectors: Selectors,
+  api: Api
 };
 
 export default All;
