@@ -77,7 +77,7 @@ Schemas.UserProfile = new SimpleSchema({
         return;
 
       const {value: genderValue} = field('gender');
-      return ImageResources.profile.defaultProfileImageUrl(genderValue);
+      return ImageResources.profile.defaultProfileImageUrl(genderValue); //eslint-disable-line consistent-return
     }
   }
 });

@@ -1,12 +1,18 @@
 import {Meteor} from 'meteor/meteor';
 import {Notifications} from '../notifications';
 
+export const NotifPublications = {
+  user: {
+    all: 'notifications.all'
+  }
+};
+
 if(Meteor.isServer) {
-  Meteor.publish('notifications', () =>
+  Meteor.publish(NotifPublications.user.all, () =>
     // Return Notifications for this user from newest to oldest.
-    Notifications.find(
+    Notifications.find( //eslint-disable-line lodash/prefer-lodash-method
       {
-        targetId: Meteor.userId(),
+        targetId: this.userId,
         timestamp: {$lte: moment().toISOString()}
       },
       {

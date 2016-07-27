@@ -38,7 +38,6 @@ if(_.isNil(process.env[CloudinaryKeys.url])) {
   components[CloudinaryKeys.apiSecret] = noProtocolUrl.substring(keySecretSeparator + 1, domainSeparator);
   components[CloudinaryKeys.cloudName] = noProtocolUrl.substring(domainSeparator + 1);
 
-  // TODO More complete validation using invalidSetting Type and invalidCloudinaryComponentTemplate Reason
   _.assignIn(process.env, components);
 }
 

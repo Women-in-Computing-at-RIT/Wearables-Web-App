@@ -170,7 +170,7 @@ export const App = {
   name: 'StressMonitor',
   version: '1.0.0',
   domain: 'monitor.com',
-  adminEmails: ['admin@admin.com'], // TODO Remove from source code
+  adminEmails: ['admin@admin.com'], // TODO Remove from source code (Move to settings somehow)
   siteDictionary: ['stress', 'monitor'],
   auth: {
     minPwdStrength: 2
@@ -238,6 +238,15 @@ export const Selectors = {
   bug: {
     ironRouter: 'div[style="width: 600px; margin: 0 auto; padding: 20px;"]'
   }
+};
+
+export const Glyphs = {
+  about: "user",
+  contact: "users",
+  signIn: "sign-in",
+  signOut: "sign-out",
+  register: "book",
+  calendar: "calendar"
 };
 
 /**

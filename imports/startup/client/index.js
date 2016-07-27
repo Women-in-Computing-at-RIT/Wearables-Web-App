@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import './subscriptions';
 import './routes';
 
 import {Bert} from 'meteor/themeteorchef:bert';

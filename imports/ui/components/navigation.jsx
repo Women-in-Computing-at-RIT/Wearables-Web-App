@@ -10,7 +10,8 @@ import { browserHistory, Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import {AuthModal, AuthState} from './auth-modal';
-import {Routes} from '../../modules/constants';
+import {FontAwesomeIcon} from './fontawesome';
+import {Routes, Glyphs} from '../../modules/constants';
 import {isLoggedIn} from '../../modules/auth/login';
 
 const handleLogout = (route) =>
@@ -24,29 +25,43 @@ const handleLogout = (route) =>
 // Navigation specification for anonymous users
 /* eslint-disable no-extra-parens */
 export const PublicNavigation = ({parent}) => (
-      <Nav pullRight>
+      <Nav pullRight={true}>
         <LinkContainer to={Routes.contact}>
-          <NavItem event={3} href={Routes.contact}>Contact Us</NavItem>
+          <NavItem event={3} href={Routes.contact}>
+            <FontAwesomeIcon glyph={Glyphs.contact}/>Contact Us
+          </NavItem>
         </LinkContainer>
-        <NavItem id="signin-navitem" eventKey={1} onClick={() => parent.refs.authModal.open(AuthState.SIGN_IN)}>Sign In</NavItem>
-        <NavItem id="register-navitem" eventKey={2} onClick={() => parent.refs.authModal.open(AuthState.REGISTER)}>Register</NavItem>
+        <NavItem id="signin-navitem" eventKey={1} onClick={() => parent.refs.authModal.open(AuthState.SIGN_IN)}>
+          <FontAwesomeIcon glyph={Glyphs.signIn}/>Sign In
+        </NavItem>
+        <NavItem id="register-navitem" eventKey={2} onClick={() => parent.refs.authModal.open(AuthState.REGISTER)}>
+          <FontAwesomeIcon glyph={Glyphs.register}/>Register
+        </NavItem>
       </Nav>
 );
 
 // Navigation specification for authenticated users
 export const AuthNavigation = ({parent}) => (
-      <Nav pullRight>
+      <Nav pullRight={true}>
         <LinkContainer to={Routes.homepage}>
-          <NavItem eventKey={1} href={Routes.homepage}>Profile</NavItem>
+          <NavItem eventKey={1} href={Routes.homepage}>
+            <FontAwesomeIcon glyph={Glyphs.about}/>Profile
+          </NavItem>
         </LinkContainer>
         <LinkContainer to={Routes.schedule}>
-          <NavItem event={2} href={Routes.schedule}>Schedule</NavItem>
+          <NavItem event={2} href={Routes.schedule}>
+            <FontAwesomeIcon glyph={Glyphs.calendar}/>Schedule
+          </NavItem>
         </LinkContainer>
         <LinkContainer to={Routes.contact}>
-          <NavItem event={3} href={Routes.contact}>Contact Us</NavItem>
+          <NavItem event={3} href={Routes.contact}>
+            <FontAwesomeIcon glyph={Glyphs.contact}/>Contact Us
+          </NavItem>
         </LinkContainer>
         {/* No Link Container because handleLogout pushes Routes.index onto browserHistory */}
-        <NavItem event={4} href={Routes.index} onClick={handleLogout(Routes.index)}>Sign Out</NavItem>
+        <NavItem event={4} href={Routes.index} onClick={handleLogout(Routes.index)}>
+          <FontAwesomeIcon glyph={Glyphs.signOut}/>Sign Out
+        </NavItem>
       </Nav>
 );
 
