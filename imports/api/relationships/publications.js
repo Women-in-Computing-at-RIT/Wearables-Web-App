@@ -1,5 +1,5 @@
 import {Meteor} from 'meteor/meteor';
-import {Relationships} from '../relationships';
+import {Relationships} from './relationships';
 
 export const RelationshipPublications = {
   all: 'relationship.all',
@@ -9,7 +9,7 @@ export const RelationshipPublications = {
 if(Meteor.isServer) {
 
   /* eslint-disable lodash/prefer-lodash-method*/
-  Meteor.publish(RelationshipPublications.all, () => {
+  Meteor.publish(RelationshipPublications.all, function() {
     if(!this.userId)
       return this.ready();
 
@@ -23,7 +23,7 @@ if(Meteor.isServer) {
   });
   /* eslint-enable */
 
-  Meteor.publish(RelationshipPublications.select, (withId) => {
+  Meteor.publish(RelationshipPublications.select, function(withId){
     if(!this.userId)
       return this.ready();
 

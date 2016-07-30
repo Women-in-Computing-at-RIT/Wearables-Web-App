@@ -3,28 +3,28 @@ import * as ChangeCase from 'change-case';
 
 /* eslint-disable lodash/prefer-constant */
 /**
- * Small extension of the {@link Enum} class adding a label method that gets the label of the enum option.
+ * Small extension of the {@link Enum} class adding a label method that gets the label of the enumType option.
  *
  * @author Matthew Crocco
  * @class
  */
 export class Enum2 extends Enum {
   /**
-   * @returns {string} Name of enum option
+   * @returns {string} Name of enumType option
      */
   get label() {
     return this.name;
   }
 
   /**
-   * @returns {string} Display name of enum value
+   * @returns {string} Display name of enumType value
      */
   get displayName() {
     return this.asOption();
   }
 
   /**
-   * @returns {string} Dispay name of enum value
+   * @returns {string} Dispay name of enumType value
      */
   asOption() {
     return this.label;
@@ -175,8 +175,8 @@ Ethnicity.initEnum({
  * which allows for disconnected nodes. Every two nodes can have at most one connection with each other
  * consisting of the relationship each has with the other.
  *
- * At the moment this is supported fairly verbosely with every enum value having a method relating it
- * to one other enum value.
+ * At the moment this is supported fairly verbosely with every enumType value having a method relating it
+ * to one other enumType value.
  *
  * @author Matthew Crocco
  */

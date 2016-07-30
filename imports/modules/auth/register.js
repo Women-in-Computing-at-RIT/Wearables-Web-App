@@ -13,7 +13,7 @@ import * as UserApi from '../../api/users/methods';
 import {UserAccess} from '../utility/user-utils';
 import {EmailType} from '../enums';
 import {App, Topics, EmailErrors, PasswordErrors, ProfileErrors} from '../constants';
-import {EventBus} from '../utility/subscriptions';
+import {EventBus} from '../utility/pubsub';
 
 import getInputValue from '../utility/get-input-value';
 

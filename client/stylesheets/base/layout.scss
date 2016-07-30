@@ -5,9 +5,9 @@
 
 // NPM Imports
 // Hover.css Imports
-@import "/node_modules/hover.css/scss/effects/border-transitions/trim";
-@import "/node_modules/hover.css/scss/effects/border-transitions/underline-reveal";
-@import "/node_modules/hover.css/scss/effects/icons/icon-pop";
+@import "../../../node_modules/hover.css/scss/effects/border-transitions/trim";
+@import "../../../node_modules/hover.css/scss/effects/border-transitions/underline-reveal";
+@import "../../../node_modules/hover.css/scss/effects/icons/icon-pop";
 
 @mixin validation-state-input($color) {
   border-color: $color;
@@ -110,11 +110,14 @@ div.wrapper-footer {
     color: $wic-text-color-alternate;
   }
 
-  &> li > a  {
-    @include pop;
-    @include glow;
+  &> li  {
+    @include trim;
+    @include underline-reveal;
     @include icon-pop;
-    color: $wic-text-color-alternate;
+
+    &> a {
+      color: $wic-text-color-alternate;
+    }
   }
 
   &> .active > a {

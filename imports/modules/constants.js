@@ -165,26 +165,26 @@ export const LoggingStrings = {
 export const Api = {
   displayName: "Stress API",
   get name() {
-    return ChangeCase.pascal(this.displayName);
+    return ChangeCase.pascal(Api.displayName);
   },
   all: {
     get userObjRoot() {
-      return `${ChangeCase.camel(this.name)}`;
+      return `${ChangeCase.camel(Api.name)}`;
     },
     tokenName: 'apiKey',
     get apiUserTokenPath() {
-      return `${this.all.userObjRoot}.${this.all.tokenName}`;
+      return `${Api.all.userObjRoot}.${Api.all.tokenName}`;
     },
     get idHeader() {
-      return `X-${this.name}-Id`;
+      return `X-${Api.name}-Id`;
     },
     get tokenHeader() {
-      return `X-${this.name}-Token`;
+      return `X-${Api.name}-Token`;
     }
   },
   v0: {
     get base() {
-      return ChangeCase.param(this.name);
+      return ChangeCase.param(Api.name);
     },
     version: 'v0'
   }
@@ -261,6 +261,7 @@ export const Resources = {
 
 export const Selectors = {
   reactMountPoint: '#react-root-container',
+  rogueBootstrapStyle: 'head > style:last-child',
   get reactMountPointNoHash() {
     return this.reactMountPoint.substring(1);
   },

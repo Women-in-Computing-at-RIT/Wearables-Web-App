@@ -26,8 +26,12 @@ class UserAccess {
     return $.cloudinary.url(this.user.profile.profileImage, transformations);
   }
 
-  get id() {
+  get _id() {
     return this.user._id;
+  }
+
+  get id() {
+    return this._id;
   }
 
   get nameAsTitle() {

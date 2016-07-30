@@ -35,6 +35,11 @@ const intervalId = setInterval(() => {
   if(nexts.length === 0)
     return;
 
+  // We also happen to have a style element in the head created by something with bootstrap.
+  // It essentially does the same as our css file import but causes loading issues, so it is removed as well.
+  //
+  // It is stored in the last style tag in the head, if this statement is removed.
+  $(Selectors.rogueBootstrapStyle).remove();
   nexts.remove();
   clearInterval(intervalId);
 }, 10);

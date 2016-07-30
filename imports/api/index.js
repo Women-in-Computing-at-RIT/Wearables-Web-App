@@ -4,9 +4,9 @@ import './relationships/methods';
 import './system/methods';
 import './users/methods';
 
-import './families/server/publications';
-import './notifications/server/publications';
-import './relationships/server/publications';
+import './families/publications';
+import './notifications/publications';
+import './relationships/publications';
 
 import {Meteor} from 'meteor/meteor';
 

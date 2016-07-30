@@ -34,7 +34,6 @@ jamiecollinson:selectize-bootstrap
 iron:router
 dburles:collection-helpers
 accounts-base
-accounts-password
 alanning:roles
 yogiben:admin
 themeteorchef:bert

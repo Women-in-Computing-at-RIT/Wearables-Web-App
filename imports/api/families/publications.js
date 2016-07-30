@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
-import {Families} from '../families';
+import {Families} from './families';
 
 /*eslint-disable lodash/prefer-lodash-method*/
 const FamilyPublications = {
@@ -14,7 +14,7 @@ const FamilyPublications = {
 };
 
 if(Meteor.isServer) {
-  Meteor.publish(FamilyPublications.user.all, () => {
+  Meteor.publish(FamilyPublications.user.all, function() {
     if(!this.userId)
       return this.ready();
 
@@ -22,7 +22,7 @@ if(Meteor.isServer) {
     return Families.find({_id: {$in: [...familyIds]}});
   });
 
-  Meteor.publish(FamilyPublications.user.select, ({familyId, familyName}) => {
+  Meteor.publish(FamilyPublications.user.select, function({familyId, familyName}) {
     if(!this.userId)
       return this.ready();
 
@@ -50,7 +50,7 @@ if(Meteor.isServer) {
       return Families.findOne({familyName});
   });
 
-  Meteor.publish(FamilyPublications.user.fetchMembers, (familyId) => {
+  Meteor.publish(FamilyPublications.user.fetchMembers, function(familyId) {
     if(!this.userId)
       return this.ready();
 
@@ -65,7 +65,7 @@ if(Meteor.isServer) {
     return Meteor.users.find({_id: {$in: family.userIds}});
   });
 
-  Meteor.publish(FamilyPublications.user.fetchRelated, () => {
+  Meteor.publish(FamilyPublications.user.fetchRelated, function(){
     if(!this.userId)
       return this.ready();
 

@@ -7,7 +7,7 @@ import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 
 import {AuthState} from '../components/auth-modal';
-import {EventBus, Topics} from '../../modules/utility/subscriptions';
+import {EventBus, Topics} from '../../modules/utility/pubsub';
 
 const styles = {maxWidth: 500};
 export class Index extends React.Component {

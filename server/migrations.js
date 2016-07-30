@@ -55,9 +55,10 @@ if(Meteor.isServer) {
           apiAuthType: ""
         },
         $set: {
-          stressApi: user.stressApi
+          "stressApi.apiKey": user.stressApi.apiKey,
+          "stressApi.apiAuthType": user.stressApi.apiKey
         }
-      }, {multi: true}));
+      }, {validate: false, multi: true}));
     },
     down() {
       const users = Meteor.users.find().fetch();

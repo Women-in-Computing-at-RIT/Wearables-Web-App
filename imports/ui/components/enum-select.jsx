@@ -1,12 +1,17 @@
 import * as ChangeCase from 'change-case';
 import React from 'react';
+
+import {Custom} from '../../modules/utility/type-checking';
 import {Enum2} from '../../modules/enums';
 
 import {FormControl, ControlLabel} from 'react-bootstrap';
 
 export class EnumSelect extends React.Component {
-  getInitialState() {
-    return {
+
+  constructor(props) {
+    super(_.defaults(props, {multiple: false}));
+
+    this.state = {
       selection: null
     };
   }
@@ -15,10 +20,6 @@ export class EnumSelect extends React.Component {
     this.setState({
       selection: event.target.value
     });
-  }
-
-  getDefaultProps() {
-    return {multiple: false};
   }
 
   render() {
@@ -36,20 +37,7 @@ export class EnumSelect extends React.Component {
 
 EnumSelect.propTypes = {
   id: React.PropTypes.string.isRequired,
-  enumType: (props, propName, componentName) => {
-    const propValue = props[propName];
-
-    // required
-    if(_.isNil(propValue))
-      return new Error(`No value for required prop '${propName}' supplied to '${componentName}'`);
-
-    // typeof propValue === function means propValue is LIKELY a type then we check it's prototype against Enum2
-    // Essentially this allows putting enumType={Gender} instead of enumType={Gender.prototype}.
-    if(!_.isFunction(propValue) || !(propValue.prototype instanceof Enum2))
-      return new Error(`Invalid prop '${propName}' supplied to '${componentName}'`);
-    else
-      return true;
-  },
+  enumType: Custom.PropTypes.enumType.isRequired,
   initialValue: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.instanceOf(Enum2)
