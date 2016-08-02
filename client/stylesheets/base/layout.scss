@@ -2,12 +2,13 @@
 
 // Local Imports
 @import "variables";
+@import "hover-overrides";
 
 // NPM Imports
 // Hover.css Imports
 @import "../../../node_modules/hover.css/scss/effects/border-transitions/trim";
-@import "../../../node_modules/hover.css/scss/effects/border-transitions/underline-reveal";
-@import "../../../node_modules/hover.css/scss/effects/icons/icon-pop";
+@import "../../../node_modules/hover.css/scss/effects/2d-transitions/grow";
+@import "../../../node_modules/hover.css/scss/effects/shadow-and-glow-transitions/grow-shadow";
 
 @mixin validation-state-input($color) {
   border-color: $color;
@@ -110,13 +111,21 @@ div.wrapper-footer {
     color: $wic-text-color-alternate;
   }
 
-  &> li  {
+  &> li > a {
     @include trim;
-    @include underline-reveal;
-    @include icon-pop;
+    @include grow;
 
-    &> a {
+    color: $wic-text-color-alternate;
+
+    &:before {
+      $hover-trim-property: $hover-trim-override;
+    }
+
+    &:hover {
+      background-color: $wic-interface-active-color;
       color: $wic-text-color-alternate;
+      border-bottom: $wic-header-border-color solid 1px;
+      margin-bottom: -1px;
     }
   }
 

@@ -279,6 +279,10 @@ export const Glyphs = {
   calendar: "calendar"
 };
 
+export const CssDefaults = {
+  anchor: 'link-wic-default'
+};
+
 /**
  * All constants, namespaced accordingly.
  */
@@ -289,7 +293,8 @@ export const All = {
   routes: Routes,
   resources: Resources,
   selectors: Selectors,
-  api: Api
+  api: Api,
+  css: CssDefaults
 };
 
 export default All;

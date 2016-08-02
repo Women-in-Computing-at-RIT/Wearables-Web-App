@@ -1,0 +1,163 @@
+@import "mixins";
+
+%anchor-cleaning {
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  vertical-align: bottom;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+// Defaults are determined project specifically
+// Delay variables, how long respective animations take
+$wic-link-braces-delay: 0.2s;
+$wic-link-border-delay: 0.2s;
+$wic-link-slideright-delay: 0.3s;
+
+// CONFIGURABLE DEFAULTS (Project Specific)
+$wic-brace-size-default: 120%;
+$wic-brace-y-fix-default: 0.035em; // With out font it appears to be off center, this just re-centers it according to font size.
+$wic-brace-padding-default: 0.25em;
+$wic-brace-brace-padding-default: 0.15em;
+$wic-brace-left-brace-default: '[';
+$wic-brace-right-brace-default: ']';
+
+$wic-border-color-default: initial;
+
+@if variable-exists(wic-header-border-color) {
+  $temp-color: $wic-header-border-color;
+}
+
+$wic-border-active-scale-default: 1.2;
+$wic-border-inactive-scale-default: 0.9;
+
+$wic-slideright-color-default: rgba(149,165,166,0.3);
+$wic-slideright-scale-default: 0.618;
+
+/**
+  "Braces" animates two brackets (used loosely, any content can be specified, by default it is [ and ]) materializing
+  from the sides and appearing on either edge of the given text.
+
+  $bracketSize - Size of the brackets as a font size
+  $y-fix - Value to pass to translateY for fixing bracket positioning, should use a font-relative unit (em/rem)
+  $padding - horizontal padding for full anchor element
+  $bracePadding - horizontal padding between text and braces
+  $leftBrace - Content for left side (can be anything, does not need to be brace)
+  $rightBrace - Content for the right side (can be anything, does not need to be brace)
+*/
+@mixin braces-style($bracketSize: $wic-brace-size-default,
+                    $y-fix: $wic-brace-y-fix-default,
+                    $padding: $wic-brace-padding-default,
+                    $bracePadding: $wic-brace-brace-padding-default,
+                    $leftBrace: $wic-brace-left-brace-default,
+                    $rightBrace: $wic-brace-right-brace-default) {
+  padding: 0 $padding 0 $padding;
+
+  @include prefixed(transition, color $wic-link-braces-delay);
+
+  &:hover {
+    &::before, &::after {
+      opacity: 1;
+      @include prefixed(transform, translate(0, $y-fix));
+    }
+  }
+
+  &::before, &::after {
+    position: absolute;
+    top: 0;
+    font-weight: 100;
+    font-size: $bracketSize;
+    line-height: 1;
+    opacity: 0;
+
+    @include prefixed-transition(opacity $wic-link-braces-delay, transform $wic-link-braces-delay);
+  }
+
+  &::before {
+    left: -$bracePadding;
+    content: $leftBrace;
+
+    @include prefixed(transform, translate(-100%, $y-fix));
+  }
+
+  &::after {
+    right: -$bracePadding;
+    content: $rightBrace;
+
+    @include prefixed(transform, translate(100%, $y-fix));
+  }
+}
+
+/*
+  "Border" Anchor which creates a border around the link without affecting surrounding elements.
+
+  $color - Color of border
+  $activeScale
+  $inactiveScale
+*/
+
+@mixin border-style($color: $wic-border-color-default,
+                    $activeScale: $wic-border-active-scale-default,
+                    $inactiveScale: $wic-border-inactive-scale-default) {
+  padding: 0 2px;
+  @include prefixed-with-value(transition, transform $wic-link-border-delay);
+
+  &:hover, &:focus {
+    @include prefixed(transform, scale($inactiveScale));
+
+    &::before {
+      opacity: 1;
+      @include prefixed(transform, scale($activeScale));
+    }
+  }
+
+  &::before {
+    position: absolute;
+    top: -2px;
+    left: 15px;
+    padding: 0 5px;
+    width: 87%;
+    height: 100%;
+    border: 2px solid $color;
+    content: '';
+    opacity: 0;
+
+    @include prefixed(box-sizing, content-box);
+    @include prefixed-transition(opacity $wic-link-border-delay, transform $wic-link-border-delay);
+    @include prefixed(transform, scale($inactiveScale));
+  }
+}
+
+/*
+  "Slide Right" displays a box of a specific color behind the anchor text on hover. This box is displayed behind the
+  anchor text using z-index.
+
+  $color - Background color (recommend have a lower alpha value)
+  $scale - Scaling size of box relative to anchor
+*/
+@mixin slideright-style($color: $wic-slideright-color-default, $scale: $wic-slideright-scale-default) {
+  overflow: hidden;
+  z-index: 0;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: $color;
+    content: '';
+    @include prefixed-with-value(transition, transform $wic-link-slideright-delay);
+    @include prefixed(transform, scaleY($scale) translateX(-100%));
+  }
+
+  &:hover {
+    &::before {
+      @include prefixed(transform, scaleY($scale) translateX(0));
+    }
+  }
+}

@@ -1,0 +1,31 @@
+@import "variables";
+@import "mixins";
+@import "anchor-effects";
+
+// Anchor defaults
+section a, div a {
+  @extend %anchor-cleaning;
+
+  &:hover, &:focus, &:active {
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.link-braces, div.link-braces a, section.link-braces a {
+  @include braces-style;
+}
+
+.link-border, div.link-border a, section.link-border a {
+  @include border-style;
+}
+
+.link-slideright, div.link-slideright a, section.link-slideright a {
+  @include slideright-style;
+}
+
+// Should just extend another anchor style. Used for most general-use links
+.link-wic-default, div.link-wic-default a, section.link-wic-default a{
+  @extend .link-slideright;
+}

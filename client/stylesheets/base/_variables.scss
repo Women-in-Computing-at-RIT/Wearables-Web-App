@@ -10,6 +10,7 @@ $wic-warning-color: #a94442;
 $wic-error-color: #8a6d3b;
 
 $wic-interface-color: #48BCE2;  // Some cool (literally in both ways) blue
+$wic-interface-active-color: #44B1D6;
 $wic-foreground-color: #FFFFFF; // White
 $wic-background-color: #F2F2F2; // Anti-Flash
 $wic-text-color-primary: #333138; // Jet Black
@@ -21,3 +22,13 @@ $wic-footer-container-padding: 15px 15px 0 0;
 $wic-font-header: "PT Sans", sans-serif;
 $wic-font-header-serif: "PT Serif", serif;
 $wic-font-body: "Open Sans", sans-serif;
+
+// Overriding hover.css options
+$shadowColor: $wic-background-color;
+
+// -- -- -- -- -- -- -- -- -- --
+
+$webkit: true;
+$moz: true;
+$ms: false;
+$o: false;
