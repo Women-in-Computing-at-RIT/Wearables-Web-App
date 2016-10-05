@@ -19,8 +19,13 @@ function createTypeChecker(validate) {
       return validate(props, propName, componentName, location, propFullName);
   }
 
+  function isValid(props, propName, componentName, location, propFullName) {
+    return !_.isError(check(true, props, propName, componentName, location, propFullName));
+  }
+
   const chainedCheck = check.bind(null, false);
   chainedCheck.isRequired = check.bind(null, true);
+  chainedCheck.isRequired.isValid = chainedCheck.isValid = isValid;
 
   return chainedCheck;
 }

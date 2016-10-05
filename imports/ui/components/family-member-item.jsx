@@ -13,7 +13,6 @@ export class FamilyMemberItem extends React.Component {
 
     this.state = {selected: _.defaultTo(this.props.primary, false)};
   }
-
   render() {
     const user = this.props.targetUser;
     const relatedTo = this.props.rootUser;

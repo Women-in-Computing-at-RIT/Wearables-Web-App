@@ -1,0 +1,11 @@
+{
+  // Mailgun Constants
+  "MAILGUN_DOMAIN": "",
+  "MAILGUN_PASSWORD": "",
+  "CLOUDINARY_CLOUD_NAME": "",
+
+  // Cloudinary Constants
+  "CLOUDINARY_API_KEY": "",
+  "CLOUDINARY_API_SECRET": "",
+  "CLOUDINARY_VERSION": 1
+}

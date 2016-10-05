@@ -1,9 +1,9 @@
 import {Meteor} from 'meteor/meteor';
 
 import './accounts/email-templates';
+import './fixtures';
 import '../../api/index';
 import './api';
-import './fixtures';
 import './serialization';
 
 import {Settings} from '../../modules/constants';

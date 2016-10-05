@@ -13,6 +13,9 @@ export const Topics = {
   auth: {
     modal: 'auth.modal',
     passwordVerify: 'auth.password.verification'
+  },
+  ui: {
+    userSelected: 'ui.user.selected'
   }
 };
 
