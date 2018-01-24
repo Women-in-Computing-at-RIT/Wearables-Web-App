@@ -22,7 +22,7 @@
     "classnames": "^2.2.5",
     "enumify": "^1.0.4",
     "hover.css": "^2.0.2",
-    "jquery": "^2.2.4",
+    "jquery": "^3.0.0",
     "jquery-validation": "^1.15.0",
     "meteor-node-stubs": "~0.2.0",
     "pubsub-js": "^1.5.3",
@@ -48,7 +48,6 @@
     "eslint-plugin-lodash": "^1.9.2",
     "eslint-plugin-meteor": "^3.6.0",
     "eslint-plugin-react": "^5.1.1",
-    "node-inspector": "^0.12.8",
     "react-addons-test-utils": "^15.1.0",
     "redux-devtools": "^3.3.1"
   }
